@@ -1,0 +1,4 @@
+cron:
+- description: "Update users about new posts"
+  url: /email
+  schedule: every day 23:00

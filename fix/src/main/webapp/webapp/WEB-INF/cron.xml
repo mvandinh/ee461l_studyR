@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+
+	<cron>
+
+		<url>/email</url>
+	
+		<description>Update users about new posts</description>
+		
+		<schedule>every 24 hours</schedule>
+		
+	</cron>
+	
+</cronentries>
