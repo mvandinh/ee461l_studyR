@@ -1,0 +1,76 @@
+{
+  "description": "Objectify",
+  "path": "com.google.cloud.tools.eclipse.appengine.libraries\\objectify",
+  "entries": [
+    {
+      "accessRules": [],
+      "sourceAttachmentPath": "BIN\\com\\googlecode\\objectify\\objectify\\5.1.13\\objectify-5.1.13-sources.jar",
+      "path": "com/googlecode/objectify/objectify/5.1.13/objectify-5.1.13.jar",
+      "attributes": [
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.repository",
+          "value": "central"
+        },
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.groupid",
+          "value": "com.googlecode.objectify"
+        },
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.artifactId",
+          "value": "objectify"
+        },
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.type",
+          "value": "jar"
+        },
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.version",
+          "value": "5.1.13"
+        },
+        {
+          "name": "org.eclipse.jst.component.dependency",
+          "value": "/WEB-INF/lib"
+        },
+        {
+          "name": "javadoc_location",
+          "value": "http://static.javadoc.io/com.googlecode.objectify/objectify/5.1.13/"
+        }
+      ]
+    },
+    {
+      "accessRules": [],
+      "sourceAttachmentPath": "BIN\\com\\google\\guava\\guava\\18.0\\guava-18.0-sources.jar",
+      "path": "com/google/guava/guava/18.0/guava-18.0.jar",
+      "attributes": [
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.repository",
+          "value": "central"
+        },
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.groupid",
+          "value": "com.google.guava"
+        },
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.artifactId",
+          "value": "guava"
+        },
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.type",
+          "value": "jar"
+        },
+        {
+          "name": "com.google.cloud.tools.eclipse.appengine.libraries.version",
+          "value": "18.0"
+        },
+        {
+          "name": "org.eclipse.jst.component.dependency",
+          "value": "/WEB-INF/lib"
+        },
+        {
+          "name": "javadoc_location",
+          "value": "https://google.github.io/guava/releases/18.0/api/docs/"
+        }
+      ]
+    }
+  ]
+}
