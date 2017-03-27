@@ -1,4 +1,4 @@
-package guestbook;
+package studyR;
 
 import java.net.HttpURLConnection;
 import java.util.*;

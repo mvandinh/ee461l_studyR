@@ -6,7 +6,7 @@
          version="2.5">
 	<servlet>
 		<servlet-name>studyR</servlet-name>
-		<servlet-class>guestbook.StudyRServlet</servlet-class>
+		<servlet-class>studyR.StudyRServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>studyR</servlet-name>
@@ -14,7 +14,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>cron</servlet-name>
-		<servlet-class>guestbook.WorstCronServlet</servlet-class>
+		<servlet-class>studyR.WorstCronServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>cron</servlet-name>

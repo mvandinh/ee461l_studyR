@@ -1,4 +1,4 @@
-package guestbook;
+package studyR;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 import java.io.IOException;

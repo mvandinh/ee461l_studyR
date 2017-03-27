@@ -1,4 +1,4 @@
-package guestbook;
+package studyR;
 
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.annotation.Entity;

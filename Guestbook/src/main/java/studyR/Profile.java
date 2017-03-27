@@ -1,4 +1,4 @@
-package guestbook;
+package studyR;
 
 import com.google.appengine.api.users.User;
 import com.googlecode.objectify.ObjectifyService;
