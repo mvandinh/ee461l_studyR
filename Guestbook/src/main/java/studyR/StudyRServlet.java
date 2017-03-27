@@ -21,8 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class StudyRServlet extends HttpServlet {
 
-    public void doPost(HttpServletRequest req, HttpServletResponse resp)
-                throws IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         
     	if (req.getParameter("button1") != null) {
     		UserService userService = UserServiceFactory.getUserService();
@@ -33,14 +32,14 @@ public class StudyRServlet extends HttpServlet {
             	StudySession greeting = new StudySession(user, title, content);
                 ofy().save().entity(greeting).now();
             }
-            resp.sendRedirect("/ofyguestbook.jsp");
+            resp.sendRedirect("/home.jsp");
     	} else if (req.getParameter("button2") != null) {
     		StudySession.showAll = !StudySession.showAll;
-    		resp.sendRedirect("/ofyguestbook.jsp");
+    		resp.sendRedirect("/home.jsp");
     	} else if (req.getParameter("button3") != null) {
     		resp.sendRedirect("/post.jsp");
     	} else if (req.getParameter("button4") != null) {
-    		resp.sendRedirect("/ofyguestbook.jsp");
+    		resp.sendRedirect("/home.jsp");
     	} else if (req.getParameter("button5") != null) {
     		resp.sendRedirect("/subscribe.jsp");
     	}else {}

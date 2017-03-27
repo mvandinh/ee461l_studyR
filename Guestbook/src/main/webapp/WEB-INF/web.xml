@@ -22,7 +22,7 @@
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>ofyguestbook.jsp</welcome-file>
+		<welcome-file>home.jsp</welcome-file>
 	</welcome-file-list>
   
 	<filter>

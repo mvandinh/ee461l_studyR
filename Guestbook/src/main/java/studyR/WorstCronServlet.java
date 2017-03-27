@@ -49,7 +49,6 @@ public class WorstCronServlet extends HttpServlet {
 		try {
 			sendMe.send();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }  
@@ -69,7 +68,7 @@ public class WorstCronServlet extends HttpServlet {
 		if (!duplicate) {
 			ObjectifyService.ofy().save().entity(email).now();
 		}
-	    resp.sendRedirect("/ofyguestbook.jsp");
+	    resp.sendRedirect("/home.jsp");
 	}
   
 }
