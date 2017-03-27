@@ -19,13 +19,12 @@
 
 <html>
 	<head>
-   		<title>studyR - the study buddy matcher!</title>
+   		<title>studyR - the study buddy maker!</title>
    		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
 	</head>
 	<body>
-		<h1>studyR - the study buddy matcher!</h1>
-   		<h3>Welcome to Minh and Ethan's punderful blog! Feel free to post your own cringe inducing puns.<br> Remember, if someone tells you that "you're not punny", you did your job. Welcome to the family!</h3>
-   		<img src = "http://vignette2.wikia.nocookie.net/scribblenauts/images/7/7a/Tuna_Fish.png/revision/latest?cb=20130418113339" alt = "Cartuna" style = "width:250px;height:125px">
+		<h1>studyR</h1>
+   		<h3></h3>
    		<i>"I went fishing this one time, and it was a tuna fun!</i>
    		<img src = "http://vignette2.wikia.nocookie.net/scribblenauts/images/7/7a/Tuna_Fish.png/revision/latest?cb=20130418113339" alt = "Cartuna" style = "width:250px;height:125px">
    		<hr>
@@ -60,70 +59,68 @@ to be able to post and subscribe to this blog!</p>
 			<input type="hidden" name="studyR" value="${fn:escapeXml(studyR)}"/>
 		</form>
 		<%
+		ObjectifyService.register(StudySession.class);
+		List<StudySession> StudySessions = ObjectifyService.ofy().load().type(StudySession.class).list();   
+		Collections.sort(StudySessions); 
+		Collections.reverse(StudySessions);
+		    if (StudySessions.isEmpty()) {
+		        %>
+		        <p>No blog posts have been made, you can be the first!</p>
+		        <%
+		    } else {
+		        %>
+		        <h2>The puns so far...</h2>
+		        <%
+		        if(StudySession.showAll){
+		        	for (StudySession studySession : StudySessions) {
+		        		pageContext.setAttribute("StudySession_title", studySession.getTitle());
+		         		pageContext.setAttribute("StudySession_content", studySession.getContent());
+		         		pageContext.setAttribute("StudySession_date", studySession.getDate());
+		            	pageContext.setAttribute("StudySession_user", studySession.getUser());
+		            	%>
+		            	<h4><b><i>${fn:escapeXml(StudySession_title)}</i></b></h4>
+		            	<blockquote>"<i>${fn:escapeXml(StudySession_content)}</i>"</blockquote>
+		            	<p>Posted by <i>${fn:escapeXml(StudySession_user.nickname)}</i> on ${fn:escapeXml(StudySession_date)}</p>
+		            	<%
+		        	}
+		        }else{
+		        	int i = 0;
+		        	while(i < 4 && i < StudySessions.size()){
+		        		StudySession StudySession = StudySessions.get(i);
+		        		pageContext.setAttribute("StudySession_title", StudySession.getTitle());
+		         		pageContext.setAttribute("StudySession_content", StudySession.getContent());
+		         		pageContext.setAttribute("StudySession_date", StudySession.getDate());
+		            	pageContext.setAttribute("StudySession_user", StudySession.getUser());
+		            	%>
+		            	<h4><b><i>${fn:escapeXml(StudySession_title)}</i></b></h4>
+		            	<blockquote>"<i>${fn:escapeXml(StudySession_content)}</i>"</blockquote>
+		            	<p>Posted by <i>${fn:escapeXml(StudySession_user.nickname)}</i> on ${fn:escapeXml(StudySession_date)}</p>
+		            	<%
+		            	i++;
+		        	}
+		        }
+		    }
+		    %>
+		<br>
+		<%
+		if (!StudySession.showAll) {
+			%>
+		   <form action="/studyR" method="post">
+					<div><input type="submit" name="button2" value="View All" /></div>
+					<input type="hidden" name="studyR" value="${fn:escapeXml(studyR)}"/>
+				</form>
+			<%
+		} else {
+			%>
+			<form action="/studyR" method="post">
+					<div><input type="submit" name="button2" value="Most Recent" /></div>
+					<input type="hidden" name="studyR" value="${fn:escapeXml(studyR)}"/>
+				</form>
+			<%
+		}
 	}
-
-ObjectifyService.register(StudySession.class);
-List<StudySession> StudySessions = ObjectifyService.ofy().load().type(StudySession.class).list();   
-Collections.sort(StudySessions); 
-Collections.reverse(StudySessions);
-    if (StudySessions.isEmpty()) {
-        %>
-        <p>No blog posts have been made, you can be the first!</p>
-        <%
-    } else {
-        %>
-        <h2>The puns so far...</h2>
-        <%
-        if(StudySession.showAll){
-        	for (StudySession StudySession : StudySessions) {
-        		pageContext.setAttribute("StudySession_title", StudySession.getTitle());
-         		pageContext.setAttribute("StudySession_content", StudySession.getContent());
-         		pageContext.setAttribute("StudySession_date", StudySession.getDate());
-            	pageContext.setAttribute("StudySession_user", StudySession.getUser());
-            	%>
-            	<h4><b><i>${fn:escapeXml(StudySession_title)}</i></b></h4>
-            	<blockquote>"<i>${fn:escapeXml(StudySession_content)}</i>"</blockquote>
-            	<p>Posted by <i>${fn:escapeXml(StudySession_user.nickname)}</i> on ${fn:escapeXml(StudySession_date)}</p>
-            	<%
-        	}
-        }else{
-        	int i = 0;
-        	while(i < 4 && i < StudySessions.size()){
-        		StudySession StudySession = StudySessions.get(i);
-        		pageContext.setAttribute("StudySession_title", StudySession.getTitle());
-         		pageContext.setAttribute("StudySession_content", StudySession.getContent());
-         		pageContext.setAttribute("StudySession_date", StudySession.getDate());
-            	pageContext.setAttribute("StudySession_user", StudySession.getUser());
-            	%>
-            	<h4><b><i>${fn:escapeXml(StudySession_title)}</i></b></h4>
-            	<blockquote>"<i>${fn:escapeXml(StudySession_content)}</i>"</blockquote>
-            	<p>Posted by <i>${fn:escapeXml(StudySession_user.nickname)}</i> on ${fn:escapeXml(StudySession_date)}</p>
-            	<%
-            	i++;
-        	}
-        }
-    }
-    %>
-<br>
-<%
-if (!StudySession.showAll) {
-	%>
-   <form action="/studyR" method="post">
-			<div><input type="submit" name="button2" value="View All" /></div>
-			<input type="hidden" name="studyR" value="${fn:escapeXml(studyR)}"/>
-		</form>
-	<%
-} else {
-	%>
-	<form action="/studyR" method="post">
-			<div><input type="submit" name="button2" value="Most Recent" /></div>
-			<input type="hidden" name="studyR" value="${fn:escapeXml(studyR)}"/>
-		</form>
-	<%
-}
 %>
+		<hr>
+		<p><b>Developed by :</b><i> Minh Van-Dinh, Ethan Cranmer, Matthew Edwards, Garrett Custer</i></p>
 	</body>
-	<audio controls>
-  		<source src="shelter.mp3" type="audio/mpeg">
-	</audio>
 </html> 

@@ -22,15 +22,14 @@ import javax.servlet.http.HttpServletResponse;
 public class StudyRServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        
     	if (req.getParameter("button1") != null) {
     		UserService userService = UserServiceFactory.getUserService();
             User user = userService.getCurrentUser();
             String title = req.getParameter("title");
             String content = req.getParameter("content");
             if ((!title.equals("")) && (!content.equals(""))) {
-            	StudySession greeting = new StudySession(user, title, content);
-                ofy().save().entity(greeting).now();
+            	StudySession studySession = new StudySession(user, title, content);
+                ofy().save().entity(studySession).now();
             }
             resp.sendRedirect("/home.jsp");
     	} else if (req.getParameter("button2") != null) {

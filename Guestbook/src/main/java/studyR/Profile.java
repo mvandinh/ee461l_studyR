@@ -16,9 +16,14 @@ public class Profile {
     String phone;
     Course[] courses;
     
-	
+    
 	public Profile(User user) {
 		this.user = user;
+		this.name = "";
+		this.bio = "";
+		this.email = "";
+		this.phone = "";
+		this.courses = null;
 	}
 	
 	public User getUser() {
