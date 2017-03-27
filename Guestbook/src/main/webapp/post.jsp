@@ -41,7 +41,7 @@
 	if (user != null) {
 		%>
 		<p>Please include a title with your post!</p>
-		<form action="/ofysign" method="post">
+		<form action="/studyR" method="post">
 			<b>Title:</b>
 			<input type="text" name="title"><br>
 			<b>Content:</b>

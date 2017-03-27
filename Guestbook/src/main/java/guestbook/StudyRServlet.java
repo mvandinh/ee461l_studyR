@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
  
 
-public class OfySignGuestbookServlet extends HttpServlet {
+public class StudyRServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
                 throws IOException {

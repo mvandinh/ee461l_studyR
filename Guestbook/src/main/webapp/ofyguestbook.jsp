@@ -54,7 +54,7 @@ to be able to post and subscribe to this blog!</p>
 <%
 	if (user != null) {
 		%>
-		<form action="/ofysign" method="post">
+		<form action="/studyR" method="post">
 			<div><input type="submit" name="button3" value="New Post" /></div>
 			<div><input type="submit" name="button5" value="Handle Subscriptions" /></div>
 			<input type="hidden" name="guestbookName" value="${fn:escapeXml(guestbookName)}"/>
@@ -108,14 +108,14 @@ Collections.reverse(StudySessions);
 <%
 if (!StudySession.showAll) {
 	%>
-   <form action="/ofysign" method="post">
+   <form action="/studyR" method="post">
 			<div><input type="submit" name="button2" value="View All" /></div>
 			<input type="hidden" name="guestbookName" value="${fn:escapeXml(guestbookName)}"/>
 		</form>
 	<%
 } else {
 	%>
-	<form action="/ofysign" method="post">
+	<form action="/studyR" method="post">
 			<div><input type="submit" name="button2" value="Most Recent" /></div>
 			<input type="hidden" name="guestbookName" value="${fn:escapeXml(guestbookName)}"/>
 		</form>
