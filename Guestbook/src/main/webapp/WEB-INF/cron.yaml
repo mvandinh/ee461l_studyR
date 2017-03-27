@@ -1,5 +1,0 @@
-cron:
-- description: mailout at 5:00pm
-  url: /cron
-  schedule: every day 17:00
-  timezone: America/Chicago

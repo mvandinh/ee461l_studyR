@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<cronentries>
-  <cron>
-    <url>/cron</url>
-    <description>Daily email subscription</description>
-    <schedule>every day 17:00</schedule>
-    <timezone>America/Chicago</timezone>
-  </cron>
-</cronentries>
