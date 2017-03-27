@@ -19,7 +19,7 @@ import com.googlecode.objectify.ObjectifyService;
   
 public class WorstCronServlet extends HttpServlet {  
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {           
-		Sendgrid sendMe = new Sendgrid("minh.vandinh", "yolothejolo2014");
+		Sendgrid sendMe = new Sendgrid("", "");
 		ObjectifyService.register(StudySession.class);
 		List<StudySession> posts = ObjectifyService.ofy().load().type(StudySession.class).list();
 		List<StudySession> postsFinal = new ArrayList<StudySession>(); 

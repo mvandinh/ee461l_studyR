@@ -28,7 +28,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="jdk-7u80-windows-x64.exe"/>
+	<classpathentry exported="true" kind="lib" path="jdk-7u80-windows-x64.exe"/>
 	<classpathentry exported="true" kind="lib" path="json-20160212.jar"/>
 	<classpathentry exported="true" kind="lib" path="objectify-4.0b1 (1).jar"/>
 	<classpathentry exported="true" kind="lib" path="jstl-1.2.jar"/>
