@@ -20,12 +20,12 @@ import com.googlecode.objectify.ObjectifyService;
 public class WorstCronServlet extends HttpServlet {  
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {           
 		Sendgrid sendMe = new Sendgrid("minh.vandinh", "yolothejolo2014");
-		ObjectifyService.register(Greeting.class);
-		List<Greeting> posts = ObjectifyService.ofy().load().type(Greeting.class).list();
-		List<Greeting> postsFinal = new ArrayList<Greeting>(); 
+		ObjectifyService.register(StudySession.class);
+		List<StudySession> posts = ObjectifyService.ofy().load().type(StudySession.class).list();
+		List<StudySession> postsFinal = new ArrayList<StudySession>(); 
 		Collections.sort(posts); 
 		Date current = new Date(System.currentTimeMillis() - (24 * 60 * 60 * 1000));
-		for (Greeting post : posts){
+		for (StudySession post : posts){
 			if (post.date.after(current)){
 				postsFinal.add(post);
 			}
@@ -41,7 +41,7 @@ public class WorstCronServlet extends HttpServlet {
 		sendMe.setFrom("m.vandinh@gmail.com");
 		sendMe.setSubject("UPDATE: Minh and Ethan's Punderful Blog");
 		String body = "POSTS FROM THE LAST 24 HOURS:\n\n";
-		for (Greeting post : postsFinal){
+		for (StudySession post : postsFinal){
 			body += post.getTitle() + ": " + post.getContent() +"\n\n";
 		}
 		String header = body + "Check van-cranmer.appspot.com for new posts!\n Or, you can unsubscribe at van-cranmer.appspot.com/subscribe.jsp";

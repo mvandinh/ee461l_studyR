@@ -19,9 +19,9 @@ public class Mailer {
 	@SuppressWarnings("deprecation")
 	public static void send(){ 
 	
-		ObjectifyService.register(Greeting.class);
+		ObjectifyService.register(StudySession.class);
 	
-		List<Greeting> posts = ObjectifyService.ofy().load().type(Greeting.class).list();   
+		List<StudySession> posts = ObjectifyService.ofy().load().type(StudySession.class).list();   
 	
 		Collections.sort(posts); 
 		
@@ -29,7 +29,7 @@ public class Mailer {
 		
 		current.setDate(current.getDay() - 1);
 		
-		for (Greeting post : posts){
+		for (StudySession post : posts){
 			if (post.date.before(current)){
 				posts.remove(post);
 			}

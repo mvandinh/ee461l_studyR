@@ -18,13 +18,13 @@ import com.googlecode.objectify.annotation.Id;
 
 @Entity
 
-public class Greeting implements Comparable<Greeting> {
+public class StudySession implements Comparable<StudySession> {
 
 	public static boolean showAll = false;
 	
 	static {
 
-        ObjectifyService.register(Greeting.class);
+        ObjectifyService.register(StudySession.class);
 
     }
     @Id Long id;
@@ -37,9 +37,9 @@ public class Greeting implements Comparable<Greeting> {
 
     Date date;
 
-    private Greeting() {}
+    private StudySession() {}
 
-    public Greeting(User user, String title, String content) {
+    public StudySession(User user, String title, String content) {
 
         this.user = user;
         
@@ -79,7 +79,7 @@ public class Greeting implements Comparable<Greeting> {
 
     @Override
 
-    public int compareTo(Greeting other) {
+    public int compareTo(StudySession other) {
 
         if (date.after(other.date)) {
 

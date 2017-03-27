@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Collections" %>
-<%@ page import="guestbook.Greeting" %>
+<%@ page import="guestbook.StudySession" %>
 <%@ page import="guestbook.Email" %>
 <%@ page import="com.googlecode.objectify.*" %>
 <%@ page import="com.google.appengine.api.users.User" %>
@@ -62,11 +62,11 @@ to be able to post and subscribe to this blog!</p>
 		<%
 	}
 
-ObjectifyService.register(Greeting.class);
-List<Greeting> greetings = ObjectifyService.ofy().load().type(Greeting.class).list();   
-Collections.sort(greetings); 
-Collections.reverse(greetings);
-    if (greetings.isEmpty()) {
+ObjectifyService.register(StudySession.class);
+List<StudySession> StudySessions = ObjectifyService.ofy().load().type(StudySession.class).list();   
+Collections.sort(StudySessions); 
+Collections.reverse(StudySessions);
+    if (StudySessions.isEmpty()) {
         %>
         <p>No blog posts have been made, you can be the first!</p>
         <%
@@ -74,30 +74,30 @@ Collections.reverse(greetings);
         %>
         <h2>The puns so far...</h2>
         <%
-        if(Greeting.showAll){
-        	for (Greeting greeting : greetings) {
-        		pageContext.setAttribute("greeting_title", greeting.getTitle());
-         		pageContext.setAttribute("greeting_content", greeting.getContent());
-         		pageContext.setAttribute("greeting_date", greeting.getDate());
-            	pageContext.setAttribute("greeting_user", greeting.getUser());
+        if(StudySession.showAll){
+        	for (StudySession StudySession : StudySessions) {
+        		pageContext.setAttribute("StudySession_title", StudySession.getTitle());
+         		pageContext.setAttribute("StudySession_content", StudySession.getContent());
+         		pageContext.setAttribute("StudySession_date", StudySession.getDate());
+            	pageContext.setAttribute("StudySession_user", StudySession.getUser());
             	%>
-            	<h4><b><i>${fn:escapeXml(greeting_title)}</i></b></h4>
-            	<blockquote>"<i>${fn:escapeXml(greeting_content)}</i>"</blockquote>
-            	<p>Posted by <i>${fn:escapeXml(greeting_user.nickname)}</i> on ${fn:escapeXml(greeting_date)}</p>
+            	<h4><b><i>${fn:escapeXml(StudySession_title)}</i></b></h4>
+            	<blockquote>"<i>${fn:escapeXml(StudySession_content)}</i>"</blockquote>
+            	<p>Posted by <i>${fn:escapeXml(StudySession_user.nickname)}</i> on ${fn:escapeXml(StudySession_date)}</p>
             	<%
         	}
         }else{
         	int i = 0;
-        	while(i < 4 && i < greetings.size()){
-        		Greeting greeting = greetings.get(i);
-        		pageContext.setAttribute("greeting_title", greeting.getTitle());
-         		pageContext.setAttribute("greeting_content", greeting.getContent());
-         		pageContext.setAttribute("greeting_date", greeting.getDate());
-            	pageContext.setAttribute("greeting_user", greeting.getUser());
+        	while(i < 4 && i < StudySessions.size()){
+        		StudySession StudySession = StudySessions.get(i);
+        		pageContext.setAttribute("StudySession_title", StudySession.getTitle());
+         		pageContext.setAttribute("StudySession_content", StudySession.getContent());
+         		pageContext.setAttribute("StudySession_date", StudySession.getDate());
+            	pageContext.setAttribute("StudySession_user", StudySession.getUser());
             	%>
-            	<h4><b><i>${fn:escapeXml(greeting_title)}</i></b></h4>
-            	<blockquote>"<i>${fn:escapeXml(greeting_content)}</i>"</blockquote>
-            	<p>Posted by <i>${fn:escapeXml(greeting_user.nickname)}</i> on ${fn:escapeXml(greeting_date)}</p>
+            	<h4><b><i>${fn:escapeXml(StudySession_title)}</i></b></h4>
+            	<blockquote>"<i>${fn:escapeXml(StudySession_content)}</i>"</blockquote>
+            	<p>Posted by <i>${fn:escapeXml(StudySession_user.nickname)}</i> on ${fn:escapeXml(StudySession_date)}</p>
             	<%
             	i++;
         	}
@@ -106,7 +106,7 @@ Collections.reverse(greetings);
     %>
 <br>
 <%
-if (!Greeting.showAll) {
+if (!StudySession.showAll) {
 	%>
    <form action="/ofysign" method="post">
 			<div><input type="submit" name="button2" value="View All" /></div>

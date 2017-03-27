@@ -30,12 +30,12 @@ public class OfySignGuestbookServlet extends HttpServlet {
             String title = req.getParameter("title");
             String content = req.getParameter("content");
             if ((!title.equals("")) && (!content.equals(""))) {
-            	Greeting greeting = new Greeting(user, title, content);
+            	StudySession greeting = new StudySession(user, title, content);
                 ofy().save().entity(greeting).now();
             }
             resp.sendRedirect("/ofyguestbook.jsp");
     	} else if (req.getParameter("button2") != null) {
-    		Greeting.showAll = !Greeting.showAll;
+    		StudySession.showAll = !StudySession.showAll;
     		resp.sendRedirect("/ofyguestbook.jsp");
     	} else if (req.getParameter("button3") != null) {
     		resp.sendRedirect("/post.jsp");
