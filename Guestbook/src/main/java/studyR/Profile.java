@@ -1,20 +1,22 @@
 package studyR;
 
+import java.util.ArrayList;
+
 import com.google.appengine.api.users.User;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.annotation.Id;
 
 public class Profile {
 
-	static { ObjectifyService.register(Email.class); }
+	static { ObjectifyService.register(Profile.class); }
 	
     @Id Long id;
-	User user;
-    String name;
-    String bio;
-    String email;
-    String phone;
-    Course[] courses;
+	private User user;
+    private String name;
+    private String bio;
+    private String email;
+    private String phone;
+    private ArrayList<Course> courses = new ArrayList<Course>();
     
     
 	public Profile(User user) {
@@ -46,7 +48,7 @@ public class Profile {
 		return phone;
 	}
 	
-	public Course[] getCourses() {
+	public ArrayList<Course> getCourses() {
 		return courses;
 	}
 }

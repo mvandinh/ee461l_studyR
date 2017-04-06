@@ -6,6 +6,9 @@ import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.annotation.Id;
 
 public class Group{
+	
+	static { ObjectifyService.register(Group.class); }
+	
 	@Id Long id;
 	private String name;
 	private ArrayList<Profile> members = new ArrayList<Profile>();
