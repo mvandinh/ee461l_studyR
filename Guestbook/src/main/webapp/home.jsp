@@ -66,18 +66,19 @@ to be able to use studyR!</p>
 		Collections.reverse(StudySessions);
 		    if (StudySessions.isEmpty()) {
 		        %>
-		        <p>No blog posts have been made, you can be the first!</p>
+		        <p>You have no upcoming study sessions...</p>
 		        <%
 		    } else {
 		        %>
-		        <h2>The puns so far...</h2>
+		        <h2>Your upcoming study sessions:</h2>
 		        <%
 		        if(StudySession.showAll){
 		        	for (StudySession studySession : StudySessions) {
-		        		pageContext.setAttribute("StudySession_title", studySession.getTitle());
-		         		pageContext.setAttribute("StudySession_content", studySession.getContent());
+		        		pageContext.setAttribute("StudySession_name", studySession.getName());
+		         		pageContext.setAttribute("StudySession_description", studySession.getDescription());
 		         		pageContext.setAttribute("StudySession_date", studySession.getDate());
-		            	pageContext.setAttribute("StudySession_user", studySession.getUser());
+		            	pageContext.setAttribute("StudySession_courseName", studySession.getCourse().getCourseName());
+		            	pageContext.setAttribute("StudySession_courseUniqueId", studySession.getCourse().getUniqueID());
 		            	%>
 		            	<h4><b><i>${fn:escapeXml(StudySession_title)}</i></b></h4>
 		            	<blockquote>"<i>${fn:escapeXml(StudySession_content)}</i>"</blockquote>
@@ -87,11 +88,12 @@ to be able to use studyR!</p>
 		        }else{
 		        	int i = 0;
 		        	while(i < 4 && i < StudySessions.size()){
-		        		StudySession StudySession = StudySessions.get(i);
-		        		pageContext.setAttribute("StudySession_title", StudySession.getTitle());
-		         		pageContext.setAttribute("StudySession_content", StudySession.getContent());
-		         		pageContext.setAttribute("StudySession_date", StudySession.getDate());
-		            	pageContext.setAttribute("StudySession_user", StudySession.getUser());
+		        		StudySession currentSession = StudySessions.get(i);
+		        		pageContext.setAttribute("StudySession_name", currentSession.getName());
+		         		pageContext.setAttribute("StudySession_description", currentSession.getDescription());
+		         		pageContext.setAttribute("StudySession_date", currentSession.getDate());
+		            	pageContext.setAttribute("StudySession_courseName", currentSession.getCourse().getCourseName());
+		            	pageContext.setAttribute("StudySession_courseUniqueId", currentSession.getCourse().getUniqueID());
 		            	%>
 		            	<h4><b><i>${fn:escapeXml(StudySession_title)}</i></b></h4>
 		            	<blockquote>"<i>${fn:escapeXml(StudySession_content)}</i>"</blockquote>
@@ -107,14 +109,14 @@ to be able to use studyR!</p>
 		if (!StudySession.showAll) {
 			%>
 		   <form action="/studyR" method="post">
-					<div><input type="submit" name="button2" value="View All" /></div>
+					<div><input type="submit" name="toggleViewAllButton" value="View All" /></div>
 					<input type="hidden" name="studyR" value="${fn:escapeXml(studyR)}"/>
 				</form>
 			<%
 		} else {
 			%>
 			<form action="/studyR" method="post">
-					<div><input type="submit" name="button2" value="Most Recent" /></div>
+					<div><input type="submit" name="toggleViewAllButton" value="Most Recent" /></div>
 					<input type="hidden" name="studyR" value="${fn:escapeXml(studyR)}"/>
 				</form>
 			<%

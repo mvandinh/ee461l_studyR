@@ -21,78 +21,47 @@ import com.googlecode.objectify.annotation.Id;
 public class StudySession implements Comparable<StudySession> {
 
 	public static boolean showAll = false;
-	
 	static {
-
         ObjectifyService.register(StudySession.class);
-
     }
     @Id Long id;
-
-    User user;
+    private String name;
+    private String description;
+    private Date date;
+    private Course course;
     
-    String title;
-
-    String content;
-
-    Date date;
-
-    private StudySession() {}
-
-    public StudySession(User user, String title, String content) {
-
-        this.user = user;
-        
-        this.title = title;
-
-        this.content = content;
-
-        date = new Date();
-
+    public StudySession(String name, String description, Date date, Course course) {
+        this.name = name;
+        this.description = description;
+        this.date = date;
+        this.course = course;
     }
 
-    public User getUser() {
-
-        return user;
-
+    public String getName() {
+        return name;
     }
 
-    public String getTitle() {
-    	
-    	return title;
-    	
+    public String getDescription() {
+    	return description;
     }
     
-    public String getContent() {
-
-        return content;
-
+    public Course getCourse() {
+        return course;
     }
     
     public String getDate() {
-    	
     	DateFormat df = new SimpleDateFormat("MM/dd/yy");
     	return df.format(date);
-    	
-    	
     }
 
     @Override
-
     public int compareTo(StudySession other) {
-
         if (date.after(other.date)) {
-
             return 1;
-
         } else if (date.before(other.date)) {
-
             return -1;
-
         }
-
         return 0;
-
     }
 
 }
