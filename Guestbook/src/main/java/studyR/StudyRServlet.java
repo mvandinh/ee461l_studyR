@@ -35,11 +35,13 @@ public class StudyRServlet extends HttpServlet {
     	} else if (req.getParameter("button2") != null) {
     		StudySession.showAll = !StudySession.showAll;
     		resp.sendRedirect("/home.jsp");
-    	} else if (req.getParameter("button3") != null) {
+    	}else if (req.getParameter("myGroupsButton") != null){
+    		resp.sendRedirect("/myGroups.jsp");
+    	} else if (req.getParameter("viewProfileButton") != null) {
     		resp.sendRedirect("/post.jsp");
     	} else if (req.getParameter("button4") != null) {
     		resp.sendRedirect("/home.jsp");
-    	} else if (req.getParameter("button5") != null) {
+    	} else if (req.getParameter("searchSessionsButton") != null) {
     		resp.sendRedirect("/subscribe.jsp");
     	}else {}
     }

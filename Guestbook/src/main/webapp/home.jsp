@@ -46,7 +46,7 @@
 %>
 <p>Hello! Please 
 <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">sign in</a>
-to be able to post and subscribe to this blog!</p>
+to be able to use studyR!</p>
 <%
     }
 %>
@@ -54,8 +54,9 @@ to be able to post and subscribe to this blog!</p>
 	if (user != null) {
 		%>
 		<form action="/studyR" method="post">
-			<div><input type="submit" name="button3" value="New Post" /></div>
-			<div><input type="submit" name="button5" value="Handle Subscriptions" /></div>
+			<div><input type="submit" name="myProfileButton" value="My Profile" /></div>
+			<div><input type="submit" name="myGroupsButton" value="My Groups" /></div>
+			<div><input type="submit" name="searchSessionsButton" value="Search Study Sessions" /></div>
 			<input type="hidden" name="studyR" value="${fn:escapeXml(studyR)}"/>
 		</form>
 		<%
