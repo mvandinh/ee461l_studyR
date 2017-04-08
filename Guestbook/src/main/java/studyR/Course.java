@@ -11,6 +11,12 @@ public class Course {
 	String courseName;
 	int uniqueID;
 	
+	public Course(){
+		id = (long) 0;
+		courseName = "UNTITLED";
+		uniqueID = 0;
+	}
+	
 	public Course(String courseName, int uniqueID) {
 		this.courseName = courseName;
 		this.uniqueID = uniqueID;

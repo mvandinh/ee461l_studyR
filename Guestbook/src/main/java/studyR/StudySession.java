@@ -21,14 +21,20 @@ import com.googlecode.objectify.annotation.Id;
 public class StudySession implements Comparable<StudySession> {
 
 	public static boolean showAll = false;
-	static {
-        ObjectifyService.register(StudySession.class);
-    }
+
     @Id Long id;
     private String name;
     private String description;
     private Date date;
     private Course course;
+    
+    public StudySession(){
+    	name = "UNTITLED";
+    	description = "UNTITLED";
+    	date = new Date();
+    	course = new Course();
+    	id = date.getTime(); // We should make the ID something more random than the date
+    }
     
     public StudySession(String name, String description, Date date, Course course) {
         this.name = name;
