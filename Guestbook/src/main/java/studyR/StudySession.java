@@ -33,7 +33,7 @@ public class StudySession implements Comparable<StudySession> {
     	description = "UNTITLED";
     	date = new Date();
     	course = new Course();
-    	id = date.getTime(); // We should make the ID something more random than the date
+    	id = date.getTime(); // TODO We should make the ID something more random than the date
     }
     
     public StudySession(String name, String description, Date date, Course course) {

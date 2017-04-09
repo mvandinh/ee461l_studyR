@@ -12,7 +12,7 @@ public class Course {
 	int uniqueID;
 	
 	public Course(){
-		id = (long) 0;
+		id = (long) 0; //TODO change this obviously
 		courseName = "UNTITLED";
 		uniqueID = 0;
 	}

@@ -15,7 +15,7 @@
 <%@ page import="com.google.appengine.api.datastore.Key" %>
 <%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<%@ page session="false" %>
 
 <html>
 	<head>
@@ -27,6 +27,7 @@
    		<h3></h3>
    		<i>"I went fishing this one time, and it was a tuna fun!</i>
    		<img src = "http://vignette2.wikia.nocookie.net/scribblenauts/images/7/7a/Tuna_Fish.png/revision/latest?cb=20130418113339" alt = "Cartuna" style = "width:250px;height:125px">
+   		<!-- TODO add this image to lib -->
    		<hr>
 <%
     String studyR = request.getParameter("studyR");
@@ -37,11 +38,8 @@
     UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();
     if (user != null) {
-      pageContext.setAttribute("user", user);
-%>
-<p>Hello, ${fn:escapeXml(user.nickname)}! (You can
-<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a> here.)</p>
-<%
+    	pageContext.setAttribute("user", user); 	
+    	response.sendRedirect("userInterface.jsp");
     } else {
 %>
 <p>Hello! Please 
