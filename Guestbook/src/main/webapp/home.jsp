@@ -41,14 +41,14 @@
     	pageContext.setAttribute("user", user); 	
     	response.sendRedirect("userInterface.jsp");
     } else {
-%>
-<p>Hello! Please 
-<a href="<%= userService.createLoginURL(request.getRequestURI()) %>">sign in</a>
-to be able to use studyR!</p>
-<%
-    }
-%>
-<%
+		%>
+		<p>Hello! Please 
+		<a href="<%= userService.createLoginURL(request.getRequestURI()) %>">sign in</a>
+		to be able to use studyR!</p>
+		<%
+		}
+	%>
+	<%
 	if (user != null) {
 		%>
 		<form action="/studyR" method="post">

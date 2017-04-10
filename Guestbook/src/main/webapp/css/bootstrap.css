@@ -3409,7 +3409,7 @@ fieldset[disabled] .btn-danger.focus {
   background-color: #ffffff;
 }
 .btn-link {
-  color: #2780e3;
+  color: #ffffff;
   font-weight: normal;
   border-radius: 0;
 }
@@ -3430,8 +3430,8 @@ fieldset[disabled] .btn-link {
 }
 .btn-link:hover,
 .btn-link:focus {
-  color: #165ba8;
-  text-decoration: underline;
+  color: #ffffff;
+  text-decoration: none;
   background-color: transparent;
 }
 .btn-link[disabled]:hover,

@@ -43,18 +43,20 @@
 				<div class="row">
 					<div class="col-sm-2">
 						<h1>
-							<font face="agency FB">studyR Dashboard
+							<font face="agency FB">studyR Edit Profile
 							</font>
 						</h1>
 						<br>
-					</div>
-					<div class="col-sm-8">
+					</div>				
+					<div class="col-sm-8">		
+					<b>Edit Picture:</b><br>
 						<img src="images/fish.png" style="float: right"
 							class="img-thumbnail" alt="fish" width="50%"
 							height="50%">
-					</div>
-					Your profile pic ya jabroni
-				</div>
+						<br>
+						<input type="file" name="fileToUpload" id="fileToUpload">
+						<input type="submit" value="Upload Image" name="submit">
+					</div>		
 				<%
 				UserService userService = UserServiceFactory.getUserService();
     			User user = userService.getCurrentUser();
@@ -89,20 +91,20 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-4">
-						<h2 align="left"> Upcoming Sessions:</h2>
+						<h2> Upcoming Sessions:</h2>
 		
-							<h3 align="left"> EE461L_Squad_Team_Alpha, Monday, March 31st 4:00pm</h3>
-							<h3 align="left"> EE461L_Squad_Team_Alpha, Wednesday, April 2nd 6:00pm</h3>
-							<h3 align="left"> EE362K_Master_Controllers, Thursday, April 3rd, 2:00pm</h3>
+							<h3> EE461L_Squad_Team_Alpha, Monday, March 31st 4:00pm</h3>
+							<h3> EE461L_Squad_Team_Alpha, Wednesday, April 2nd 6:00pm</h3>
+							<h3> EE362K_Master_Controllers, Thursday, April 3rd, 2:00pm</h3>
 
 					</div>
 					<div class="col-lg-4">					
-						<h2 align="left">Notifications:</h2>	
-						<h3 align="left"> New message from EE461L_Squad_Team_Alpha.</h3>
-						<h3 align="left"> You have been invited to a new study group.</h3>
+						<h2>Notifications:</h2>	
+						<h3> New message from EE461L_Squad_Team_Alpha.</h3>
+						<h3> You have been invited to a new study group.</h3>
 					</div>
 					<div class="col-lg-4">
-						<a href="/editProfile.jsp" class="btn btn-primary" role="button">Edit Profile</a>
+						<button type="button" class="btn btn-primary">Edit profile</button>
 						<p></p>
 						<button type="button" class="btn btn-primary">Request session</button>
 						<select>
