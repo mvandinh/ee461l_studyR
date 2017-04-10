@@ -72,8 +72,8 @@
 			</div>
 		</div>
 		<div class="jumbotron vertical-center">
-			<div class="container">
-				<table class = "table">
+			<div class="container" align = "left">
+				<table style = "float:left" class = "table">
 					<thead>
 						<tr>
 							<th>Your profile description</th>

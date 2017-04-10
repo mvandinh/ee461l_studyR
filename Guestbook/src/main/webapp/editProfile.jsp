@@ -48,15 +48,18 @@
 						</h1>
 						<br>
 					</div>				
-					<div class="col-sm-8">		
+					<div class="col-sm-4">		
 					<b>Edit Picture:</b><br>
 						<img src="images/fish.png" style="float: right"
 							class="img-thumbnail" alt="fish" width="50%"
 							height="50%">
-						<br>
+					</div>
+					<div class = "col-sm-2">
 						<input type="file" name="fileToUpload" id="fileToUpload">
 						<input type="submit" value="Upload Image" name="submit">
-					</div>		
+					</div>
+				</div>
+				<div class="row">	
 				<%
 				UserService userService = UserServiceFactory.getUserService();
     			User user = userService.getCurrentUser();
@@ -71,22 +74,25 @@
   			  		response.sendRedirect("home.jsp");			
     			}
 				%>
+				</div>
 			</div>
 		</div>
 		<div class="jumbotron vertical-center">
 			<div class="container">
-				<table class = "table">
-					<thead>
-						<tr>
-							<th>Your profile description</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</td>
-						</tr>
-					</tbody>
-				</table>	
+
+				Edit your profile description:
+				<br>
+				<!-- TODO: make the servlet which updates the profile -->
+				<h3 align = "left">Personal Description:</h3>
+				<form action="/write" method="post">				
+					<div>
+						<textarea name="content" rows="3" cols="60">test</textarea>
+					</div>
+					<div>
+						<!-- <input type="submit" value="Post" /> -->
+						<button type="submit" class="btn btn-success" role="button">Submit</button>		
+					</div>
+				</form>
 			</div>		
 			<div class="container-fluid">
 				<div class="row">
