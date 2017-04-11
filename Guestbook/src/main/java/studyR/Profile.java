@@ -1,6 +1,7 @@
 package studyR;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.google.appengine.api.users.User;
 import com.googlecode.objectify.ObjectifyService;
@@ -11,7 +12,7 @@ public class Profile {
 	static { ObjectifyService.register(Profile.class); }
 	
     @Id Long id;
-	private User user;
+    public static HashMap<User, Profile> allUsers = new HashMap<User, Profile>();
     private String name;
     private String bio;
     private String email;
@@ -20,16 +21,12 @@ public class Profile {
     
     
 	public Profile(User user) {
-		this.user = user;
-		this.name = "";
+		this.name = user.getNickname();
 		this.bio = "";
-		this.email = "";
+		this.email = user.getEmail();
 		this.phone = "";
 		this.courses = null;
-	}
-	
-	public User getUser() {
-		return user;
+		allUsers.put(user, this);
 	}
 	
 	public String getName() {
