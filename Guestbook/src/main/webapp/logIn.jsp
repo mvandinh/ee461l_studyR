@@ -21,6 +21,9 @@
 	<head>
    		<title>studyR - the study buddy maker!</title>
    		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+		<!-- <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />-->
+		<!-- Bootstrap -->
+		<link href="css/bootstrap.css" rel="stylesheet">
 	</head>
 	<body>
 		<h1>studyR</h1>
@@ -37,7 +40,6 @@
     UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();
     if (user != null) {
-    	pageContext.setAttribute("user", user); 	
     	response.sendRedirect("userInterface.jsp");
     } else {
 		%>
@@ -50,4 +52,9 @@
 		<hr>
 		<p><b>Developed by :</b><i> Minh Van-Dinh, Ethan Cranmer, Matthew Edwards, Garrett Custer</i></p>
 	</body>
+				<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/bootstrap.min.js"></script>
 </html> 

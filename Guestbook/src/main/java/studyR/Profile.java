@@ -1,5 +1,7 @@
 package studyR;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -8,8 +10,6 @@ import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.annotation.Id;
 
 public class Profile {
-
-	static { ObjectifyService.register(Profile.class); }
 	
     @Id Long id;
     public static HashMap<User, Profile> allUsers = new HashMap<User, Profile>();
@@ -27,6 +27,7 @@ public class Profile {
 		this.phone = "";
 		this.courses = null;
 		allUsers.put(user, this);
+		ofy().save().entity(this).now();
 	}
 	
 	public String getName() {
@@ -41,7 +42,7 @@ public class Profile {
 		return email;
 	}
 	
-	public String getphone() {
+	public String getPhone() {
 		return phone;
 	}
 	

@@ -9,6 +9,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Collections" %>
 <%@ page import="studyR.StudySession" %>
+<%@ page import="studyR.Profile" %>
 <%@ page import="studyR.Email" %>
 <%@ page import="com.googlecode.objectify.*" %>
 <%@ page import="com.google.appengine.api.users.User" %>
@@ -59,14 +60,19 @@
 				UserService userService = UserServiceFactory.getUserService();
     			User user = userService.getCurrentUser();
   			  	if (user != null) {
-    				pageContext.setAttribute("user", user); 	
+    				Profile profile;
+    				if (Profile.allUsers.containsKey(user)) {
+    					profile = Profile.allUsers.get(user); 
+    				} else {
+    					profile = new Profile(user);
+    				}
+    				pageContext.setAttribute("profile_name", profile.getName());
     			%>
-				
-				<p>Hello, ${fn:escapeXml(user.nickname)}! (You can
+				<p>Hello, ${fn:escapeXml(profile_name)}! (You can
 				<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a> here.)</p>
 				<%
-  			  	}else {
-  			  		response.sendRedirect("home.jsp");			
+  			  	} else {
+  			  		response.sendRedirect("logIn.jsp");			
     			}
 				%>
 			</div>

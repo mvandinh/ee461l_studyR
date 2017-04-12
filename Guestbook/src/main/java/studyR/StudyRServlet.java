@@ -31,16 +31,16 @@ public class StudyRServlet extends HttpServlet {
             	StudySession studySession = new StudySession(, title, content);
                 ofy().save().entity(studySession).now();
             }
-            resp.sendRedirect("/home.jsp");
+            resp.sendRedirect("/logIn.jsp");
     	} else if (req.getParameter("toggleViewAllButton") != null) {
     		StudySession.showAll = !StudySession.showAll;
-    		resp.sendRedirect("/home.jsp");
+    		resp.sendRedirect("/logIn.jsp");
     	}else if (req.getParameter("myGroupsButton") != null){
     		resp.sendRedirect("/myGroups.jsp");
     	} else if (req.getParameter("viewProfileButton") != null) {
     		resp.sendRedirect("/post.jsp");
     	} else if (req.getParameter("button4") != null) {
-    		resp.sendRedirect("/home.jsp");
+    		resp.sendRedirect("/logIn.jsp");
     	} else if (req.getParameter("searchSessionsButton") != null) {
     		resp.sendRedirect("/subscribe.jsp");
     	}else {}
