@@ -38,10 +38,12 @@
 
 <title>Edit Profile</title>
 <body>
+
+    
 	<form action="/editProfile" method="post">
 	
 	<div class="tab">
-	  <button type="button" class="tablinks" onclick="openCity(event, 'Basic')">Basic Information</button>
+	  <button type="button" class="tablinks" onclick="openCity(event, 'Basic')" id="defaultButton">Basic Information</button>
 	  <button type="button" class="tablinks" onclick="openCity(event, 'Profile')">Profile Picture</button>
 	  <button type="button" class="tablinks" onclick="openCity(event, 'Bio')">Bio</button>
 	</div>
@@ -70,20 +72,24 @@
 	<br>
 	
 	<div>
-		<input type="submit" class="btn btn-info" value="weffew">
+		<input type="submit" class="btn btn-info" value="save">
 	</div>
-	
 	</form>
+	
+
+
 			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 			
-	<script>
+	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
 
 
 </body>
-
+	<script>
+		document.getElementById("defaultButton").click();
+	</script>
 </html>
 		
 				
