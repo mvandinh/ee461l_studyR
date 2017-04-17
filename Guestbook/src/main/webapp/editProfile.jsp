@@ -9,7 +9,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Collections" %>
 <%@ page import="studyR.StudySession" %>
-<%@ page import="studyR.Profile" %>
 <%@ page import="studyR.Email" %>
 <%@ page import="com.googlecode.objectify.*" %>
 <%@ page import="com.google.appengine.api.users.User" %>
@@ -37,41 +36,47 @@
 </head>
 
 
-<title>studyR Dashboard</title>
+<title>Edit Profile</title>
 <body>
-	<div class="jumbotron vertical-center">
-			<div class="wrapper container">
-				<div class="row">
-					<div class="col-sm-2">
-						<h1>
-							<font face="agency FB">studyR Edit Profile
-							</font>
-						</h1>
-						<br>
-					</div>				
-				</div>
-				<div class="row">	
-				<%
-				UserService userService = UserServiceFactory.getUserService();
-    			User user = userService.getCurrentUser();
-  			  	if (user != null) {
-    				pageContext.setAttribute("user", user);	
-    			%>
-				
-				<p>Hello, ${fn:escapeXml(user.nickname)}! (You can
-				<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a> here.)</p>
-				<%
-  			  	}else {
-  			  		response.sendRedirect("logIn.jsp");			
-    			}
-				%>
-				</div>
-			</div>
-		</div>
+	<form action="/editProfile" method="post">
+	
+	<div class="tab">
+	  <button type="button" class="tablinks" onclick="openCity(event, 'Basic')">Basic Information</button>
+	  <button type="button" class="tablinks" onclick="openCity(event, 'Profile')">Profile Picture</button>
+	  <button type="button" class="tablinks" onclick="openCity(event, 'Bio')">Bio</button>
+	</div>
+	
+	<div id="Basic" class="tabcontent">
 		
-		
+			 Display Name:
+			 <input type="text" name="name" value="todo" id="userName"><br>
+			 Email:
+			 <input type="text" name="email" value="todo" id="email"><br>
+			 Phone Number:
+			 <input type="text" name="phone" value="todo" id="phone"><br>
+			 Please format your phone number as follows: 555-123-4567.
+
+	</div>
+	
+	<div id="Profile" class="tabcontent">
+	  <h3>Paris</h3>
+	  <p>Paris is the capital of France.</p> 
+	</div>
+	
+	<div id="Bio" class="tabcontent">
+	  <h3>Tokyo</h3>
+	  <p>Tokyo is the capital of Japan.</p>
+	</div>
+	<br>
+	
+	<div>
+		<input type="submit" class="btn btn-info" value="weffew">
+	</div>
+	
+	</form>
 			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script
+			
+	<script>
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
@@ -81,3 +86,4 @@
 
 </html>
 		
+				

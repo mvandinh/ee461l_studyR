@@ -78,8 +78,8 @@
 			</div>
 		</div>
 		<div class="jumbotron vertical-center">
-			<div class="container" align = "left">
-				<table style = "float:left" class = "table">
+			<div class="container" align="left">
+				<table style="float:left" class = "table" align="left">
 					<thead>
 						<tr>
 							<th>Your profile description</th>
@@ -94,7 +94,7 @@
 			</div>		
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-lg-4">
+					<div class="col-lg-3">
 						<h2 align="left"> Upcoming Sessions:</h2>
 		
 							<h3 align="left"> EE461L_Squad_Team_Alpha, Monday, March 31st 4:00pm</h3>
@@ -102,31 +102,40 @@
 							<h3 align="left"> EE362K_Master_Controllers, Thursday, April 3rd, 2:00pm</h3>
 
 					</div>
-					<div class="col-lg-4">					
+					<div class="col-lg-3">					
 						<h2 align="left">Notifications:</h2>	
 						<h3 align="left"> New message from EE461L_Squad_Team_Alpha.</h3>
 						<h3 align="left"> You have been invited to a new study group.</h3>
 					</div>
-					<div class="col-lg-4">
+					<div class="col-lg-2" align="left">
 						<a href="/editProfile.jsp" class="btn btn-primary" role="button">Edit Profile</a>
-						<p></p>
+						<br>
+						<br>
 						<button type="button" class="btn btn-primary">Request session</button>
+						<br>
+						<form>
+						  date:
+						  <br>
+						  <input type="date" name="bday">
+						</form>
+						session:
+						<br>
 						<select>
 						  <option value="volvo">EE461L_Squad_Team_Alpha</option>
 						  <option value="saab">EE362K_Master_Controllers</option>
 						</select>
-						<form>
-						  date:
-						  <input type="date" name="bday">
-						</form>
-						<p></p>
+					</div>
+					<div class="col-lg-2" align="left">
+						<button type="button" class="btn btn-primary">Create group</button>		
+						<br>
+						<br>
 						<button type="button" class="btn btn-primary">Search for user</button>
 						<form>
 						  Username:
+						  <br>
 						  <input type="text" name="bday">
 						</form>
-						<p></p>
-						<button type="button" class="btn btn-primary">Create group</button>					
+					</div>		
 					</div>
 				</div>
 			</div>		
