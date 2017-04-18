@@ -21,7 +21,7 @@ public class StudySession implements Comparable<StudySession> {
     @Id Long id;
     private String name;
     private String description;
-    private Date date;
+    Date date;
     private Course course;
     
     public StudySession(){
@@ -65,5 +65,15 @@ public class StudySession implements Comparable<StudySession> {
         }
         return 0;
     }
+
+	public String getTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getContent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

@@ -28,7 +28,7 @@ public class StudyRServlet extends HttpServlet {
             String title = req.getParameter("title");
             String content = req.getParameter("content");
             if ((!title.equals("")) && (!content.equals(""))) {
-            	StudySession studySession = new StudySession(, title, content);
+            	StudySession studySession = new StudySession(title, content, null, null);
                 ofy().save().entity(studySession).now();
             }
             resp.sendRedirect("/logIn.jsp");

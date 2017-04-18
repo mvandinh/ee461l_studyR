@@ -39,45 +39,54 @@
 <title>Edit Profile</title>
 <body>
 
-    
-	<form action="/editProfile" method="post">
-	
-	<div class="tab">
-	  <button type="button" class="tablinks" onclick="openCity(event, 'Basic')" id="defaultButton">Basic Information</button>
-	  <button type="button" class="tablinks" onclick="openCity(event, 'Profile')">Profile Picture</button>
-	  <button type="button" class="tablinks" onclick="openCity(event, 'Bio')">Bio</button>
-	</div>
-	
-	<div id="Basic" class="tabcontent">
+	<form action="/editProfile" method="post" enctype="multipart/form-data">
 		
-			 Display Name:
-			 <input type="text" name="name" value="todo" id="userName"><br>
-			 Email:
-			 <input type="text" name="email" value="todo" id="email"><br>
-			 Phone Number:
-			 <input type="text" name="phone" value="todo" id="phone"><br>
-			 Please format your phone number as follows: 555-123-4567.
+		<div class="tab">
+		  <button type="button" class="tablinks" onclick="openCity(event, 'Basic')" id="defaultButton">Basic Information</button>
+		  <button type="button" class="tablinks" onclick="openCity(event, 'Bio')">Bio</button>
+		</div>
+		
+		<div id="Basic" class="tabcontent">
+				 Display Name:
+				 <input type="text" name="userName" value="todo" id="userName"><br>
+				 Email:
+				 <input type="text" name="email" value="todo" id="email"><br>
+				 Phone Number:
+				 <input type="text" name="phone" value="todo" id="phone"><br>
+				 Please format your phone number as follows: 555-123-4567.
+		</div>
+		
 
-	</div>
-	
-	<div id="Profile" class="tabcontent">
-	  <h3>Paris</h3>
-	  <p>Paris is the capital of France.</p> 
-	</div>
-	
-	<div id="Bio" class="tabcontent">
-	  <h3>Tokyo</h3>
-	  <p>Tokyo is the capital of Japan.</p>
-	</div>
-	<br>
-	
-	<div>
-		<input type="submit" class="btn btn-info" value="save">
-	</div>
+		
+		<div id="Bio" class="tabcontent">
+		  Edit your profile description:
+				<br>
+				<!-- TODO: make the servlet which updates the profile -->
+				<h3 align = "left">Personal Description:</h3>		
+					<div>
+						<textarea name="content" rows="3" cols="60" id="bio">test</textarea>
+					</div>
+		</div>
+		
+		
+		
+		<% UserService userService = UserServiceFactory.getUserService();
+	       User user = userService.getCurrentUser();
+	       String userID = user.getFederatedIdentity();
+		%>
+		
+		<input type="hidden" name="userID" value="${fn:escapeXml(userID)}" />
+		
+		<div>
+			<input type="submit" class="btn btn-info" value="Save">
+		</div>
+		
 	</form>
 	
-
-
+	<div class="row" align="left">
+		<a href="/userInterface.jsp" class="btn btn-primary" role="button">Cancel</a>
+	</div>
+	
 			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 			
 	<script

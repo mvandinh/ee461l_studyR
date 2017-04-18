@@ -22,6 +22,8 @@
 <%@ page import="com.google.appengine.api.datastore.FetchOptions" %>
 <%@ page import="com.google.appengine.api.datastore.Key" %>
 <%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page session="false" %>
 <html>
@@ -34,7 +36,6 @@
 						<style>
 							h3 {color:blue;}				
 						</style>	
-</head>
 
 
 <title>studyR Dashboard</title>
@@ -50,15 +51,16 @@
 						<br>
 					</div>
 					<div class="col-sm-8">
-						<img src="images/fish.png" style="float: right"
-							class="img-thumbnail" alt="fish" width="50%"
-							height="50%">
+						<img src="images/fish.png" style="float:right"
+						class="img-thumbnail" alt="fish" width="50%"
+						height="50%">
 					</div>
 					Your profile pic ya jabroni
 				</div>
 				<%
 				UserService userService = UserServiceFactory.getUserService();
-    			User user = userService.getCurrentUser();
+			    User user = userService.getCurrentUser();
+			    String userID = user.getFederatedIdentity();
   			  	if (user != null) {
     				Profile profile;
     				if (Profile.allUsers.containsKey(user)) {

@@ -16,6 +16,8 @@
 <%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page session="false" %>
+<%@ page import="studyR.Profile"%>
+
 
 <html>
 	<head>
@@ -32,6 +34,7 @@
    		<img src = "http://vignette2.wikia.nocookie.net/scribblenauts/images/7/7a/Tuna_Fish.png/revision/latest?cb=20130418113339" alt = "Cartuna" style = "width:250px;height:125px">
    		<hr>
 <%
+	ObjectifyService.register(Profile.class);
     String studyR = request.getParameter("studyR");
     if (studyR == null) {
         studyR = "default";
