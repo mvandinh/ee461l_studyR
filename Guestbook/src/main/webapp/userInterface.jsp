@@ -59,9 +59,9 @@
 				</div>
 				<%
 				UserService userService = UserServiceFactory.getUserService();
-			    User user = userService.getCurrentUser();
-			    String userID = user.getFederatedIdentity();
-  			  	if (user != null) {
+  			  	if (userService.isUserLoggedIn()) {	  			  	
+	  				User user = userService.getCurrentUser();
+	  				String userID = user.getFederatedIdentity();
     				Profile profile;
     				if (Profile.allUsers.containsKey(user)) {
     					profile = Profile.allUsers.get(user); 
