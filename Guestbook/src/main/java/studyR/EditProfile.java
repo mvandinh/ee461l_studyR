@@ -27,13 +27,20 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 public class EditProfile extends HttpServlet {  
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
 		String userName = req.getParameter("userName");
 		String email = req.getParameter("email");
 		String phone = req.getParameter("phone");
 		String bio = req.getParameter("bio");
 		String userID = req.getParameter("userID");
-		String imageLoc = req.getParameter("imagePath");
+		ArrayList<ArrayList<String>> timePrefs = new ArrayList<ArrayList<String>>();
+		String blah = req.getParameter("select_0");
+		for(char i = '0'; req.getParameter("select_" + i) != null; i++){
+			ArrayList<String> timePrefToAdd = new ArrayList<String>();
+			timePrefToAdd.add(req.getParameter("select_" + i));
+			timePrefToAdd.add((req.getParameter("firstTime_" + i)).toString());
+			timePrefToAdd.add((req.getParameter("secondTime_" + i)).toString());		
+			timePrefs.add(timePrefToAdd);
+		}
 
 		
 		

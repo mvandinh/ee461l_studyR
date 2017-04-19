@@ -20,10 +20,11 @@ public class Profile {
     private String bio;
     private String email;
     private String phone;
-    private ArrayList<Course> courses = new ArrayList<Course>();
-    private Image profilePic;
+    private ArrayList<Course> courses;
+    private Preferences preferences;
     
     public Profile(){}
+    
     
 	public Profile(User user) {
 		this.name = user.getNickname();
@@ -35,7 +36,8 @@ public class Profile {
 		id = user.getFederatedIdentity();
 		ofy().save().entity(this).now();
 	}
-	
+	//TODO make a copy constructor
+	//TODO this constructor
 	public Profile(String id, 
 			String name, 
 			String bio, 
@@ -49,7 +51,6 @@ public class Profile {
 		this.phone = phone;
 		this.courses = courses;
 		this.email = email;
-		this.profilePic = profilePic;
 	}
 	
 	public String getName() {
@@ -70,6 +71,10 @@ public class Profile {
 	
 	public ArrayList<Course> getCourses() {
 		return courses;
+	}
+	
+	public Preferences getPreferences(){
+		return preferences;
 	}
 	
 	public boolean compareID(String toCompare){

@@ -39,7 +39,7 @@
 <title>Edit Profile</title>
 <body>
 
-	<form action="/editProfile" method="post" enctype="multipart/form-data">
+	<form action="/editProfile" method="post">
 		
 		<div class="tab">
 		  <button type="button" class="tablinks" onclick="openCity(event, 'Basic')" id="defaultButton">Basic Information</button>
@@ -54,8 +54,9 @@
 				 Email:
 				 <input type="text" name="email" value="todo" id="email"><br>
 				 Phone Number:
-				 <input type="text" name="phone" value="todo" id="phone"><br>
-				 Please format your phone number as follows: 555-123-4567.
+				 <input type="text" name="phone" id="phone"><br>
+				 Format: 555-555-5555
+				 
 		</div>
 		
 
@@ -66,20 +67,17 @@
 				<!-- TODO: make the servlet which updates the profile -->
 				<h3 align = "left">Personal Description:</h3>		
 					<div>
-						<textarea name="content" rows="3" cols="60" id="bio">test</textarea>
+						<textarea name="bioText" rows="3" cols="60" id="bioText">test</textarea>
 					</div>
 		</div>
 		
 		<div id="timePrefs" class="tabcontent">
-		  <%
-		  	pageContext.setAttribute("numClick", (int) 0);
-		  %>
 		  Your available times:
 		  <b id="clicks">0</b>
 		  <br>
 		  Invalid times ranges, such as incomplete time ranges or time ranges which end before they begin, will be ignored.
 		  <br id="loc">
-		  <button type="button"  onclick="addTime('loc')" id="monday">add another time</button>
+		  <button type="button"  onclick="addTime('loc')">add another time</button>
 		  <script>
 		  var clicks = 0;
 		  function addTime(loc){		  
@@ -183,13 +181,17 @@
 				 <p style="margin-left: 40px"><input type="checkbox" name="Exam Review" id="studyStylesER"> Exam Review</p>
 				 
 		</div>
-
-		<% UserService userService = UserServiceFactory.getUserService();
+		<% 
+		   UserService userService = UserServiceFactory.getUserService();
 	       User user = userService.getCurrentUser();
 	       String userID = user.getFederatedIdentity();
-		%>
-		
-		<input type="hidden" name="userID" value="${fn:escapeXml(userID)}" />
+	       String bioInput = request.getParameter("bioText");
+	       pageContext.setAttribute("userID", userID);
+	       pageContext.setAttribute("bioText", bioInput);
+	       
+		%>		
+		<input type="hidden" name="userID" value="<%=user.getFederatedIdentity()%>">
+		<input type="hidden" name="bio" value="<%=request.getParameter("bioText")%>">
 		
 		<div>
 			<input type="submit" class="btn btn-info" value="Save">
