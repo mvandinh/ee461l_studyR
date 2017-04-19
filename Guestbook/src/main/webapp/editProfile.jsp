@@ -44,6 +44,7 @@
 		<div class="tab">
 		  <button type="button" class="tablinks" onclick="openCity(event, 'Basic')" id="defaultButton">Basic Information</button>
 		  <button type="button" class="tablinks" onclick="openCity(event, 'Bio')">Bio</button>
+		  <button type="button" class="tablinks" onclick="openCity(event, 'Prefs')">Preferences</button>
 		</div>
 		
 		<div id="Basic" class="tabcontent">
@@ -66,6 +67,40 @@
 					<div>
 						<textarea name="content" rows="3" cols="60" id="bio">test</textarea>
 					</div>
+		</div>
+		
+		<div id="Prefs" class="tabcontent">
+		  <%
+		  	pageContext.setAttribute("numClick", (int) 0);
+		  %>
+		  Available Times:
+		  <a id="clicks">0</a>
+		  <br id="monday">
+		  Monday: From <input type="time"> To <input type="time">
+		  <button type="button"  onclick="addTime('monday')" id="monday">add another date</button>
+		  <script>
+		  var clicks = 0;
+		  function addTime(day){		  
+			  if(clicks < 4){
+			  	var br = document.createElement("br");
+			    var from = document.createTextNode("From");
+			    var firstTime = document.createElement("input");
+			    firstTime.type = "text";
+			    firstTime.id = day
+			    var to = document.createTextNode("to");
+			    var secondTime = document.createElement("input");
+			    var nextLine = document.getElementById(day);
+			    secondTime.type = "text";
+			    nextLine.parentNode.insertBefore(br, nextLine.nextSibiling);
+			    nextLine.parentNode.insertBefore(from, nextLine.nextSibiling);
+			    nextLine.parentNode.insertBefore(firstTime, nextLine.nextSibiling);
+			    nextLine.parentNode.insertBefore(to, nextLine.nextSibiling);
+			    nextLine.parentNode.insertBefore(secondTime, nextLine.nextSibiling);
+			    clicks += 1;
+		        document.getElementById("clicks").innerHTML = clicks;
+			  }
+			}
+		  </script>
 		</div>
 		
 		
