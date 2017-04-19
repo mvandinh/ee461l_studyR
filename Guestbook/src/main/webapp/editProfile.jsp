@@ -44,7 +44,8 @@
 		<div class="tab">
 		  <button type="button" class="tablinks" onclick="openCity(event, 'Basic')" id="defaultButton">Basic Information</button>
 		  <button type="button" class="tablinks" onclick="openCity(event, 'Bio')">Bio</button>
-		  <button type="button" class="tablinks" onclick="openCity(event, 'Prefs')">Preferences</button>
+		  <button type="button" class="tablinks" onclick="openCity(event, 'timePrefs')">Time Preferences</button>
+		  <button type="button" class="tablinks" onclick="openCity(event, 'otherPrefs')">Other Preferences</button>
 		</div>
 		
 		<div id="Basic" class="tabcontent">
@@ -69,12 +70,14 @@
 					</div>
 		</div>
 		
-		<div id="Prefs" class="tabcontent">
+		<div id="timePrefs" class="tabcontent">
 		  <%
 		  	pageContext.setAttribute("numClick", (int) 0);
 		  %>
 		  Your available times:
-		  <a id="clicks"></a>
+		  <b id="clicks">0</b>
+		  <br>
+		  Invalid times ranges, such as incomplete time ranges or time ranges which end before they begin, will be ignored.
 		  <br id="loc">
 		  <button type="button"  onclick="addTime('loc')" id="monday">add another time</button>
 		  <script>
@@ -154,6 +157,31 @@
 			}
 
 		  </script>
+		</div>
+		
+		<div id="otherPrefs" class="tabcontent">
+				 Group Size (leave blank if your have no preference):
+				 <input type="number" name="groupSize" value="todo" id="groupSize" min = "2" max="10"><br>
+				 <br>
+				 Group Longevity:
+				 <select name="groupLongevity" id="groupLongevity">
+				 	<option> 1 Week </option>
+				 	<option> Several Weeks </option>
+				 	<option> 1 Month </option>
+				 	<option> Several Months </option>
+				 	<option> 1 Semester </option>
+				 	<option> Several Semesters </option>
+				 	<option> Indifferent </option>
+				 </select>
+				 <br>
+				 <br>
+				 Study Styles:
+				 <br>
+				 <p style="margin-left: 40px"><input type="checkbox" name="Group Discussion" id="studyStylesGD"> Group Discussion</p>
+				 <p style="margin-left: 40px"><input type="checkbox" name="Practice Questions" id="studyStylesPQ"> Practice Questions</p>
+				 <p style="margin-left: 40px"><input type="checkbox" name="Project Group" id="studyStylesPG"> Project Group</p>
+				 <p style="margin-left: 40px"><input type="checkbox" name="Exam Review" id="studyStylesER"> Exam Review</p>
+				 
 		</div>
 
 		<% UserService userService = UserServiceFactory.getUserService();
