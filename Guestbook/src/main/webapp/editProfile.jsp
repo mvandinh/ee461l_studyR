@@ -73,38 +73,89 @@
 		  <%
 		  	pageContext.setAttribute("numClick", (int) 0);
 		  %>
-		  Available Times:
-		  <a id="clicks">0</a>
-		  <br id="monday">
-		  Monday: From <input type="time"> To <input type="time">
-		  <button type="button"  onclick="addTime('monday')" id="monday">add another date</button>
+		  Your available times:
+		  <a id="clicks"></a>
+		  <br id="loc">
+		  <button type="button"  onclick="addTime('loc')" id="monday">add another time</button>
 		  <script>
 		  var clicks = 0;
-		  function addTime(day){		  
-			  if(clicks < 4){
+		  function addTime(loc){		  
+			  if(clicks < 4){				
 			  	var br = document.createElement("br");
-			    var from = document.createTextNode("From");
+			  		br.id = "br_" + clicks;
+			  	var select = document.createElement("select");
+			  		select.id = "select_" + clicks;
+				    var mon = document.createElement("option");
+				    	mon.text =	"monday";
+				    var tues = document.createElement("option");
+				    	tues.text = "tuesday";
+				    var wednes = document.createElement("option");
+				    	wednes.text = "wednesday"
+				    var thurs = document.createElement("option");
+				    	thurs.text = "thursday";
+				    var fri = document.createElement("option");
+				    	fri.text =	"friday";
+				    var sat = document.createElement("option");
+				    	sat.text =	"saturday";
+				    var sun = document.createElement("option");
+				    	sun.text = "sunday";
+				    select.add(mon);
+				    select.add(tues);
+				    select.add(wednes);
+				    select.add(thurs);
+				    select.add(fri);
+				    select.add(sat);
+				    select.add(sun);
+			    var from = document.createElement("b");
+			    	from.innerHTML = " from ";
+			    	from.id = "from_" + clicks;
 			    var firstTime = document.createElement("input");
-			    firstTime.type = "text";
-			    firstTime.id = day
-			    var to = document.createTextNode("to");
+			    	firstTime.id = "firstTime_" + clicks;
+			    	firstTime.type = "time";
+			    var to = document.createElement("b"); 		
+			   		to.innerHTML = " to ";
+			   		to.id = "to_" + clicks;
 			    var secondTime = document.createElement("input");
-			    var nextLine = document.getElementById(day);
-			    secondTime.type = "text";
+			    	secondTime.id = "secondTime_" + clicks;
+			    	secondTime.type = "time";
+			    var deleteButton = document.createElement("button");
+			   		deleteButton.id = clicks;
+			   		deleteButton.type = "button";
+			   		deleteButton.innerHTML = "delete time";
+			   		deleteButton.onclick = function(){		   		
+			   			var deleteThis = document.getElementById("from_" + deleteButton.id);
+			   			deleteThis.parentNode.removeChild(deleteThis);
+			   			deleteThis = document.getElementById("firstTime_" + deleteButton.id);
+						deleteThis.parentNode.removeChild(deleteThis);
+						deleteThis = document.getElementById("secondTime_" + deleteButton.id);
+						deleteThis.parentNode.removeChild(deleteThis);						
+						deleteThis = document.getElementById("br_" + deleteButton.id);
+						deleteThis.parentNode.removeChild(deleteThis);
+						deleteThis = document.getElementById("select_" + deleteButton.id);
+						deleteThis.parentNode.removeChild(deleteThis);
+						deleteThis = document.getElementById("to_" + deleteButton.id);
+						deleteThis.parentNode.removeChild(deleteThis);
+						clicks--;
+						document.getElementById("clicks").innerHTML = clicks;
+						this.parentNode.removeChild(this);
+						
+			   		}
+			    var nextLine = document.getElementById(loc);
 			    nextLine.parentNode.insertBefore(br, nextLine.nextSibiling);
+			    nextLine.parentNode.insertBefore(select, nextLine.nextSibiling);
 			    nextLine.parentNode.insertBefore(from, nextLine.nextSibiling);
 			    nextLine.parentNode.insertBefore(firstTime, nextLine.nextSibiling);
 			    nextLine.parentNode.insertBefore(to, nextLine.nextSibiling);
-			    nextLine.parentNode.insertBefore(secondTime, nextLine.nextSibiling);
+			    nextLine.parentNode.insertBefore(secondTime, nextLine.nextSibiling);		    
+			    nextLine.parentNode.insertBefore(deleteButton, nextLine.nextSibiling);		    
 			    clicks += 1;
 		        document.getElementById("clicks").innerHTML = clicks;
 			  }
 			}
+
 		  </script>
 		</div>
-		
-		
-		
+
 		<% UserService userService = UserServiceFactory.getUserService();
 	       User user = userService.getCurrentUser();
 	       String userID = user.getFederatedIdentity();
