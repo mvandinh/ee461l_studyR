@@ -86,6 +86,7 @@
 			  		br.id = "br_" + clicks;
 			  	var select = document.createElement("select");
 			  		select.id = "select_" + clicks;
+			  		select.name = "select_" + clicks;
 				    var mon = document.createElement("option");
 				    	mon.text =	"monday";
 				    var tues = document.createElement("option");
@@ -185,19 +186,16 @@
 		   UserService userService = UserServiceFactory.getUserService();
 	       User user = userService.getCurrentUser();
 	       String userID = user.getFederatedIdentity();
-	       String bioInput = request.getParameter("bioText");
-	       pageContext.setAttribute("userID", userID);
-	       pageContext.setAttribute("bioText", bioInput);
-	       
 		%>		
+		
 		<input type="hidden" name="userID" value="<%=user.getFederatedIdentity()%>">
-		<input type="hidden" name="bio" value="<%=request.getParameter("bioText")%>">
 		
 		<div>
 			<input type="submit" class="btn btn-info" value="Save">
 		</div>
 		
 	</form>
+	<button onclick="getBio()">click me </button>
 	
 	<div class="row" align="left">
 		<a href="/userInterface.jsp" class="btn btn-primary" role="button">Cancel</a>

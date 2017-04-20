@@ -43,8 +43,8 @@ public class Profile {
 			String bio, 
 			String email, 
 			String phone, 
-			ArrayList<Course> courses, 
-			Image profilePic){
+			ArrayList<Course> courses)
+	{
 		this.id = id;
 		this.name = name;
 		this.bio = bio;
