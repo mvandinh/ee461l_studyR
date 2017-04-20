@@ -80,10 +80,11 @@
 		  <button type="button"  onclick="addTime('loc')">add another time</button>
 		  <script>
 		  var clicks = 0;
-		  function addTime(loc){		  
-			  if(clicks < 4){	//See important note in EditProfile.java if you change this line.			
+		  var maxClicks = 4;//Read the note in EditProfile.java if you change this	
+		  function addTime(loc){
+			  if(clicks < maxClicks){		
 				var idNum = 0;
-				for(var i = 0; i < 4; i++){
+				for(var i = 0; i < maxClicks; i++){
 					if(document.getElementById("select_" + i) == null){
 						idNum = i;
 					}
@@ -117,15 +118,57 @@
 			    var from = document.createElement("b");
 			    	from.innerHTML = " from ";
 			    	from.id = "from_" + idNum;
-			    var firstTime = document.createElement("input");
-			    	firstTime.id = "firstTime_" + idNum;
-			    	firstTime.type = "time";
+			    var firstTimeHour = document.createElement("input");
+			    	firstTimeHour.id = "firstTimeHour_" + idNum;
+			    	firstTimeHour.type = "number";
+			    	firstTimeHour.size = "2";
+			    	firstTimeHour.min = "1";
+			    	firstTimeHour.max = "12"
+			    var firstTimeMinute = document.createElement("input");
+			  	  	firstTimeMinute.id = "firstTimeMinute_" + idNum;
+			  	  	firstTimeMinute.type = "number";
+			  	  	firstTimeMinute.size = "2";
+			  	  	firstTimeMinute.min = "0";
+			  	  	firstTimeMinute.max = "59";
+			  	var AmPmOne = document.createElement("select");
+			  		AmPmOne.id = "AmPmOne_" + idNum;
+			  		AmPmOne.name = "AmPmOne_" + idNum;
+				  		var AmOne = document.createElement("option");
+				  			AmOne.text = "AM"
+				  		var PmOne = document.createElement("option");
+				  			PmOne.text = "PM"
+			  		AmPmOne.add(AmOne);
+				  	AmPmOne.add(PmOne);
 			    var to = document.createElement("b"); 		
 			   		to.innerHTML = " to ";
 			   		to.id = "to_" + idNum;
-			    var secondTime = document.createElement("input");
-			    	secondTime.id = "secondTime_" + idNum;
-			    	secondTime.type = "time";
+			   	var colonOne = document.createElement("b"); 		
+			   		colonOne.innerHTML = " : ";
+			   		colonOne.id = "colonOne_" + idNum;
+			   	var colonTwo = document.createElement("b"); 		
+			   		colonTwo.innerHTML = " : ";
+			   		colonTwo.id = "colonTwo_" + idNum;
+			    var secondTimeHour = document.createElement("input");
+			    	secondTimeHour.id = "secondTimeHour_" + idNum;
+			    	secondTimeHour.type = "number";
+			    	secondTimeHour.size = "2";
+			    	secondTimeHour.min = "1";
+			    	secondTimeHour.max = "12"
+			   	var secondTimeMinute = document.createElement("input");
+			   		secondTimeMinute.id = "secondTimeMinute_" + idNum;
+			   		secondTimeMinute.type = "number";
+			   		secondTimeMinute.size = "2";		
+			    	secondTimeMinute.min = "0";
+			    	secondTimeMinute.max = "60"
+			  	var AmPmTwo = document.createElement("select");
+			  		AmPmTwo.id = "AmPmTwo_" + idNum;
+			  		AmPmTwo.name = "AmPmTwo_" + idNum;
+			  		var AmTwo = document.createElement("option");
+			  			AmTwo.text = "AM"
+			  		var PmTwo = document.createElement("option");
+			  			PmTwo.text = "PM"
+			  		AmPmTwo.add(AmTwo);
+				  	AmPmTwo.add(PmTwo);
 			    var deleteButton = document.createElement("button");
 			   		deleteButton.id = idNum;
 			   		deleteButton.type = "button";
@@ -133,15 +176,27 @@
 			   		deleteButton.onclick = function(){		   		
 			   			var deleteThis = document.getElementById("from_" + deleteButton.id);
 			   			deleteThis.parentNode.removeChild(deleteThis);
-			   			deleteThis = document.getElementById("firstTime_" + deleteButton.id);
+			   			deleteThis = document.getElementById("firstTimeHour_" + deleteButton.id);
 						deleteThis.parentNode.removeChild(deleteThis);
-						deleteThis = document.getElementById("secondTime_" + deleteButton.id);
-						deleteThis.parentNode.removeChild(deleteThis);						
+						deleteThis = document.getElementById("firstTimeMinute_" + deleteButton.id);
+						deleteThis.parentNode.removeChild(deleteThis);
+						deleteThis = document.getElementById("secondTimeHour_" + deleteButton.id);
+						deleteThis.parentNode.removeChild(deleteThis);		
+						deleteThis = document.getElementById("secondTimeMinute_" + deleteButton.id);
+						deleteThis.parentNode.removeChild(deleteThis);	
 						deleteThis = document.getElementById("br_" + deleteButton.id);
 						deleteThis.parentNode.removeChild(deleteThis);
 						deleteThis = document.getElementById("select_" + deleteButton.id);
 						deleteThis.parentNode.removeChild(deleteThis);
 						deleteThis = document.getElementById("to_" + deleteButton.id);
+						deleteThis.parentNode.removeChild(deleteThis);
+						deleteThis = document.getElementById("colonOne_" + deleteButton.id);
+						deleteThis.parentNode.removeChild(deleteThis);
+						deleteThis = document.getElementById("colonTwo_" + deleteButton.id);
+						deleteThis.parentNode.removeChild(deleteThis);
+						deleteThis = document.getElementById("AmPmTwo_" + deleteButton.id);
+						deleteThis.parentNode.removeChild(deleteThis);
+						deleteThis = document.getElementById("AmPmOne_" + deleteButton.id);
 						deleteThis.parentNode.removeChild(deleteThis);
 						clicks--;
 						document.getElementById("clicks").innerHTML = clicks;
@@ -152,9 +207,15 @@
 			    nextLine.parentNode.insertBefore(br, nextLine.nextSibiling);
 			    nextLine.parentNode.insertBefore(select, nextLine.nextSibiling);
 			    nextLine.parentNode.insertBefore(from, nextLine.nextSibiling);
-			    nextLine.parentNode.insertBefore(firstTime, nextLine.nextSibiling);
+			    nextLine.parentNode.insertBefore(firstTimeHour, nextLine.nextSibiling);
+			    nextLine.parentNode.insertBefore(colonOne, nextLine.nextSibiling);
+			    nextLine.parentNode.insertBefore(firstTimeMinute, nextLine.nextSibiling);
+			    nextLine.parentNode.insertBefore(AmPmOne, nextLine.nextSibiling);
 			    nextLine.parentNode.insertBefore(to, nextLine.nextSibiling);
-			    nextLine.parentNode.insertBefore(secondTime, nextLine.nextSibiling);		    
+			    nextLine.parentNode.insertBefore(secondTimeHour, nextLine.nextSibiling);
+			    nextLine.parentNode.insertBefore(colonTwo, nextLine.nextSibiling);
+			    nextLine.parentNode.insertBefore(secondTimeMinute, nextLine.nextSibiling);
+			    nextLine.parentNode.insertBefore(AmPmTwo, nextLine.nextSibiling);
 			    nextLine.parentNode.insertBefore(deleteButton, nextLine.nextSibiling);		    
 			    clicks += 1;
 		        document.getElementById("clicks").innerHTML = clicks;
@@ -199,12 +260,10 @@
 		<div>
 			<input type="submit" class="btn btn-info" value="Save">
 		</div>
-		
 	</form>
-	<button onclick="getBio()">click me </button>
 	
 	<div class="row" align="left">
-		<a href="/userInterface.jsp" class="btn btn-primary" role="button">Cancel</a>
+		<a href="/userInterface.jsp" class="btn btn-primary" role="button" align="center">Cancel</a>
 	</div>
 	
 			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
