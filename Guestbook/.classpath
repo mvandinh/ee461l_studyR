@@ -26,6 +26,5 @@
 	<classpathentry exported="true" kind="lib" path="src/main/webapp/WEB-INF/lib/standard-1.1.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/main/webapp/WEB-INF/lib/objectify-4.0b1.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/appengine-api-labs-1.7.0.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/joda-time-2.4.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

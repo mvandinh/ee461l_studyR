@@ -1,9 +1,3 @@
-<!-- WebApp URL: http://homework-1-159007.appspot.com/ 
-	Matthew Edwards
-	EID: mwe295
-	Ahsan Khan
-	EID: ajk2723
--->
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
@@ -23,7 +17,7 @@
 <%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page session="false" %>
-<html>
+<!DOCTYPE html>
 <head>
 <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
 <!-- <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />-->
@@ -75,7 +69,7 @@
 		  Your available times:
 		  <b id="clicks">0</b>
 		  <br>
-		  Invalid times ranges, such as incomplete time ranges or time ranges which end before they begin, will be ignored.
+		  Time ranges which end before they begin will be ignored.
 		  <br id="loc">
 		  <button type="button"  onclick="addTime('loc')">add another time</button>
 		  <script>
@@ -87,6 +81,7 @@
 				for(var i = 0; i < maxClicks; i++){
 					if(document.getElementById("select_" + i) == null){
 						idNum = i;
+						break;
 					}
 				}
 			  	var br = document.createElement("br");

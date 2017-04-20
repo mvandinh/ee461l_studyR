@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.joda.time.Period;
 
 public class Preferences{
 	private HashMap<String, ArrayList<Period>> timePrefs;
