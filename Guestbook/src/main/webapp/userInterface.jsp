@@ -61,7 +61,7 @@
 				UserService userService = UserServiceFactory.getUserService();
   			  	if (userService.isUserLoggedIn()) {	  			  	
 	  				User user = userService.getCurrentUser();
-	  				String userID = user.getFederatedIdentity();
+	  				String userID = user.getUserId();
     				Profile profile;
     				if (Profile.allUsers.containsKey(user)) {
     					profile = Profile.allUsers.get(user); 

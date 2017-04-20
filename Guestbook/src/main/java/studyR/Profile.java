@@ -33,7 +33,7 @@ public class Profile {
 		this.phone = "";
 		this.courses = null;
 		allUsers.put(user, this);
-		id = user.getFederatedIdentity();
+		id = user.getUserId();
 		ofy().save().entity(this).now();
 	}
 	//TODO make a copy constructor

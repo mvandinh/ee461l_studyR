@@ -25,6 +25,7 @@ public class EditProfile extends HttpServlet {
 		for(char i = '0'; i<'4'; i++){
 			if(req.getParameter("select_" + i) != null){
 				//Start and end times need to be in miliseconds
+				String blah = req.getParameter("firstTimeMinute_" + i);
 				long timeStart = Integer.parseInt(req.getParameter("firstTimeMinute_" + i))*60*1000 +
 								 ((req.getParameter("AmPmOne" + i)) == "PM" ? 12*60*60*1000 : 0);
 				if(!req.getParameter("firstTimeHour_" + i).equals("12")){
