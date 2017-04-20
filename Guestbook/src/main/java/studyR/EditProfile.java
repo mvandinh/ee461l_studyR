@@ -21,12 +21,16 @@ public class EditProfile extends HttpServlet {
 		String userID = req.getParameter("userID");
 		ArrayList<ArrayList<String>> timePrefs = new ArrayList<ArrayList<String>>();
 		String blah = req.getParameter("select_0");
-		for(char i = '0'; req.getParameter("select_" + i) != null; i++){
-			ArrayList<String> timePrefToAdd = new ArrayList<String>();
-			timePrefToAdd.add(req.getParameter("select_" + i));
-			timePrefToAdd.add(req.getParameter("firstTime_" + i));
-			timePrefToAdd.add(req.getParameter("secondTime_" + i));		
-			timePrefs.add(timePrefToAdd);
+		//IMPORTANT: the 4 in the for-loop corresponds to the maximum number of time ranges users can input.
+		//			 Change this value if we change the number of allowed time ranges.
+		for(char i = '0'; i<4; i++){
+			if(req.getParameter("select_" + i) != null){
+				ArrayList<String> timePrefToAdd = new ArrayList<String>();
+				timePrefToAdd.add(req.getParameter("select_" + i));
+				timePrefToAdd.add(req.getParameter("firstTime_" + i));
+				timePrefToAdd.add(req.getParameter("secondTime_" + i));		
+				timePrefs.add(timePrefToAdd);
+			}
 		}
 		
 		Profile replacement = new Profile(userID, userName, bio, email, phone, null);

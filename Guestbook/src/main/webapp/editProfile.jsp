@@ -81,12 +81,18 @@
 		  <script>
 		  var clicks = 0;
 		  function addTime(loc){		  
-			  if(clicks < 4){				
+			  if(clicks < 4){	//See important note in EditProfile.java if you change this line.			
+				var idNum = 0;
+				for(var i = 0; i < 4; i++){
+					if(document.getElementById("select_" + i) == null){
+						idNum = i;
+					}
+				}
 			  	var br = document.createElement("br");
-			  		br.id = "br_" + clicks;
+			  		br.id = "br_" + idNum;
 			  	var select = document.createElement("select");
-			  		select.id = "select_" + clicks;
-			  		select.name = "select_" + clicks;
+			  		select.id = "select_" + idNum;
+			  		select.name = "select_" + idNum;
 				    var mon = document.createElement("option");
 				    	mon.text =	"monday";
 				    var tues = document.createElement("option");
@@ -110,18 +116,18 @@
 				    select.add(sun);
 			    var from = document.createElement("b");
 			    	from.innerHTML = " from ";
-			    	from.id = "from_" + clicks;
+			    	from.id = "from_" + idNum;
 			    var firstTime = document.createElement("input");
-			    	firstTime.id = "firstTime_" + clicks;
+			    	firstTime.id = "firstTime_" + idNum;
 			    	firstTime.type = "time";
 			    var to = document.createElement("b"); 		
 			   		to.innerHTML = " to ";
-			   		to.id = "to_" + clicks;
+			   		to.id = "to_" + idNum;
 			    var secondTime = document.createElement("input");
-			    	secondTime.id = "secondTime_" + clicks;
+			    	secondTime.id = "secondTime_" + idNum;
 			    	secondTime.type = "time";
 			    var deleteButton = document.createElement("button");
-			   		deleteButton.id = clicks;
+			   		deleteButton.id = idNum;
 			   		deleteButton.type = "button";
 			   		deleteButton.innerHTML = "delete time";
 			   		deleteButton.onclick = function(){		   		
