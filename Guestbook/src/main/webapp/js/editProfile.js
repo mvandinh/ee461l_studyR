@@ -35,19 +35,19 @@ function addTimeReference(loc, maxClicks){
 		  		select.id = "select_" + idNum;
 		  		select.name = "select_" + idNum;
 			    var mon = document.createElement("option");
-			    	mon.text =	"monday";
+			    	mon.text =	"Monday";
 			    var tues = document.createElement("option");
-			    	tues.text = "tuesday";
+			    	tues.text = "Tuesday";
 			    var wednes = document.createElement("option");
-			    	wednes.text = "wednesday"
+			    	wednes.text = "Wednesday"
 			    var thurs = document.createElement("option");
-			    	thurs.text = "thursday";
+			    	thurs.text = "Thursday";
 			    var fri = document.createElement("option");
-			    	fri.text =	"friday";
+			    	fri.text =	"Friday";
 			    var sat = document.createElement("option");
-			    	sat.text =	"saturday";
+			    	sat.text =	"Saturday";
 			    var sun = document.createElement("option");
-			    	sun.text = "sunday";
+			    	sun.text = "Sunday";
 			    select.add(mon);
 			    select.add(tues);
 			    select.add(wednes);
@@ -60,6 +60,8 @@ function addTimeReference(loc, maxClicks){
 		    	from.id = "from_" + idNum;
 		    var firstTime = document.createElement("input");
 		    	firstTime.id = "firstTime_" + idNum;
+		    	firstTime.name = "firstTime_" + idNum;
+		    	firstTime.value = "12:00";
 		    	firstTime.type = "text";
 		    	firstTime.pattern = "([0]?[0-9]|1[0-2]):[0-5][0-9]";
 		    	firstTime.size = "5";
@@ -77,16 +79,18 @@ function addTimeReference(loc, maxClicks){
 		   		to.id = "to_" + idNum;
 		    var secondTime = document.createElement("input");
 		    	secondTime.id = "secondTime_" + idNum;
-		    	secondTime.type = "text"
+		    	secondTime.name = "secondTime_" + idNum;
+		    	secondTime.value = "11:59";
+		    	secondTime.type = "text";
 			    secondTime.pattern = "([0]?[0-9]|1[0-2]):[0-5][0-9]";
 		    	secondTime.size = "5";
 		  	var AmPmTwo = document.createElement("select");
 		  		AmPmTwo.id = "AmPmTwo_" + idNum;
 		  		AmPmTwo.name = "AmPmTwo_" + idNum;
 		  		var AmTwo = document.createElement("option");
-		  			AmTwo.text = "AM"
+		  			AmTwo.text = "AM";
 		  		var PmTwo = document.createElement("option");
-		  			PmTwo.text = "PM"
+		  			PmTwo.text = "PM";
 		  		AmPmTwo.add(AmTwo);
 			  	AmPmTwo.add(PmTwo);
 		    var deleteButton = document.createElement("button");
@@ -130,7 +134,7 @@ function addTimeReference(loc, maxClicks){
 		  }
 }
 
-//TODO: do actual error checking
+//TODO: do actual error checking (for phone numbers and time inputs)
 function errorMessage(){
 	if(document.getElementById("newLine") != null){
 		var deleteThis = document.getElementById("newLine");
@@ -142,10 +146,15 @@ function errorMessage(){
 	var newLine = document.createElement("br");
 	newLine.id = "newLine";
 	var errorMessage = document.createElement("b");
-	errorMessage.innerHTML = "There is a problem with one of your time inputs. Please fix that error.";
+	errorMessage.innerHTML = "TODO: write the error checking code (this is the error message)";
 	errorMessage.id = "errorMessage";
 	cancelLoc.parentNode.insertBefore(newLine, cancelLoc.nextSibiling);
 	cancelLoc.parentNode.insertBefore(errorMessage, cancelLoc.nextSibiling);
 	
 }
+
+$(document).on("keypress", ":input:not(textarea)", function(event) {
+    return event.keyCode != 13;
+});
+
 

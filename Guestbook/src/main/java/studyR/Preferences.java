@@ -1,31 +1,40 @@
 package studyR;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
 
-
+@Entity
 public class Preferences{
-	private HashMap<String, ArrayList<Period>> timePrefs;
+	@Id String id;
+	private ArrayList<String> timePrefs;
 	private Map<String, Boolean> studyStyles;
 	private String groupLongevity;
-	private int groupSize;
+	private String groupSize;
 
-	public Preferences(HashMap<String, ArrayList<Period>> timePrefs, 
-					   Map<String, Boolean> studyStyles,
+	public Preferences(String id,
+					   ArrayList<String> timePrefs,
+					   String groupSize,
 					   String groupLongevity,
-					   int groupSize){
+					   Map<String, Boolean> studyStyles
+					   ){
+		this.id = id;
 		this.timePrefs = timePrefs;
 		this.studyStyles = studyStyles;
 		this.groupLongevity = groupLongevity;
 		this.groupSize = groupSize;
 	}
 	
-	public HashMap<String, ArrayList<Period>> getTimePrefs(){
+	public Preferences(){}
+	
+	public ArrayList<String> getTimePrefs(){
 		return timePrefs;
 	}
 
-	public void setTimePrefs(HashMap<String, ArrayList<Period>> timePrefs) {
+	public void setTimePrefs(ArrayList<String> timePrefs) {
 		this.timePrefs = timePrefs;
 	}
 	
@@ -45,11 +54,11 @@ public class Preferences{
 		this.groupLongevity = groupLongevity;
 	}
 
-	public int getGroupSize() {
+	public String getGroupSize() {
 		return groupSize;
 	}
 
-	public void setGroupSize(int groupSize) {
+	public void setGroupSize(String groupSize) {
 		this.groupSize = groupSize;
 	}
 	

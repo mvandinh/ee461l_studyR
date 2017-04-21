@@ -37,6 +37,7 @@
 		
 		<div class="tab">
 		  <button type="button" class="tablinks" onclick="openCity(event, 'Basic')" id="defaultButton">Basic Information</button>
+
 		  <button type="button" class="tablinks" onclick="openCity(event, 'Bio')">Bio</button>
 		  <button type="button" class="tablinks" onclick="openCity(event, 'timePrefs')">Time Preferences</button>
 		  <button type="button" class="tablinks" onclick="openCity(event, 'otherPrefs')">Other Preferences</button>
@@ -48,7 +49,7 @@
 				 Email:
 				 <input type="text" name="email" value="todo" id="email"><br>
 				 Phone Number:
-				 <input type="text" name="phone" id="phone"><br>
+				 <input type="text" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br>
 				 Format: 555-555-5555
 				 
 		</div>
@@ -56,29 +57,24 @@
 
 		
 		<div id="Bio" class="tabcontent">
-		  Edit your profile description:
-				<br>
-				<!-- TODO: make the servlet which updates the profile -->
-				<h3 align = "left">Personal Description:</h3>		
-					<div>
-						<textarea name="bioText" rows="3" cols="60" id="bioText">test</textarea>
-					</div>
+			Edit your profile description:
+			<br>
+			<textarea name="bioText" rows="3" cols="60" id="bioText">test</textarea>
 		</div>
 		
 		<div id="timePrefs" class="tabcontent">
-		  Your available times:
-		  <b id="clicks">0</b>
-		  <br>
-		  Time ranges which end before they begin will be ignored.
-		  Enter times in the following format: HH:MM
-		  <br id="loc">
-		  <button type="button"  onclick="addTime('loc')">add another time</button>
-		  <script>
-		  var maxClicks = 4;//Read the note in EditProfile.java if you change this	
-		  function addTime(loc){
-			 addTimeReference(loc, maxClicks);
-			}
-
+			 Your available times:
+			 <b id="clicks">0</b>
+			 <br>
+			 Time ranges which end before they begin will be ignored.
+			 Enter times in the following format: HH:MM
+			 <br id="loc">
+			 <button type="button"  onclick="addTime('loc')">add another time</button>
+			 <script>
+				 var maxClicks = 4;//Read the note in EditProfile.java if you change this	
+				 function addTime(loc){
+				 addTimeReference(loc, maxClicks);
+				 }
 		  </script>
 		</div>
 		
@@ -100,19 +96,18 @@
 				 <br>
 				 Study Styles:
 				 <br>
-				 <p style="margin-left: 40px"><input type="checkbox" name="Group Discussion" id="studyStylesGD"> Group Discussion</p>
-				 <p style="margin-left: 40px"><input type="checkbox" name="Practice Questions" id="studyStylesPQ"> Practice Questions</p>
-				 <p style="margin-left: 40px"><input type="checkbox" name="Project Group" id="studyStylesPG"> Project Group</p>
-				 <p style="margin-left: 40px"><input type="checkbox" name="Exam Review" id="studyStylesER"> Exam Review</p>
+				 <p style="margin-left: 40px"><input type="checkbox" name="Group Discussion" id="studyStylesGD" > Group Discussion</p>
+				 <p style="margin-left: 40px"><input type="checkbox" name="Practice Questions" id="studyStylesPQ" > Practice Questions</p>
+				 <p style="margin-left: 40px"><input type="checkbox" name="Project Group" id="studyStylesPG" > Project Group</p>
+				 <p style="margin-left: 40px"><input type="checkbox" name="Exam Review" id="studyStylesER" > Exam Review</p>
 				 
 		</div>
 		<% 
 		   UserService userService = UserServiceFactory.getUserService();
-	       User user = userService.getCurrentUser();
-	       String userID = user.getFederatedIdentity();
+	       User user = userService.getCurrentUser();       
 		%>		
 		
-		<input type="hidden" name="userID" value="<%=user.getFederatedIdentity()%>">
+		<input type="hidden" name="userID" value="<%=user.getUserId()%>">
 		
 		<div>
 			<input type="submit" class="btn btn-info" value="Save" onclick="errorMessage()">
@@ -128,13 +123,12 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="js/all.js"></script>
-	<script src="js/notEnterInput.js"></script>
+	<script src="js/editProfile.js"></script>
 
 </body>
-	<script>
-		document.getElementById("defaultButton").click();
-	</script>
+<script>
+	document.getElementById("defaultButton").click();
+</script>
 </html>
 		
 				

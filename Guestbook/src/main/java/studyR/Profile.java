@@ -4,10 +4,9 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import com.google.appengine.api.images.Image;
 import com.google.appengine.api.users.User;
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.annotation.Embed;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
@@ -21,7 +20,7 @@ public class Profile {
     private String email;
     private String phone;
     private ArrayList<Course> courses;
-    private Preferences preferences;
+    @Embed Preferences preferences;
     
     public Profile(){}
     
@@ -38,12 +37,14 @@ public class Profile {
 	}
 	//TODO make a copy constructor
 	//TODO this constructor
-	public Profile(String id, 
+	public Profile( 
 			String name, 
-			String bio, 
 			String email, 
 			String phone, 
-			ArrayList<Course> courses)
+			String bio, 
+			ArrayList<Course> courses,
+			Preferences preferences,
+			String id)
 	{
 		this.id = id;
 		this.name = name;
@@ -51,6 +52,7 @@ public class Profile {
 		this.phone = phone;
 		this.courses = courses;
 		this.email = email;
+		this.preferences = preferences;
 	}
 	
 	public String getName() {

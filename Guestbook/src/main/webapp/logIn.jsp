@@ -3,6 +3,7 @@
 <%@ page import="java.util.Collections" %>
 <%@ page import="studyR.StudySession" %>
 <%@ page import="studyR.Email" %>
+<%@ page import="studyR.Preferences"%>
 <%@ page import="com.googlecode.objectify.*" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
@@ -35,6 +36,7 @@
    		<hr>
 <%
 	ObjectifyService.register(Profile.class);
+	ObjectifyService.register(Preferences.class);
     String studyR = request.getParameter("studyR");
     if (studyR == null) {
         studyR = "default";
