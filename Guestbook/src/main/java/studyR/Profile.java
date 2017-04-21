@@ -5,7 +5,6 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 import java.util.ArrayList;
 import java.util.HashMap;
 import com.google.appengine.api.users.User;
-import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.annotation.Embed;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
@@ -19,12 +18,14 @@ public class Profile {
     private String bio;
     private String email;
     private String phone;
+    //This will need an @Embed tag when we actually get around to making the Course class
     private ArrayList<Course> courses;
     @Embed Preferences preferences;
     
     public Profile(){}
     
-    
+    //This should only be called if the user doesn't already have a saved profile.
+    //The only scenario where a user should not have a saved profile is if they are a new user.
 	public Profile(User user) {
 		this.name = user.getNickname();
 		this.bio = "";
@@ -35,8 +36,8 @@ public class Profile {
 		id = user.getUserId();
 		ofy().save().entity(this).now();
 	}
-	//TODO make a copy constructor
-	//TODO this constructor
+	
+	//TODO should we have a copy constructor?
 	public Profile( 
 			String name, 
 			String email, 

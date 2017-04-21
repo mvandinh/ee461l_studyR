@@ -1,7 +1,5 @@
 package studyR;
 
-import static com.googlecode.objectify.ObjectifyService.ofy;
-
 import java.util.ArrayList;
 import java.util.Map;
 import com.googlecode.objectify.annotation.Entity;

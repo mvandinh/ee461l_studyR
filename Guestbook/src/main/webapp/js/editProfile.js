@@ -1,3 +1,4 @@
+//This function is from https://www.w3schools.com/howto/howto_js_tabs.asp
 function openCity(evt, cityName) {
     // Declare all variables
     var i, tabcontent, tablinks;
@@ -19,6 +20,7 @@ function openCity(evt, cityName) {
     evt.currentTarget.className += " active";
 }
 
+//This function is really long, but all it does is create a bunch of input fields.
 function addTimeReference(loc, maxClicks){
 	 var clicks = document.getElementById("clicks").innerHTML;
 	 if(clicks < maxClicks){		
@@ -153,6 +155,7 @@ function errorMessage(){
 	
 }
 
+//This prevents the form from submitting if you press enter
 $(document).on("keypress", ":input:not(textarea)", function(event) {
     return event.keyCode != 13;
 });

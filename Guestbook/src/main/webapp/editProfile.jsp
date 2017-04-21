@@ -17,7 +17,7 @@
 <%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page session="false" %>
-<!DOCTYPE html>
+<html>
 <head>
 <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
 <!-- <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />-->
@@ -115,7 +115,7 @@
 	</form>
 	
 	<div class="row" align="left">
-		<a href="/userInterface.jsp" class="btn btn-primary" role="button" align="center" id="cancel">Cancel</a>
+		<a href="/userInterface.jsp" class="btn btn-primary" role="button" id="cancel">Cancel</a>
 	</div>
 	
 			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

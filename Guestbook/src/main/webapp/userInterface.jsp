@@ -81,7 +81,7 @@
 		</div>
 		<div class="jumbotron vertical-center">
 			<div class="container" align="left">
-				<table style="float:left" class = "table" align="left">
+				<table style="float:left" class = "table">
 					<thead>
 						<tr>
 							<th>Your profile description</th>
@@ -141,7 +141,6 @@
 					</div>
 				</div>
 			</div>		
-		</div>
 		
 		
 			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

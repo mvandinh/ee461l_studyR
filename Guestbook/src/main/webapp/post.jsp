@@ -17,7 +17,7 @@
 
 
 <html>
-	<<head>
+	<head>
    		<title>studyR - the study buddy maker!</title>
    		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
 	</head>
