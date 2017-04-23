@@ -22,7 +22,7 @@ public class EditProfile extends HttpServlet {
 		String bio = req.getParameter("bioText");
 		ArrayList<String> timePrefs = new ArrayList<String>();
 		//IMPORTANT: the 4 in the for-loop corresponds to the maximum number of time ranges users can input.
-		//			 Change this value if we change the number of allowed time ranges.
+		//			 Change this value if we change the number of allowed time ranges as specified in editProfile.jsp.
 		for(char i = '0'; i<'4'; i++){
 			if(req.getParameter("select_" + i) != null){
 				String day = req.getParameter("select_" + i);
