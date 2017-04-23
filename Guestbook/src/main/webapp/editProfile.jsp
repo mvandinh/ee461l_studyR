@@ -94,10 +94,10 @@
 				 </select>
 				 <br>
 				 <br>
-				 Study Styles:
+				 Group Purposes:
 				 <br>
-				 <p style="margin-left: 40px"><input type="checkbox" name="Group Discussion" id="studyStylesGD" > Group Discussion</p>
-				 <p style="margin-left: 40px"><input type="checkbox" name="Practice Questions" id="studyStylesPQ" > Practice Questions</p>
+				 <p style="margin-left: 40px"><input type="checkbox" name="Group Discussion" id="studyStylesGD" > Class Discussion</p>
+				 <p style="margin-left: 40px"><input type="checkbox" name="Practice Questions" id="studyStylesPQ" > Homework</p>
 				 <p style="margin-left: 40px"><input type="checkbox" name="Project Group" id="studyStylesPG" > Project Group</p>
 				 <p style="margin-left: 40px"><input type="checkbox" name="Exam Review" id="studyStylesER" > Exam Review</p>
 				 

@@ -12,6 +12,7 @@
 		<servlet-name>studyR</servlet-name>
 		<url-pattern>/studyR</url-pattern>
 	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>cron</servlet-name>
 		<servlet-class>studyR.WorstCronServlet</servlet-class>
@@ -20,6 +21,7 @@
 		<servlet-name>cron</servlet-name>
 		<url-pattern>/cron</url-pattern>
 	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>editProfile</servlet-name>
 		<servlet-class>studyR.EditProfile</servlet-class>
@@ -28,6 +30,16 @@
 		<servlet-name>editProfile</servlet-name>
 		<url-pattern>/editProfile</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>createStudySession</servlet-name>
+		<servlet-class>studyR.CreateStudySessionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>createStudySession</servlet-name>
+		<url-pattern>/createStudySession</url-pattern>
+	</servlet-mapping>
+	
 	<welcome-file-list>
 		<welcome-file>logIn.jsp</welcome-file>
 	</welcome-file-list>
