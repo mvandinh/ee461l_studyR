@@ -32,7 +32,7 @@
 
 <title>Create Study Session</title>
 <body>
-
+	<font face="agency FB">Create Study Session</font>
 	<form action="/createStudySession" method="post" id="myform">
 		
 		<div class="tab">
@@ -59,8 +59,6 @@
 			 	 </script>
 		</div>
 		
-
-		
 		<div id="Desc" class="tabcontent">
 			Edit the meetup description:
 			<br>
@@ -83,12 +81,6 @@
 				 </select>
 				 <br>
 				 <br>
-				 Study Styles:
-				 <br>
-				 <p style="margin-left: 40px"><input type="checkbox" name="Group Discussion" id="studyStylesGD" > Group Discussion</p>
-				 <p style="margin-left: 40px"><input type="checkbox" name="Practice Questions" id="studyStylesPQ" > Practice Questions</p>
-				 <p style="margin-left: 40px"><input type="checkbox" name="Project Group" id="studyStylesPG" > Project Group</p>
-				 <p style="margin-left: 40px"><input type="checkbox" name="Exam Review" id="studyStylesER" > Exam Review</p>
 				 
 		</div>
 		<% 

@@ -128,7 +128,7 @@
 						</select>
 					</div>
 					<div class="col-lg-2" align="left">
-						<button type="button" class="btn btn-primary">Create group</button>		
+						<a href="/createStudySession.jsp" class="btn btn-primary" role="button">Create Study Session</a>	
 						<br>
 						<br>
 						<button type="button" class="btn btn-primary">Search for user</button>
