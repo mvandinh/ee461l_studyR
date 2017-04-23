@@ -4,10 +4,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
- 
-
-import com.google.appengine.api.users.User;
-import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.annotation.Entity;
 
 import com.googlecode.objectify.annotation.Id;
@@ -65,15 +61,4 @@ public class StudySession implements Comparable<StudySession> {
         }
         return 0;
     }
-
-	public String getTitle() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String getContent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
