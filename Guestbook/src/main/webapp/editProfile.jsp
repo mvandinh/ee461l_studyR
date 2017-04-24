@@ -38,6 +38,18 @@
 
 <title>Edit Profile</title>
 <body>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">studyR</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	   	  <li ><a href="/userInterface.jsp">Dashboard</a></li>
+	      <li class="active"><a href="/editProfile.jsp">Edit Profile</a></li>
+	      <li><a href="/createStudySession.jsp">Create Study Session</a></li>
+	    </ul>
+	  </div>
+	</nav>
 		<% 
 		
 		   UserService userService = UserServiceFactory.getUserService();
