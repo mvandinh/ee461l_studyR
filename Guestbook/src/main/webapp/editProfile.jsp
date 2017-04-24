@@ -47,6 +47,8 @@
 	   	  <li ><a href="/userInterface.jsp">Dashboard</a></li>
 	      <li class="active"><a href="/editProfile.jsp">Edit Profile</a></li>
 	      <li><a href="/createStudySession.jsp">Create Study Session</a></li>
+	      <li><a href="#">Request Session</a></li>
+	      <li><a href="#">Search For User</a></li>
 	    </ul>
 	  </div>
 	</nav>
@@ -90,30 +92,30 @@
 		</div>
 		
 		<div id="Basic" class="tabcontent">
-				 Display Name:
-				 <input type="text" name="userName" value="${fn:escapeXml(userName)}" id="userName">
-				 <br>
-				 <br>
-				 Email:
-				 <input type="text" name="email" value="${fn:escapeXml(email)}" id="email">
-				 <br>
-				 <br>
-				 Phone Number:
-				 <input type="text" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="${fn:escapeXml(phoneNumber)}">
-				 <br>
-				 Format: 555-555-5555
+			<br>
+			 Display Name:
+			 <input type="text" name="userName" value="${fn:escapeXml(userName)}" id="userName">
+			 <br>
+			 <br>
+			 Email:
+			 <input type="text" name="email" value="${fn:escapeXml(email)}" id="email">
+			 <br>
+			 <br>
+			 Phone Number:
+			 <input type="text" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="${fn:escapeXml(phoneNumber)}">
+			 <br>
+			 Format: 555-555-5555
 				 
-		</div>
-		
-
-		
+		</div>		
 		<div id="Bio" class="tabcontent">
+			<br>
 			Edit your profile description:
 			<br>
 			<textarea name="bioText" rows="3" cols="60" id="bioText">${fn:escapeXml(bio)}</textarea>
 		</div>
 		
 		<div id="timePrefs" class="tabcontent">
+			<br>
 			 Your available times:
 			 <b id="clicks">0</b>
 			 <br>
@@ -131,27 +133,28 @@
 		</div>
 		
 		<div id="otherPrefs" class="tabcontent">
-				 Group Size (leave blank if your have no preference):
-				 <input type="number" name="groupSize" value="${fn:escapeXml(groupSize)}" id="groupSize" min = "2" max="10"><br>
-				 <br>
-				 Group Longevity:
-				 <select name="groupLongevity" id="groupLongevity" value="${fn:escapeXml(groupLongevity)}">
-				 	<option> 1 Week </option>
-				 	<option> Several Weeks </option>
-				 	<option> 1 Month </option>
-				 	<option> Several Months </option>
-				 	<option> 1 Semester </option>
-				 	<option> Several Semesters </option>
-				 	<option> Indifferent </option>
-				 </select>
-				 <br>
-				 <br>
-				 Study Styles:
-				 <br>
-				 <p style="margin-left: 40px"><input type="checkbox" name="Group Discussion" id="studyStylesGD" > Group Discussion</p>
-				 <p style="margin-left: 40px"><input type="checkbox" name="Practice Questions" id="studyStylesPQ" > Practice Questions</p>
-				 <p style="margin-left: 40px"><input type="checkbox" name="Project Group" id="studyStylesPG" > Project Group</p>
-				 <p style="margin-left: 40px"><input type="checkbox" name="Exam Review" id="studyStylesER" > Exam Review</p>
+			<br>
+			 Group Size (leave blank if your have no preference):
+			 <input type="number" name="groupSize" value="${fn:escapeXml(groupSize)}" id="groupSize" min = "2" max="10"><br>
+			 <br>
+			 Group Longevity:
+			 <select name="groupLongevity" id="groupLongevity" value="${fn:escapeXml(groupLongevity)}">
+			 	<option> 1 Week </option>
+			 	<option> Several Weeks </option>
+			 	<option> 1 Month </option>
+			 	<option> Several Months </option>
+			 	<option> 1 Semester </option>
+			 	<option> Several Semesters </option>
+			 	<option> Indifferent </option>
+			 </select>
+			 <br>
+			 <br>
+			 Study Styles:
+			 <br>
+			 <p style="margin-left: 40px"><input type="checkbox" name="Group Discussion" id="studyStylesGD" > Group Discussion</p>
+			 <p style="margin-left: 40px"><input type="checkbox" name="Practice Questions" id="studyStylesPQ" > Practice Questions</p>
+			 <p style="margin-left: 40px"><input type="checkbox" name="Project Group" id="studyStylesPG" > Project Group</p>
+			 <p style="margin-left: 40px"><input type="checkbox" name="Exam Review" id="studyStylesER" > Exam Review</p>
 				 
 		</div>
 		

@@ -44,6 +44,8 @@
 	   	  <li class="active"><a href="/userInterface.jsp">Dashboard</a></li>
 	      <li><a href="/editProfile.jsp">Edit Profile</a></li>
 	      <li><a href="/createStudySession.jsp">Create Study Session</a></li>
+	      <li><a href="#">Request Session</a></li>
+	      <li><a href="#">Search For User</a></li>
 	    </ul>
 	  </div>
 	</nav>
@@ -104,40 +106,6 @@
 						<h2 align="left">Notifications:</h2>	
 						Todo
 					</div>
-					<div class="col-lg-2" align="left">
-						<a href="/editProfile.jsp" class="btn btn-primary" role="button">Edit Profile</a>
-						<br>
-						<br>
-						<button type="button" class="btn btn-primary">Request session</button>
-						<br>
-						<form>
-						  date:
-						  <br>
-						  <input type="date" name="bday">
-						</form>
-						session:
-						<br>
-						<select>
-						  <option value="volvo">EE461L_Squad_Team_Alpha</option>
-						  <option value="saab">EE362K_Master_Controllers</option>
-						</select>
-					</div>
-					<div class="col-lg-2" align="left">
-						<a href="/createStudySession.jsp" class="btn btn-primary" role="button">Create Study Session</a>	
-						<br>
-						<br>
-						<button type="button" class="btn btn-primary">Search for user</button>
-						<form>
-						  Username:
-						  <br>
-						  <input type="text" name="bday">
-						</form>
-					</div>		
-					</div>
-				</div>
-			</div>		
-		
-		
 			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
