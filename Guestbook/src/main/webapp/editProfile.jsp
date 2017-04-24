@@ -68,6 +68,12 @@
 	    		userProfile.getPreferences().getTimePrefs()!= null){
 	    	   timePrefs =  userProfile.getPreferences().getTimePrefs();
 		       numberTimes = timePrefs.size();
+		       pageContext.setAttribute("groupSize", userProfile.getPreferences().getGroupSize());
+		       pageContext.setAttribute("groupLongevity", userProfile.getPreferences().getGroupLongevity());
+		       pageContext.setAttribute("groupDiscussion", userProfile.getPreferences().getStudyStyles().get("Group Discussion"));
+		       pageContext.setAttribute("practiceQuestions", userProfile.getPreferences().getStudyStyles().get("Practice Questions"));
+		       pageContext.setAttribute("projectGroup", userProfile.getPreferences().getStudyStyles().get("Project Group"));
+		       pageContext.setAttribute("examReview", userProfile.getPreferences().getStudyStyles().get("Exam Review"));
 	       }
 	       pageContext.setAttribute("numTimes", numberTimes);
 	       String timePrefsString = new String(); 
@@ -75,12 +81,7 @@
 	    	  timePrefsString += timePrefs.get(i) + "|";
 	       }
 	       pageContext.setAttribute("timePrefs", timePrefsString);
-	       pageContext.setAttribute("groupSize", userProfile.getPreferences().getGroupSize());
-	       pageContext.setAttribute("groupLongevity", userProfile.getPreferences().getGroupLongevity());
-	       pageContext.setAttribute("groupDiscussion", userProfile.getPreferences().getStudyStyles().get("Group Discussion"));
-	       pageContext.setAttribute("practiceQuestions", userProfile.getPreferences().getStudyStyles().get("Practice Questions"));
-	       pageContext.setAttribute("projectGroup", userProfile.getPreferences().getStudyStyles().get("Project Group"));
-	       pageContext.setAttribute("examReview", userProfile.getPreferences().getStudyStyles().get("Exam Review"));
+	      
 		%>		
 	<form action="/editProfile" method="post" id="myform">
 		

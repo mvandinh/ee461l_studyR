@@ -67,7 +67,8 @@
 	  				User user = userService.getCurrentUser();
 	  				String userID = user.getUserId();
     				Ref<Profile> profileRef = ObjectifyService.ofy().load().type(Profile.class).id(user.getUserId());
-    				Profile profile = (profileRef == null) ? new Profile(user) : profileRef.get();
+    				Profile profile = profileRef.get();
+    				profile = profile == null ? new Profile(user) : profile;
     				pageContext.setAttribute("profile_name", profile.getName());
     				pageContext.setAttribute("name", profile.getName());
     				pageContext.setAttribute("email", profile.getEmail());
