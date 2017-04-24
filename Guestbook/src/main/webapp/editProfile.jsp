@@ -88,6 +88,7 @@
 				 <br>
 				 Phone Number:
 				 <input type="text" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="${fn:escapeXml(phoneNumber)}">
+				 <br>
 				 Format: 555-555-5555
 				 
 		</div>
