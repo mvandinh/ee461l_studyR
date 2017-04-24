@@ -65,23 +65,30 @@
 	       int numberTimes = 0;
 	       ArrayList<String> timePrefs = new ArrayList<String>();
 	       if(userProfile.getPreferences() != null && 
-	    		userProfile.getPreferences().getTimePrefs()!= null){
-	    	   timePrefs =  userProfile.getPreferences().getTimePrefs();
-		       numberTimes = timePrefs.size();
-		       pageContext.setAttribute("groupSize", userProfile.getPreferences().getGroupSize());
-		       pageContext.setAttribute("groupLongevity", userProfile.getPreferences().getGroupLongevity());
-		       pageContext.setAttribute("groupDiscussion", userProfile.getPreferences().getStudyStyles().get("Group Discussion"));
-		       pageContext.setAttribute("practiceQuestions", userProfile.getPreferences().getStudyStyles().get("Practice Questions"));
-		       pageContext.setAttribute("projectGroup", userProfile.getPreferences().getStudyStyles().get("Project Group"));
-		       pageContext.setAttribute("examReview", userProfile.getPreferences().getStudyStyles().get("Exam Review"));
-	       }
+		    		userProfile.getPreferences().getTimePrefs()!= null){
+		    	   timePrefs =  userProfile.getPreferences().getTimePrefs();
+			       numberTimes = timePrefs.size();
+			       pageContext.setAttribute("groupSize", userProfile.getPreferences().getGroupSize());
+			       pageContext.setAttribute("groupLongevity", userProfile.getPreferences().getGroupLongevity());
+			       pageContext.setAttribute("groupDiscussion", userProfile.getPreferences().getStudyStyles().get("Group Discussion"));
+			       pageContext.setAttribute("practiceQuestions", userProfile.getPreferences().getStudyStyles().get("Practice Questions"));
+			       pageContext.setAttribute("projectGroup", userProfile.getPreferences().getStudyStyles().get("Project Group"));
+			       pageContext.setAttribute("examReview", userProfile.getPreferences().getStudyStyles().get("Exam Review"));
+		       }else{
+		    	   timePrefs =  userProfile.getPreferences().getTimePrefs();
+			       numberTimes = timePrefs.size();
+		    	   pageContext.setAttribute("groupSize", 0);
+			       pageContext.setAttribute("groupLongevity", "1 Week");
+			       pageContext.setAttribute("groupDiscussion", false);
+			       pageContext.setAttribute("practiceQuestions", false);
+			       pageContext.setAttribute("projectGroup", false);
+			       pageContext.setAttribute("examReview", false);
+		       }
 	       pageContext.setAttribute("numTimes", numberTimes);
 	       String timePrefsString = new String(); 
 	       for(int i = 0; i < timePrefs.size(); i++){
 	    	  timePrefsString += timePrefs.get(i) + "|";
 	       }
-	       pageContext.setAttribute("timePrefs", timePrefsString);
-	      
 		%>		
 	<form action="/editProfile" method="post" id="myform">
 		
