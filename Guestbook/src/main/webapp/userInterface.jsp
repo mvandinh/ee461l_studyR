@@ -100,8 +100,6 @@
 					<div class="col-lg-3">
 						<h2 align="left"> Upcoming Sessions:</h2>
 							Todo
-						
-
 					</div>
 					<div class="col-lg-3">					
 						<h2 align="left">Notifications:</h2>	
@@ -109,7 +107,7 @@
 					</div>
 				</div>
 			</div>		
-			
+		</div>	
 			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

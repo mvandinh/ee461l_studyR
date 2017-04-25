@@ -16,9 +16,6 @@ import com.googlecode.objectify.annotation.Id;
 @Entity
 
 public class StudySession implements Comparable<StudySession> {
-
-	public static boolean showAll = false;
-
     @Id Long id;
     private String name;
     private String description;
