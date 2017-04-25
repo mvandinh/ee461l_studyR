@@ -90,7 +90,7 @@
 				 	<option> Several Months </option>
 				 	<option> 1 Semester </option>
 				 	<option> Several Semesters </option>
-				 	<option> Indifferent </option>
+				 	<option> No Preference </option>
 				 </select>
 				 <br>
 				 <br>

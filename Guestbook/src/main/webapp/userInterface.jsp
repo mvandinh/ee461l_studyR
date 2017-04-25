@@ -113,7 +113,7 @@
 						<a href="/editProfile.jsp" class="btn btn-primary" role="button">Edit Profile</a>
 						<br>
 						<br>
-						<button type="button" class="btn btn-primary">Request session</button>
+						<a href="/search.jsp" class="btn btn-primary" role="button">Search for Sessions</a>
 						<br>
 						<form>
 						  date:
