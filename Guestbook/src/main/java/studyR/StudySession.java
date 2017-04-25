@@ -1,9 +1,12 @@
 package studyR;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.googlecode.objectify.annotation.Embed;
 import com.googlecode.objectify.annotation.Entity;
 
 import com.googlecode.objectify.annotation.Id;
@@ -20,7 +23,7 @@ public class StudySession implements Comparable<StudySession> {
     private String name;
     private String description;
     Date date;
-    private Course course;
+    @Embed private Course course;
     
     public StudySession(){
     	name = "UNTITLED";
@@ -28,6 +31,7 @@ public class StudySession implements Comparable<StudySession> {
     	date = new Date();
     	course = new Course();
     	id = date.getTime(); // TODO We should make the ID something more random than the date
+		ofy().save().entity(this).now();
     }
     
     public StudySession(String name, String description, Date date, Course course) {

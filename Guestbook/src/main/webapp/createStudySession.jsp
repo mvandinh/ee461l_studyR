@@ -46,12 +46,11 @@
 		</div>
 		
 		<div id="Basic" class="tabcontent">
-				 Name:
-				 <input type="text" name="groupName" value="Enter your session name here." id="userName"><br>
-				 Class:
-				 <input type="text" name="className" value="Enter the class name here." id="className"><br>
-				 Current Meetup time:
+				 Session Name:
+				 <input type="text" name="groupName" value="Enter name here." id="userName"><br>
 				 <br>
+				 Class that session is for:
+				 <input type="text" name="className" value="Enter class here." id="className"><br>
 				 <br id="loc">
 				 Day of the Week:
 				 <select name="weekDay" id="weekDay">
@@ -63,6 +62,7 @@
 				 	<option> Saturday </option>
 				 	<option> Sunday </option>
 				 </select>
+				 <br>
 				 Start time:
 				 <select name="startHour" id="startHour">
 				 	<option> 00 </option>
@@ -153,7 +153,19 @@
 				 	<option> 58 </option>
 				 	<option> 59 </option>
 				 </select>
+				 Duration (in Hours)
+				 <select name="duration" id="duration">
+				 	<option> 1 </option>
+				 	<option> 2 </option>
+				 	<option> 3 </option>
+				 	<option> 4 </option>
+				 	<option> 5 </option>
+				 	<option> 6 </option>
+				 	<option> 7 </option>
+				 	<option> 8 </option>
+				 </select>
 		</div>
+		
 		
 		<div id="Desc" class="tabcontent">
 			Edit the meetup description:

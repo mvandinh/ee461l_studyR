@@ -33,13 +33,22 @@
 <!-- Bootstrap -->
 <link href="css/bootstrap.css" rel="stylesheet">
 
-						<style>
-							h3 {color:blue;}				
-						</style>	
-
-
 <title>studyR Dashboard</title>
 <body>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">studyR</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	   	  <li class="active"><a href="/userInterface.jsp">Dashboard</a></li>
+	      <li><a href="/editProfile.jsp">Edit Profile</a></li>
+	      <li><a href="/createStudySession.jsp">Create Study Session</a></li>
+	      <li><a href="#">Request Session</a></li>
+	      <li><a href="#">Search For User</a></li>
+	    </ul>
+	  </div>
+	</nav>
 	<div class="jumbotron vertical-center">
 			<div class="wrapper container">
 				<div class="row">
@@ -50,25 +59,21 @@
 						</h1>
 						<br>
 					</div>
-					<div class="col-sm-8">
-						<img src="images/fish.png" style="float:right"
-						class="img-thumbnail" alt="fish" width="50%"
-						height="50%">
-					</div>
-					Your profile pic ya jabroni
+				
 				</div>
 				<%
 				UserService userService = UserServiceFactory.getUserService();
   			  	if (userService.isUserLoggedIn()) {	  			  	
 	  				User user = userService.getCurrentUser();
 	  				String userID = user.getUserId();
-    				Profile profile;
-    				if (Profile.allUsers.containsKey(user)) {
-    					profile = Profile.allUsers.get(user); 
-    				} else {
-    					profile = new Profile(user);
-    				}
+    				Ref<Profile> profileRef = ObjectifyService.ofy().load().type(Profile.class).id(user.getUserId());
+    				Profile profile = profileRef.get();
+    				profile = profile == null ? new Profile(user) : profile;
     				pageContext.setAttribute("profile_name", profile.getName());
+    				pageContext.setAttribute("name", profile.getName());
+    				pageContext.setAttribute("email", profile.getEmail());
+    				pageContext.setAttribute("phone", profile.getPhone());
+    				pageContext.setAttribute("bio", profile.getBio());
     			%>
 				<p>Hello, ${fn:escapeXml(profile_name)}! (You can
 				<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a> here.)</p>
@@ -81,68 +86,30 @@
 		</div>
 		<div class="jumbotron vertical-center">
 			<div class="container" align="left">
-				<table style="float:left" class = "table">
-					<thead>
-						<tr>
-							<th>Your profile description</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</td>
-						</tr>
-					</tbody>
-				</table>	
+				<div class="row">
+					<h2 align="left">Your public profile:</h2>
+					<h3 align="left" class="tab">Display name: ${fn:escapeXml(name)}</h3>
+					<h3 align="left" class="tab">Display email: ${fn:escapeXml(email)}</h3>
+					<h3 align="left" class="tab">Display phone: ${fn:escapeXml(phone)}</h3>
+					<h3 align="left" class="tab">Display bio:</h3>
+						<div class="well">${fn:escapeXml(bio)}</div>
+				</div>
 			</div>		
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-3">
 						<h2 align="left"> Upcoming Sessions:</h2>
-		
-							<h3 align="left"> EE461L_Squad_Team_Alpha, Monday, March 31st 4:00pm</h3>
-							<h3 align="left"> EE461L_Squad_Team_Alpha, Wednesday, April 2nd 6:00pm</h3>
-							<h3 align="left"> EE362K_Master_Controllers, Thursday, April 3rd, 2:00pm</h3>
+							Todo
+						
 
 					</div>
 					<div class="col-lg-3">					
 						<h2 align="left">Notifications:</h2>	
-						<h3 align="left"> New message from EE461L_Squad_Team_Alpha.</h3>
-						<h3 align="left"> You have been invited to a new study group.</h3>
-					</div>
-					<div class="col-lg-2" align="left">
-						<a href="/editProfile.jsp" class="btn btn-primary" role="button">Edit Profile</a>
-						<br>
-						<br>
-						<button type="button" class="btn btn-primary">Request session</button>
-						<br>
-						<form>
-						  date:
-						  <br>
-						  <input type="date" name="bday">
-						</form>
-						session:
-						<br>
-						<select>
-						  <option value="volvo">EE461L_Squad_Team_Alpha</option>
-						  <option value="saab">EE362K_Master_Controllers</option>
-						</select>
-					</div>
-					<div class="col-lg-2" align="left">
-						<a href="/createStudySession.jsp" class="btn btn-primary" role="button">Create Study Session</a>	
-						<br>
-						<br>
-						<button type="button" class="btn btn-primary">Search for user</button>
-						<form>
-						  Username:
-						  <br>
-						  <input type="text" name="bday">
-						</form>
-					</div>		
+						Todo
 					</div>
 				</div>
 			</div>		
-		
-		
+			
 			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

@@ -21,7 +21,7 @@ function openCity(evt, cityName) {
 }
 
 //This function is really long, but all it does is create a bunch of input fields.
-function addTimeReference(loc, maxClicks){
+function addTimeReference(loc, maxClicks, day, timeOne, AmPmOneReq, timeTwo, AmPmTwoReq){
 	 var clicks = document.getElementById("clicks").innerHTML;
 	 if(clicks < maxClicks){		
 			var idNum = 0;
@@ -38,18 +38,25 @@ function addTimeReference(loc, maxClicks){
 		  		select.name = "select_" + idNum;
 			    var mon = document.createElement("option");
 			    	mon.text =	"Monday";
+			    	mon.id = "Monday_" + idNum;
 			    var tues = document.createElement("option");
 			    	tues.text = "Tuesday";
+			    	tues.id = "Tuesday_" + idNum;
 			    var wednes = document.createElement("option");
 			    	wednes.text = "Wednesday"
+			    	wednes.id = "Wednesday_" + idNum;
 			    var thurs = document.createElement("option");
 			    	thurs.text = "Thursday";
+			    	thurs.id = "Thursday_" + idNum;
 			    var fri = document.createElement("option");
 			    	fri.text =	"Friday";
+			    	fri.id = "Friday_" + idNum;
 			    var sat = document.createElement("option");
 			    	sat.text =	"Saturday";
+			    	sat.id = "Saturday_" + idNum;
 			    var sun = document.createElement("option");
 			    	sun.text = "Sunday";
+			    	sun.id = "Sunday_" + idNum;
 			    select.add(mon);
 			    select.add(tues);
 			    select.add(wednes);
@@ -57,13 +64,19 @@ function addTimeReference(loc, maxClicks){
 			    select.add(fri);
 			    select.add(sat);
 			    select.add(sun);
+			    var dayOpts = select.options;
+			    for(var i = 0; i < 7; i++){
+			    	if(dayOpts[i].text == day){
+			    		select.selectedIndex = i;
+			    	}
+			    }
 		    var from = document.createElement("b");
 		    	from.innerHTML = " from ";
 		    	from.id = "from_" + idNum;
 		    var firstTime = document.createElement("input");
 		    	firstTime.id = "firstTime_" + idNum;
 		    	firstTime.name = "firstTime_" + idNum;
-		    	firstTime.value = "12:00";
+		    	firstTime.value = timeOne;
 		    	firstTime.type = "text";
 		    	firstTime.pattern = "([0]?[0-9]|1[0-2]):[0-5][0-9]";
 		    	firstTime.size = "5";
@@ -76,13 +89,19 @@ function addTimeReference(loc, maxClicks){
 			  			PmOne.text = "PM"
 		  		AmPmOne.add(AmOne);
 			  	AmPmOne.add(PmOne);
+			    var AmPmOneOpts = AmPmOne.options;
+			    for(var i = 0; i < 2; i++){
+			    	if(AmPmOneOpts[i].text == AmPmOneReq){
+			    		AmPmOne.selectedIndex = i;
+			    	}
+			    }
 		    var to = document.createElement("b"); 		
 		   		to.innerHTML = " to ";
 		   		to.id = "to_" + idNum;
 		    var secondTime = document.createElement("input");
 		    	secondTime.id = "secondTime_" + idNum;
 		    	secondTime.name = "secondTime_" + idNum;
-		    	secondTime.value = "11:59";
+		    	secondTime.value = timeTwo;
 		    	secondTime.type = "text";
 			    secondTime.pattern = "([0]?[0-9]|1[0-2]):[0-5][0-9]";
 		    	secondTime.size = "5";
@@ -95,6 +114,12 @@ function addTimeReference(loc, maxClicks){
 		  			PmTwo.text = "PM";
 		  		AmPmTwo.add(AmTwo);
 			  	AmPmTwo.add(PmTwo);
+			    var AmPmTwoOpts = AmPmTwo.options;
+			    for(var i = 0; i < 2; i++){
+			    	if(AmPmTwoOpts[i].text == AmPmTwoReq){
+			    		AmPmTwo.selectedIndex = i;
+			    	}
+			    }
 		    var deleteButton = document.createElement("button");
 		   		deleteButton.id = idNum;
 		   		deleteButton.type = "button";

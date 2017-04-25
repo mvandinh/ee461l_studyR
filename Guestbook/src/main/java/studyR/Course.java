@@ -5,8 +5,6 @@ import com.googlecode.objectify.annotation.Id;
 
 public class Course {
 
-	static { ObjectifyService.register(Email.class); }
-	
     @Id Long id;
 	String courseName;
 	int uniqueID;

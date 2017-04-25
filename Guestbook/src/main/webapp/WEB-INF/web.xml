@@ -40,6 +40,15 @@
 		<url-pattern>/createStudySession</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>search</servlet-name>
+		<servlet-class>studyR.Search</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>search</servlet-name>
+		<url-pattern>/search</url-pattern>
+	</servlet-mapping>
+	
 	<welcome-file-list>
 		<welcome-file>logIn.jsp</welcome-file>
 	</welcome-file-list>
