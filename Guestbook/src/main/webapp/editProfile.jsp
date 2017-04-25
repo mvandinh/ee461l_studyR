@@ -61,34 +61,40 @@
 	       pageContext.setAttribute("userName", userProfile.getName());
 	       pageContext.setAttribute("email", userProfile.getEmail());
 	       pageContext.setAttribute("phoneNumber", userProfile.getPhone());
-	       pageContext.setAttribute("bio", userProfile.getBio());
+	       pageContext.setAttribute("bio", userProfile.getBio());	       
 	       int numberTimes = 0;
 	       ArrayList<String> timePrefs = new ArrayList<String>();
-	       if(userProfile.getPreferences() != null && 
-		    		userProfile.getPreferences().getTimePrefs()!= null){
+	       if(userProfile.getPreferences() != null){
+		       if(userProfile.getPreferences().getTimePrefs()!= null){
 		    	   timePrefs =  userProfile.getPreferences().getTimePrefs();
 			       numberTimes = timePrefs.size();
-			       pageContext.setAttribute("groupSize", userProfile.getPreferences().getGroupSize());
-			       pageContext.setAttribute("groupLongevity", userProfile.getPreferences().getGroupLongevity());
-			       pageContext.setAttribute("groupDiscussion", userProfile.getPreferences().getStudyStyles().get("Group Discussion"));
-			       pageContext.setAttribute("practiceQuestions", userProfile.getPreferences().getStudyStyles().get("Practice Questions"));
-			       pageContext.setAttribute("projectGroup", userProfile.getPreferences().getStudyStyles().get("Project Group"));
-			       pageContext.setAttribute("examReview", userProfile.getPreferences().getStudyStyles().get("Exam Review"));
-		       }else{
-		    	   timePrefs =  userProfile.getPreferences().getTimePrefs();
-			       numberTimes = timePrefs.size();
-		    	   pageContext.setAttribute("groupSize", 0);
-			       pageContext.setAttribute("groupLongevity", "1 Week");
-			       pageContext.setAttribute("groupDiscussion", false);
-			       pageContext.setAttribute("practiceQuestions", false);
-			       pageContext.setAttribute("projectGroup", false);
-			       pageContext.setAttribute("examReview", false);
 		       }
+		       if(userProfile.getPreferences().getGroupSize() != ""){
+		      	 pageContext.setAttribute("groupSize", userProfile.getPreferences().getGroupSize());
+		       }else{
+			       pageContext.setAttribute("groupSize", "0");
+		       }
+		       pageContext.setAttribute("groupLongevity", userProfile.getPreferences().getGroupLongevity());
+		       pageContext.setAttribute("groupDiscussion", userProfile.getPreferences().getStudyStyles().get("Group Discussion"));
+		       pageContext.setAttribute("practiceQuestions", userProfile.getPreferences().getStudyStyles().get("Practice Questions"));
+		       pageContext.setAttribute("projectGroup", userProfile.getPreferences().getStudyStyles().get("Project Group"));
+		       pageContext.setAttribute("examReview", userProfile.getPreferences().getStudyStyles().get("Exam Review"));
+	       }else{
+	    	   pageContext.setAttribute("groupSize", "0");
+		       pageContext.setAttribute("groupLongevity", "1 Week");
+		       pageContext.setAttribute("groupDiscussion", false);
+		       pageContext.setAttribute("practiceQuestions", false);
+		       pageContext.setAttribute("projectGroup", false);
+		       pageContext.setAttribute("examReview", false);
+		   }
+
+
 	       pageContext.setAttribute("numTimes", numberTimes);
 	       String timePrefsString = "";
 	       for(int i = 0; i < timePrefs.size(); i++){
 	    	  timePrefsString += timePrefs.get(i) + "|";
 	       }
+	       pageContext.setAttribute("timePrefs", timePrefsString);
 		%>		
 	<form action="/editProfile" method="post" id="myform">
 		
@@ -200,6 +206,12 @@
 		timeTwo = timePrefsSplit[3].substring(0, 5);
 		AmPmTwo = timePrefsSplit[3].substring(5, 7);
 		addTimeReference("loc", maxClicks, day, timeOne, AmPmOne, timeTwo, AmPmTwo);
+	}
+	
+	var groupSize = document.getElementById("groupSize");
+	var GS = ${groupSize};
+	if(GS > 0){
+		groupSize.value = GS;
 	}
 	
 	//preload longevity pref
