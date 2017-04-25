@@ -28,17 +28,7 @@ public class StudySession implements Comparable<StudySession> {
     String studyPurpose;
     @Embed private Course course;
     
-    public StudySession(){
-    	name = "UNTITLED";
-    	description = "UNTITLED";
-    	date = new Date();
-    	course = new Course();
-    	id = date.getTime(); // TODO We should make the ID something more random than the date
-		groupSize = 5;
-		studyStyle = "No Preference";
-		studyPurpose = "No Preference";
-    	ofy().save().entity(this).now();
-    }
+    public StudySession(){}
     
     public StudySession(
     		String name, 
@@ -82,6 +72,10 @@ public class StudySession implements Comparable<StudySession> {
     
     public String getStudyStyle() {
     	return studyStyle;
+    }
+    
+    public String getStudyPurpose() {
+    	return studyPurpose;
     }
 
     @Override
