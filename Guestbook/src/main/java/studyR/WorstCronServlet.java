@@ -41,9 +41,9 @@ public class WorstCronServlet extends HttpServlet {
 		sendMe.setFrom("m.vandinh@gmail.com");
 		sendMe.setSubject("UPDATE: Minh and Ethan's Punderful Blog");
 		String body = "POSTS FROM THE LAST 24 HOURS:\n\n";
-		for (StudySession post : postsFinal){
+		/*for (StudySession post : postsFinal){
 			body += post.getTitle() + ": " + post.getContent() +"\n\n";
-		}
+		}*/
 		String header = body + "Check van-cranmer.appspot.com for new posts!\n Or, you can unsubscribe at van-cranmer.appspot.com/subscribe.jsp";
 		sendMe.setText(header);
 		try {

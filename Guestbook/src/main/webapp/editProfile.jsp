@@ -75,8 +75,10 @@
 			       pageContext.setAttribute("projectGroup", userProfile.getPreferences().getStudyStyles().get("Project Group"));
 			       pageContext.setAttribute("examReview", userProfile.getPreferences().getStudyStyles().get("Exam Review"));
 		       }else{
-		    	   timePrefs =  userProfile.getPreferences().getTimePrefs();
-			       numberTimes = timePrefs.size();
+		    	   timePrefs =  new ArrayList<String>();
+		    			   //userProfile.getPreferences().getTimePrefs();
+			       numberTimes = 0;
+			       			//timePrefs.size();
 		    	   pageContext.setAttribute("groupSize", 0);
 			       pageContext.setAttribute("groupLongevity", "1 Week");
 			       pageContext.setAttribute("groupDiscussion", false);

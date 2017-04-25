@@ -107,36 +107,6 @@
 						<h2 align="left">Notifications:</h2>	
 						Todo
 					</div>
-					<div class="col-lg-2" align="left">
-						<a href="/editProfile.jsp" class="btn btn-primary" role="button">Edit Profile</a>
-						<br>
-						<br>
-						<a href="/search.jsp" class="btn btn-primary" role="button">Search for Sessions</a>
-						<br>
-						<form>
-						  date:
-						  <br>
-						  <input type="date" name="bday">
-						</form>
-						session:
-						<br>
-						<select>
-						  <option value="volvo">EE461L_Squad_Team_Alpha</option>
-						  <option value="saab">EE362K_Master_Controllers</option>
-						</select>
-					</div>
-					<div class="col-lg-2" align="left">
-						<button type="button" class="btn btn-primary">Create group</button>		
-						<br>
-						<br>
-						<button type="button" class="btn btn-primary">Search for user</button>
-						<form>
-						  Username:
-						  <br>
-						  <input type="text" name="bday">
-						</form>
-					</div>		
-					</div>
 				</div>
 			</div>		
 			
