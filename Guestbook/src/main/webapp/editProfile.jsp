@@ -75,10 +75,8 @@
 			       pageContext.setAttribute("projectGroup", userProfile.getPreferences().getStudyStyles().get("Project Group"));
 			       pageContext.setAttribute("examReview", userProfile.getPreferences().getStudyStyles().get("Exam Review"));
 		       }else{
-		    	   timePrefs =  new ArrayList<String>();
-		    			   //userProfile.getPreferences().getTimePrefs();
-			       numberTimes = 0;
-			       			//timePrefs.size();
+		    	   timePrefs =  userProfile.getPreferences().getTimePrefs();
+			       numberTimes = timePrefs.size();
 		    	   pageContext.setAttribute("groupSize", 0);
 			       pageContext.setAttribute("groupLongevity", "1 Week");
 			       pageContext.setAttribute("groupDiscussion", false);
@@ -87,7 +85,7 @@
 			       pageContext.setAttribute("examReview", false);
 		       }
 	       pageContext.setAttribute("numTimes", numberTimes);
-	       String timePrefsString = new String(); 
+	       String timePrefsString = "";
 	       for(int i = 0; i < timePrefs.size(); i++){
 	    	  timePrefsString += timePrefs.get(i) + "|";
 	       }

@@ -44,7 +44,7 @@
 	   	  <li class="active"><a href="/userInterface.jsp">Dashboard</a></li>
 	      <li><a href="/editProfile.jsp">Edit Profile</a></li>
 	      <li><a href="/createStudySession.jsp">Create Study Session</a></li>
-	      <li><a href="#">Request Session</a></li>
+	      <li><a href="/search.jsp">Search Study Sessions</a></li>
 	      <li><a href="#">Search For User</a></li>
 	    </ul>
 	  </div>

@@ -23,6 +23,9 @@ public class StudySession implements Comparable<StudySession> {
     private String name;
     private String description;
     Date date;
+    int groupSize;
+    String studyStyle;
+    String studyPurpose;
     @Embed private Course course;
     
     public StudySession(){
@@ -31,14 +34,29 @@ public class StudySession implements Comparable<StudySession> {
     	date = new Date();
     	course = new Course();
     	id = date.getTime(); // TODO We should make the ID something more random than the date
-		ofy().save().entity(this).now();
+		groupSize = 5;
+		studyStyle = "No Preference";
+		studyPurpose = "No Preference";
+    	ofy().save().entity(this).now();
     }
     
-    public StudySession(String name, String description, Date date, Course course) {
+    public StudySession(
+    		String name, 
+    		String description, 
+    		Date date, 
+    		Course course,
+    		int groupSize,
+    		String studyStyle,
+    		String studyPurpose
+    		) {
         this.name = name;
         this.description = description;
         this.date = date;
         this.course = course;
+        this.groupSize = groupSize;
+        this.studyStyle = studyStyle;
+        this.studyPurpose = studyPurpose;
+        ofy().save().entity(this).now();
     }
 
     public String getName() {
@@ -56,6 +74,14 @@ public class StudySession implements Comparable<StudySession> {
     public String getDate() {
     	DateFormat df = new SimpleDateFormat("MM/dd/yy");
     	return df.format(date);
+    }
+    
+    public int getGroupSize() {
+    	return groupSize;
+    }
+    
+    public String getStudyStyle() {
+    	return studyStyle;
     }
 
     @Override
