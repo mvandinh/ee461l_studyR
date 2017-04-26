@@ -26,6 +26,7 @@
 <%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page session="false" %>
+<%@ page import="java.util.ArrayList" %>
 <html>
 <head>
 <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
@@ -63,11 +64,12 @@
 				</div>
 				<%
 				UserService userService = UserServiceFactory.getUserService();
+				Profile profile = null;
   			  	if (userService.isUserLoggedIn()) {	  			  	
 	  				User user = userService.getCurrentUser();
 	  				String userID = user.getUserId();
     				Ref<Profile> profileRef = ObjectifyService.ofy().load().type(Profile.class).id(user.getUserId());
-    				Profile profile = profileRef.get();
+    				profile = profileRef.get();
     				profile = profile == null ? new Profile(user) : profile;
     				pageContext.setAttribute("profile_name", profile.getName());
     				pageContext.setAttribute("name", profile.getName());
@@ -87,26 +89,45 @@
 		<div class="jumbotron vertical-center">
 			<div class="container" align="left">
 				<div class="row">
-					<h2 align="left">Your public profile:</h2>
-					<h3 align="left" class="tab">Display name: ${fn:escapeXml(name)}</h3>
-					<h3 align="left" class="tab">Display email: ${fn:escapeXml(email)}</h3>
-					<h3 align="left" class="tab">Display phone: ${fn:escapeXml(phone)}</h3>
-					<h3 align="left" class="tab">Display bio:</h3>
-						<div class="well">${fn:escapeXml(bio)}</div>
+					<h2 align="left"><u>Your public profile</u></h2>
+						<div class = "col-lg-6">						
+							<h3 align="left" class="tab"><b>Display name</b>: ${fn:escapeXml(name)}</h3>
+							<h3 align="left" class="tab"><b>Display email</b>: ${fn:escapeXml(email)}</h3>
+							<h3 align="left" class="tab"><b>Display phone</b>: ${fn:escapeXml(phone)}</h3>
+						</div>
+						<div class = "col-lg-6">
+						<h3 align="left" class="tab"><b>Available times</b>:</h3>					
+						<%				
+						if(profile.getPreferences() != null && profile.getPreferences().getTimePrefs() != null){
+							ArrayList<String> timePrefs = profile.getPreferences().getTimePrefs();
+							for(int i = 0; i < timePrefs.size(); i++){
+								pageContext.setAttribute("thisTimePref", timePrefs.get(i));
+								%>
+								<h3 align="left">${fn:escapeXml(thisTimePref)}</h3>
+								<%
+							}
+						}
+						%>	
+
+					</div>
 				</div>
-			</div>		
-			<div class="container-fluid">
 				<div class="row">
-					<div class="col-lg-3">
-						<h2 align="left"> Upcoming Sessions:</h2>
+					<h3 align="left" class="tab"><b>Bio</b>:</h3>
+					<div class="well">${fn:escapeXml(bio)}</div>
+				</div>
+	
+				<div class="row">
+					<h2 align="left"><u>Notifications</u></h2>
+					<div class="col-lg-6">
+						<h2 align="left" class="tab"> Upcoming Sessions:</h2>
 							Todo
 					</div>
-					<div class="col-lg-3">					
-						<h2 align="left">Notifications:</h2>	
+					<div class="col-lg-6">					
+						<h2 align="left" class="tab">Messages:</h2>	
 						Todo
 					</div>
 				</div>
-			</div>		
+			</div>	
 		</div>	
 			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script
