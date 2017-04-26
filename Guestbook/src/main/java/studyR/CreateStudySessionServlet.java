@@ -55,6 +55,7 @@ public class CreateStudySessionServlet extends HttpServlet {
 		if(courseOfSession == null){
 			setError(true);
 			resp.sendRedirect("/createStudySession.jsp");
+			return;
 		}
 		
 		//getting profile of creator
