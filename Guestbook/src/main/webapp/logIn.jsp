@@ -38,6 +38,7 @@
 <%
 	ObjectifyService.register(Profile.class);
 	ObjectifyService.register(Preferences.class);
+	ObjectifyService.register(StudySession.class);
     String studyR = request.getParameter("studyR");
     if (studyR == null) {
         studyR = "default";

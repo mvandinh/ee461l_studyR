@@ -28,12 +28,12 @@ public class StudyRServlet extends HttpServlet {
             String title = req.getParameter("title");
             String content = req.getParameter("content");
             if ((!title.equals("")) && (!content.equals(""))) {
-            	StudySession studySession = new StudySession(title, content, null, null);
+            	StudySession studySession = new StudySession();
                 ofy().save().entity(studySession).now();
             }
             resp.sendRedirect("/logIn.jsp");
     	} else if (req.getParameter("toggleViewAllButton") != null) {
-    		StudySession.showAll = !StudySession.showAll;
+    		//StudySession.showAll = !StudySession.showAll;
     		resp.sendRedirect("/logIn.jsp");
     	}else if (req.getParameter("myGroupsButton") != null){
     		resp.sendRedirect("/myGroups.jsp");

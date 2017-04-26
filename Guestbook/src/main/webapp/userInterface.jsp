@@ -120,7 +120,32 @@
 					<h2 align="left"><u>Notifications</u></h2>
 					<div class="col-lg-6">
 						<h2 align="left" class="tab"> Upcoming Sessions:</h2>
-							Todo
+							<%
+							User user = userService.getCurrentUser();
+			  				String userID = user.getUserId();
+			  				List<StudySession> sessions = ObjectifyService.ofy().load().type(StudySession.class).list();
+			  				boolean member;
+			  		        for(StudySession s : sessions){
+			  		        	member = false;
+			  		        	if(userID.equals(s.getHost().getUserID())){
+			  		        		member = true;
+			  		        	}
+			  		        	for(Profile p: s.getMemberList()){
+			  		        		if(userID.equals(p.getUserID())){
+			  		        			member = true;
+			  		        		}
+			  		        	}
+			  		        	if(member){
+			  		        		pageContext.setAttribute("session_name", s.getName());
+			  	    				pageContext.setAttribute("session_course", s.getCourse());
+			  	    				pageContext.setAttribute("session_date", s.getDate());
+			  	    				pageContext.setAttribute("session_time", s.getStartTime());
+			  		        		%>
+			  		        		<h3 align="left" class="tab"><b>${fn:escapeXml(session_name)}, ${fn:escapeXml(session_course)}</b>: ${fn:escapeXml(session_date)}, ${fn:escapeXml(session_time)}</h3>
+			  		        		<%
+			  		        	}
+			  		        }
+							%>
 					</div>
 					<div class="col-lg-6">					
 						<h2 align="left" class="tab">Messages:</h2>	
