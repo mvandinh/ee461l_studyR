@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Collections" %>
 <%@ page import="studyR.StudySession" %>
+<%@ page import="studyR.SearchResults" %>
 <%@ page import="studyR.Email" %>
 <%@ page import="com.googlecode.objectify.*" %>
 <%@ page import="com.google.appengine.api.users.User" %>
@@ -51,26 +52,25 @@
 	<div class="jumbotron vertical-center">
 		<div class="container-fluid" align= "left">
 			<div class="row">
-			<h3>My Filters:</h3>
+			<h3>Advanced Filters:</h3>
 			<form action="/search" method="post" id="search">
 				<div id="otherPrefs" class="tabcontent">
 					Group Size:
 					<input type="number" name="groupSize" value="todo" id="groupSize" min = "2" max="10"><br><br>
 					Study Style: 
 						<select name="studyStyle" id="studyStyle">
-							<option> No Preference </option>
+							<option selected = "selected"> No Preference </option>
 							<option> Quiet </option>
 							<option> Collaborative </option>
 						</select><br><br>
 					Study Purpose:
 						<select name="studyPurpose" id="studyPurpose">
-							<option> No Preference </option>
+							<option selected = "selected"> No Preference </option>
 							<option> Class Discussion </option>
 							<option> Homework </option>
 							<option> Exam Review </option>
 						</select><br><br>
 					<input type="submit" class="btn btn-info" value="Filter" onclick="errorMessage()">
-					<input type="submit" class="btn btn-info" value="Reset" onclick="errorMessage()">
 					<a href="/userInterface.jsp" class="btn btn-primary" role="button" id="cancel">Cancel</a>
 				</div>
 			</form>
@@ -79,21 +79,32 @@
 		<div class="container" align="right">
 			<div class="row">
 				<%
+				UserService userService = UserServiceFactory.getUserService();
+			    User user = userService.getCurrentUser();
+				Ref<SearchResults> searchResultsRef = ObjectifyService.ofy().load().type(SearchResults.class).id(user.getUserId() +"_searchResults");
+			    SearchResults searchResults = searchResultsRef.get();
 				ObjectifyService.register(StudySession.class);
+				ObjectifyService.register(SearchResults.class);
 				List<StudySession> studySessions = ObjectifyService.ofy().load().type(StudySession.class).list();   
 				Collections.sort(studySessions); 
 				Collections.reverse(studySessions);
 			    if (studySessions.isEmpty()) {
 			        %>
-			        <p>No study sessions with your preferences are available, but you can make one <a href="/createStudySession.jsp">here</a>!!</p>
+			        <p>No study sessions with your preferences are available, but you can host you own <a href="/createStudySession.jsp">here</a>!!</p>
 			        <%
-			    } else {
+			    } else if (searchResults == null){
 			    	for (StudySession studySession : studySessions) {
 			        	pageContext.setAttribute("greeting_title", studySession.getName());
 			        	%>
 			        	<h4><b><i>${fn:escapeXml(greeting_title)}</i></b></h4>
 			        	<%
 			        }
+				} else {
+					List<StudySession> filteredStudySessions = searchResults.getSearchResults();
+					for (StudySession studySession : filteredStudySessions) {
+						
+					}
+					ObjectifyService.ofy().delete().type(SearchResults.class).id(user.getUserId() +"_searchResults").now();
 				}
 				%>
 				
