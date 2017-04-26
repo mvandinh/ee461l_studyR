@@ -94,9 +94,16 @@
 			        <%
 			    } else if (searchResults == null){
 			    	for (StudySession studySession : studySessions) {
-			        	pageContext.setAttribute("greeting_title", studySession.getName());
+			        	pageContext.setAttribute("studySession", studySession.getName());
+			        	pageContext.setAttribute("studySession", studySession.getDescription());
+			        	pageContext.setAttribute("studySession", studySession.getDate());
+			        	pageContext.setAttribute("studySession", studySession.getGroupSize());
+			        	pageContext.setAttribute("studySession", studySession.getCurrentNumMembers());
+			        	pageContext.setAttribute("studySession", studySession.getStudyStyle());
+			        	pageContext.setAttribute("studySession", studySession.getStudyPurpose());
+			        	pageContext.setAttribute("studySession", studySession.getCourse());
 			        	%>
-			        	<h4><b><i>${fn:escapeXml(greeting_title)}</i></b></h4>
+			        	<h4><b><i>${fn:escapeXml(studySesion_title)}</i></b></h4>
 			        	<%
 			        }
 				} else {
