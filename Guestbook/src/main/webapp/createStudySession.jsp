@@ -47,10 +47,10 @@
 		
 		<div id="Basic" class="tabcontent">
 				 Session Name:
-				 <input type="text" name="groupName" value="Enter name here." id="userName"><br>
+				 <input type="text" name="sessionName" value="Default" id="sessionName"><br>
 				 <br>
 				 Class that session is for:
-				 <input type="text" name="className" value="Enter class here." id="className"><br>
+				 <input type="text" name="className" value="Default" id="className"><br>
 				 <br id="loc">
 				 Day of the Week:
 				 <select name="weekDay" id="weekDay">
@@ -168,7 +168,7 @@
 		
 		
 		<div id="Desc" class="tabcontent">
-			Edit the meetup description:
+			Edit the session description:
 			<br>
 			<textarea name="bioText" rows="3" cols="60" id="bioText">test</textarea>
 		</div>
