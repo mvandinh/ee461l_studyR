@@ -32,8 +32,6 @@
 							h3 {color:blue;}				
 						</style>	
 </head>
-<p>You can look at all existing study sessions at this page. Use the advanced filters to match the results with your preferences. Hover over the study session's name to view its description</p> 
-<p id="error"></p>
 
 <title>Search Study Sessions</title>
 <body>
@@ -51,6 +49,8 @@
 	    </ul>
 	  </div>
 	</nav>
+	<p>You can look at all existing study sessions at this page. Use the advanced filters to match the results with your preferences. Hover over the study session's name to view its description</p> 
+	<p id="error"></p>
 	<div class="jumbotron vertical-center">
 		<div class="container-fluid" align= "left">
 			<div class="row">
@@ -59,6 +59,19 @@
 				<div id="otherPrefs" class="tabcontent">
 					Group Size:
 					<input type="number" name="groupSize" value="todo" id="groupSize" min = "2" max="10"><br><br>
+					Course: 
+						<select name=course id="course">
+							<option selected = "selected"> No Preference </option>
+							<option> EE302 </option>
+							<option> EE306 </option>
+							<option> EE312 </option>
+							<option> EE313 </option>
+							<option> EE319K </option>
+							<option> EE360C </option>
+							<option> EE411 </option>
+							<option> EE422C </option>
+							<option> EE461L </option>
+						</select><br><br>
 					Study Style: 
 						<select name="studyStyle" id="studyStyle">
 							<option selected = "selected"> No Preference </option>
@@ -80,6 +93,7 @@
 		</div>
 		<div class="container" align="right">
 			<div class="row">
+			
 				<%
 				ObjectifyService.register(StudySession.class);
 				ObjectifyService.register(SearchResults.class);
@@ -91,7 +105,6 @@
 				Ref<SearchResults> searchResultsRef = ObjectifyService.ofy().load().type(SearchResults.class).id(user.getUserId() +"_searchResults");
 			    SearchResults searchResults = searchResultsRef.get();
 				List<StudySession> studySessions = ObjectifyService.ofy().load().type(StudySession.class).list();   
-				
 			    if (studySessions.isEmpty()) {
 			        %>
 			        <p>No study sessions with your preferences are available, but you can host you own <a href="/createStudySession.jsp">here</a>!!</p>
@@ -117,13 +130,13 @@
 						        	pageContext.setAttribute("studySession_date", studySession.getDate());
 						        	pageContext.setAttribute("studySession_course", studySession.getCourse());
 						        	pageContext.setAttribute("studySession_groupSize", studySession.getGroupSize());
-						        	pageContext.setAttribute("studySession_currentNumMembers", studySession.getCurrentNumMembers());
+						        	pageContext.setAttribute("studySession_currentNumMembers", studySession.getMemberList().size());
 						        	pageContext.setAttribute("studySession_studyStyle", studySession.getStudyStyle());
 						        	pageContext.setAttribute("studySession_studyPurpose", studySession.getStudyPurpose());
 						        	pageContext.setAttribute("studySession_description", studySession.getDescription());
 						        	%>
 						        	<tr>
-							    	    <td><span title="${fn:escapeXml(studySession_description)}"><a href="#" onclick="joinStudySession('studySession.getId')">${fn:escapeXml(studySession_title)}</a></span></td>
+							    	    <td><span title="${fn:escapeXml(studySession_description)}"><a href="#" onclick="joinStudySession(studySession)">${fn:escapeXml(studySession_title)}</a></span></td>
 							    	    <td>${fn:escapeXml(studySession_date)}</td> 
 							    	    <td>${fn:escapeXml(studySession_course)}</td>
 							    	    <td>${fn:escapeXml(studySession_currentNumMembers)} / ${fn:escapeXml(studySession_groupSize)}</td>
@@ -134,7 +147,7 @@
 					    		}
 			        		}
 					    	if (searchResults != null){ 
-					    		ObjectifyService.ofy().delete().type(SearchResults.class).id(user.getUserId() +"_searchResults").now();
+					    		ObjectifyService.ofy().delete().type(SearchResults.class).id(user.getUserId() + "_searchResults").now();
 							}
 			    	%></table><%
 				}
@@ -153,16 +166,13 @@
 </body>
 <script>
 	document.getElementById("defaultButton").click();
-	function joinStudySession(hostId) {
-		Ref<studySession> studySessionRef = ObjectifyService.ofy().load().type(StudySession.class).id(hostId);
-	    StudySession studySession = studySessionRef.get();
-	    if (studySession.getCurrentNumMembers() < studySession.getGroupSize()) {
+	function joinStudySession(studySession) {
+	    if (studySession.getMemberList().size() < studySession.getGroupSize()) {
 	    	studySession.addMember(userProfile);
 	    	response.sendRedirect("userInterface.jsp");
 	    } else {
-	    	document.getElementById("error").innerHTML = "This Study Session is now full.";
+	    	document.getElementById("error").innerHTML = "This study session is now full.";
 	    }
-	    
 	}
 </script>
 </html>

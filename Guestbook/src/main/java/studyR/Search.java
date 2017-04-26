@@ -79,4 +79,16 @@ public class Search extends HttpServlet {
 		}
 		return filteredSessions;
 	}
+	
+	public static ArrayList<StudySession> filterByCourse(ArrayList<StudySession> studySessions, Course courseFilter) {
+		ArrayList<StudySession> filteredSessions = new ArrayList<StudySession>();
+		if (!courseFilter.equals("default")) {
+			for (StudySession studySession : studySessions){
+				if (!studySession.getStudyStyle().equals(courseFilter)) {
+					filteredSessions.add(studySession);
+				}
+			}
+		}
+		return filteredSessions;
+	}
 }

@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.google.appengine.api.users.User;
 import com.googlecode.objectify.annotation.Embed;
 import com.googlecode.objectify.annotation.Entity;
 
@@ -23,7 +22,6 @@ public class StudySession implements Comparable<StudySession> {
     private String description;
     Date date;
     int groupSize;
-    int currentNumMembers;
     String studyStyle;
     String studyPurpose;
     @Embed private Course course;
@@ -39,15 +37,13 @@ public class StudySession implements Comparable<StudySession> {
     		int groupSize,
     		String studyStyle,
     		String studyPurpose, 
-    		Profile host,
-    		ArrayList<Profile> members
+    		Profile host
     		) {
         this.name = name;
         this.description = description;
         this.date = new Date();
         this.course = course;
         this.groupSize = groupSize;
-        this.currentNumMembers = 1;
         this.studyStyle = studyStyle;
         this.studyPurpose = studyPurpose;
         this.host = host;
@@ -77,10 +73,6 @@ public class StudySession implements Comparable<StudySession> {
     	return groupSize;
     }
     
-    public int getCurrentNumMembers() {
-    	return currentNumMembers;
-    }
-    
     public String getStudyStyle() {
     	return studyStyle;
     }
@@ -103,7 +95,6 @@ public class StudySession implements Comparable<StudySession> {
     
     public void addMember(Profile addition) {
     	memberList.add(addition);
-    	currentNumMembers++;
     }
 
     @Override
