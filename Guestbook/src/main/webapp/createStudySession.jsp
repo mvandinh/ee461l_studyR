@@ -195,6 +195,13 @@
 				 	<option> Exam Review </option>
 				 </select>
 				 <br>
+				 Group Purposes:
+				 <select name="studyStyle" id="studyStyle">
+				 	<option> No Preference </option>
+				 	<option> Quiet </option>
+				 	<option> Loud </option>
+				 </select>
+				 <br>
 				 
 		</div>
 		<% 

@@ -12,7 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;  
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.Result;
 
 public class CreateStudySessionServlet extends HttpServlet {
 	
@@ -28,10 +32,12 @@ public class CreateStudySessionServlet extends HttpServlet {
 		String duration = req.getParameter("duration");
 		String desc = req.getParameter("bioText");
 		String groupSize = req.getParameter("groupSize");
+		String studyStyle = req.getParameter("studyStyle");
 		String purpose = req.getParameter("groupPurpose");
 		
 		ObjectifyService.register(Course.class);
 		ObjectifyService.register(StudySession.class);
+		ObjectifyService.register(Profile.class);
 		
 		//Adding couple of Courses
 		Course ee461l = new Course("EE461L", 16540);
@@ -40,7 +46,7 @@ public class CreateStudySessionServlet extends HttpServlet {
 		
 		//checking if course is in course lists
 		Course courseOfSession = null;
-		List<Course> courses = ObjectifyService.ofy().load().type(Course.class).list();
+		List<Course> courses = ofy().load().type(Course.class).list();
 		for(Course cur : courses){
 			if(cur.getCourseName().equals(className)){
 				courseOfSession = cur;
@@ -51,8 +57,16 @@ public class CreateStudySessionServlet extends HttpServlet {
 			resp.sendRedirect("/createStudySession.jsp");
 		}
 		
-		
-		//StudySession session = new StudySession(groupName,desc,courseOfSession,groupSize,);
+		UserService userService = UserServiceFactory.getUserService();
+        User user = userService.getCurrentUser();
+        Profile creator = null;
+        List<Profile> profiles = ofy().load().type(Profile.class).list();
+        for(Profile person : profiles){
+        	if(user.getUserId() == person.id){
+        		creator = person;
+        	}
+        }
+		StudySession session = new StudySession(groupName,desc,courseOfSession,Integer.parseInt(groupSize),studyStyle,purpose,creator, new ArrayList<Profile>());
 		resp.sendRedirect("/userInterface.jsp");
 	}
 
