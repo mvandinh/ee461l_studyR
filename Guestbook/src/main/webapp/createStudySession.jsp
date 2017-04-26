@@ -42,15 +42,15 @@
 		<div class="tab">
 		  <button type="button" class="tablinks" onclick="openCity(event, 'Basic')" id="defaultButton">Basic Info</button>
 		  <button type="button" class="tablinks" onclick="openCity(event, 'Desc')">Description</button>
-		  <button type="button" class="tablinks" onclick="openCity(event, 'otherDetails')">More Details</button>
+		  <button type="button" class="tablinks" onclick="openCity(event, 'otherDetails')">More Options</button>
 		</div>
 		
 		<div id="Basic" class="tabcontent">
 				 Session Name:
-				 <input type="text" name="sessionName" value="Default" id="sessionName"><br>
+				 <input type="text" name="sessionName" id="sessionName"><br>
 				 <br>
 				 Class that session is for:
-				 <input type="text" name="className" value="Default" id="className"><br>
+				 <input type="text" name="className" id="className"><br>
 				 <br id="loc">
 				 Day of the Week:
 				 <select name="weekDay" id="weekDay">
@@ -62,6 +62,7 @@
 				 	<option> Saturday </option>
 				 	<option> Sunday </option>
 				 </select>
+				 <br>
 				 <br>
 				 Start time:
 				 <select name="startHour" id="startHour">
@@ -91,7 +92,7 @@
 				 	<option> 23 </option>
 				 </select>
 				 :
-				 <select name="startMinute" id="startMinute">
+				 <select name="startMin" id="startMin">
 				 	<option> 00 </option>
 				 	<option> 01 </option>
 				 	<option> 02 </option>
@@ -170,7 +171,7 @@
 		<div id="Desc" class="tabcontent">
 			Edit the session description:
 			<br>
-			<textarea name="bioText" rows="3" cols="60" id="bioText">test</textarea>
+			<textarea name="bioText" rows="3" cols="60" id="bioText">Default</textarea>
 		</div>
 		
 		<div id="otherDetails" class="tabcontent">
