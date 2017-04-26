@@ -4,6 +4,7 @@
 <%@ page import="java.util.Collections" %>
 <%@ page import="studyR.StudySession" %>
 <%@ page import="studyR.Email" %>
+<%@ page import="studyR.CreateStudySessionServlet" %>
 <%@ page import="com.googlecode.objectify.*" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
@@ -51,6 +52,14 @@
 				 <br>
 				 Class that session is for:
 				 <input type="text" name="className" id="className"><br>
+				 <%
+				 	if(CreateStudySessionServlet.isError()){
+				 		%>
+				 		Please use a valid course.
+				 		<%
+				 		CreateStudySessionServlet.setError(false);
+				 	}
+				 %>
 				 <br id="loc">
 				 Day of the Week:
 				 <select name="weekDay" id="weekDay">

@@ -2,8 +2,9 @@ package studyR;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.*;
 
+@Entity
 public class Course {
 
     @Id String courseName;
@@ -17,7 +18,6 @@ public class Course {
 	public Course(String courseName, int uniqueID) {
 		this.courseName = courseName;
 		this.uniqueID = uniqueID;
-		ofy().save().entity(this).now();
 	}
 	
 	public String getCourseName() {
