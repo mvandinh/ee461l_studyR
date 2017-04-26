@@ -52,7 +52,7 @@ public class CreateStudySessionServlet extends HttpServlet {
 		}
 		
 		
-		StudySession session = new StudySession(groupName,desc,courseOfSession,groupSize,);
+		//StudySession session = new StudySession(groupName,desc,courseOfSession,groupSize,);
 		resp.sendRedirect("/userInterface.jsp");
 	}
 
