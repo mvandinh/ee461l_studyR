@@ -32,7 +32,8 @@
 							h3 {color:blue;}				
 						</style>	
 </head>
-
+<p>You can look at all existing study sessions at this page. Use the advanced filters to match the results with your preferences. Hover over the study session's name to view its description</p> 
+<p id="error"></p>
 
 <title>Search Study Sessions</title>
 <body>
@@ -111,25 +112,26 @@
 						        <th>Study Purpose:</th>
 					    	  </tr>
 					    	<%for (StudySession studySession : studySessions) {
-					    		if (studySession.getHost().equals(userProfile))
-					        	pageContext.setAttribute("studySession_name", studySession.getName());
-					        	pageContext.setAttribute("studySession_date", studySession.getDate());
-					        	pageContext.setAttribute("studySession_course", studySession.getCourse());
-					        	pageContext.setAttribute("studySession_groupSize", studySession.getGroupSize());
-					        	pageContext.setAttribute("studySession_currentNumMembers", studySession.getCurrentNumMembers());
-					        	pageContext.setAttribute("studySession_studyStyle", studySession.getStudyStyle());
-					        	pageContext.setAttribute("studySession_studyPurpose", studySession.getStudyPurpose());
-					        	pageContext.setAttribute("studySession_description", studySession.getDescription());
-					        	%>
-					        	<tr>
-						    	    <td><span title="${fn:escapeXml(studySession_description)}"><a href="/userInterface.jsp" onclick="joinStudySession(studySession.getId)">${fn:escapeXml(studySession_title)}</a></span></td>
-						    	    <td>${fn:escapeXml(studySession_date)}</td> 
-						    	    <td>${fn:escapeXml(studySession_course)}</td>
-						    	    <td>${fn:escapeXml(studySession_currentNumMembers)} / ${fn:escapeXml(studySession_groupSize)}</td>
-						    	    <td>${fn:escapeXml(studySession_studyStyle)}</td>
-						    	    <td>${fn:escapeXml(studySession_studyPurpose)}</td>
-					    	  	</tr>
-					        	<%
+					    		if (!studySession.getMemberList().contains(userProfile)) {
+					    			pageContext.setAttribute("studySession_name", studySession.getName());
+						        	pageContext.setAttribute("studySession_date", studySession.getDate());
+						        	pageContext.setAttribute("studySession_course", studySession.getCourse());
+						        	pageContext.setAttribute("studySession_groupSize", studySession.getGroupSize());
+						        	pageContext.setAttribute("studySession_currentNumMembers", studySession.getCurrentNumMembers());
+						        	pageContext.setAttribute("studySession_studyStyle", studySession.getStudyStyle());
+						        	pageContext.setAttribute("studySession_studyPurpose", studySession.getStudyPurpose());
+						        	pageContext.setAttribute("studySession_description", studySession.getDescription());
+						        	%>
+						        	<tr>
+							    	    <td><span title="${fn:escapeXml(studySession_description)}"><a href="#" onclick="joinStudySession('studySession.getId')">${fn:escapeXml(studySession_title)}</a></span></td>
+							    	    <td>${fn:escapeXml(studySession_date)}</td> 
+							    	    <td>${fn:escapeXml(studySession_course)}</td>
+							    	    <td>${fn:escapeXml(studySession_currentNumMembers)} / ${fn:escapeXml(studySession_groupSize)}</td>
+							    	    <td>${fn:escapeXml(studySession_studyStyle)}</td>
+							    	    <td>${fn:escapeXml(studySession_studyPurpose)}</td>
+						    	  	</tr>
+						        	<%
+					    		}
 			        		}
 					    	if (searchResults != null){ 
 					    		ObjectifyService.ofy().delete().type(SearchResults.class).id(user.getUserId() +"_searchResults").now();
@@ -151,11 +153,16 @@
 </body>
 <script>
 	document.getElementById("defaultButton").click();
-	
-	function joinStudySession(String hostId) {
+	function joinStudySession(hostId) {
 		Ref<studySession> studySessionRef = ObjectifyService.ofy().load().type(StudySession.class).id(hostId);
 	    StudySession studySession = studySessionRef.get();
-	    studySession.add(userProfile);
+	    if (studySession.getCurrentNumMembers() < studySession.getGroupSize()) {
+	    	studySession.addMember(userProfile);
+	    	response.sendRedirect("userInterface.jsp");
+	    } else {
+	    	document.getElementById("error").innerHTML = "This Study Session is now full.";
+	    }
+	    
 	}
 </script>
 </html>
