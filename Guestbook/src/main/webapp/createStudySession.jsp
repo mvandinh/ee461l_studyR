@@ -51,16 +51,19 @@
 				 <input type="text" name="sessionName" id="sessionName"><br>
 				 <br>
 				 Class that session is for:
-				 <input type="text" name="className" id="className"><br>
-				 <%
-				 	if(CreateStudySessionServlet.isError()){
-				 		%>
-				 		Please use a valid course.
-				 		<%
-				 		CreateStudySessionServlet.setError(false);
-				 	}
-				 %>
+				 <select name="courseName" id="courseName">
+							<option> EE302 </option>
+							<option> EE306 </option>
+							<option> EE312 </option>
+							<option> EE313 </option>
+							<option> EE319K </option>
+							<option> EE360C </option>
+							<option> EE411 </option>
+							<option> EE422C </option>
+							<option> EE461L </option>
+						</select>
 				 <br id="loc">
+				 <br>
 				 Day of the Week:
 				 <select name="weekDay" id="weekDay">
 				 	<option> Monday </option>
@@ -185,7 +188,8 @@
 		
 		<div id="otherDetails" class="tabcontent">
 				 Group Size (leave blank if your have no preference):
-				 <input type="number" name="groupSize" value="todo" id="groupSize" min = "2" max="10">
+				 <input type="number" name="groupSize" id="groupSize" min = "2" max="10">
+				 <br>
 				 <br>
 				 Group Purposes:
 				 <select name="groupPurpose" id="groupPurpose">
@@ -195,14 +199,14 @@
 				 	<option> Exam Review </option>
 				 </select>
 				 <br>
-				 Group Purposes:
+				 <br>
+				 Group Style:
 				 <select name="studyStyle" id="studyStyle">
 				 	<option> No Preference </option>
 				 	<option> Quiet </option>
 				 	<option> Loud </option>
 				 </select>
 				 <br>
-				 
 		</div>
 		<% 
 		   UserService userService = UserServiceFactory.getUserService();
