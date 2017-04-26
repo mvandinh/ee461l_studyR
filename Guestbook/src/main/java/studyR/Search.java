@@ -40,6 +40,7 @@ public class Search extends HttpServlet {
     	filteredSearch = filterStudyStyle(filteredSearch, studyStyleFilter);
     	filteredSearch = filterStudyPurpose(filteredSearch, studyPurposeFilter);
 		ofy().save().entity(new SearchResults(user, filteredSearch)).now();
+		System.out.println("YOU REACH SEARCH.JAVA");
 		resp.sendRedirect("/search.jsp");
 	}
 	
