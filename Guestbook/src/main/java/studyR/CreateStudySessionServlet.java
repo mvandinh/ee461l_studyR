@@ -20,18 +20,18 @@ import com.googlecode.objectify.Result;
 
 public class CreateStudySessionServlet extends HttpServlet {
 	
-	private static boolean isError = false;
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String groupName = req.getParameter("sessionName");
-		String className = req.getParameter("className");
-		className = className.toUpperCase().replaceAll(" ", "").trim();
+		String courseName = req.getParameter("courseName");
 		String weekDay = req.getParameter("weekDay");
-		String startHour = req.getParameter("startHour");
-		String startMin = req.getParameter("startMin");
+		String startTime = req.getParameter("startHour") + ":" +req.getParameter("startMin");
 		String duration = req.getParameter("duration");
 		String desc = req.getParameter("bioText");
 		String groupSize = req.getParameter("groupSize");
+		if(groupSize.equals("")){
+			groupSize = "10";
+		}
 		String studyStyle = req.getParameter("studyStyle");
 		String purpose = req.getParameter("groupPurpose");
 		
@@ -40,22 +40,22 @@ public class CreateStudySessionServlet extends HttpServlet {
 		ObjectifyService.register(Profile.class);
 		
 		//Adding couple of Courses
-		Course ee461l = new Course("EE461L", 16540);
-		ofy().delete().type(Course.class).id(ee461l.getCourseName()).now();
-		ofy().save().entity(ee461l).now();
+		Course ee302 = new Course("EE302", 0);
+		Course ee306 = new Course("EE306", 0);
+		Course ee312 = new Course("EE312", 0);
+		Course ee313 = new Course("EE313", 0);
+		Course ee319k = new Course("EE319K", 0);
+		Course ee360c = new Course("EE360C", 0);
+		Course ee411 = new Course("EE411", 0);
+		Course ee422c = new Course("EE422C", 0);
+		Course ee461l = new Course("EE461L", 0);
 		
-		//checking if course is in course lists
-		Course courseOfSession = null;
-		List<Course> courses = ofy().load().type(Course.class).list();
-		for(Course cur : courses){
-			if(cur.getCourseName().equals(className)){
-				courseOfSession = cur;
+		//choosing which course
+		Course courseSelected = new Course();
+		for(Course cur : Course.courseList){
+			if(courseName.equals(cur.courseName)){
+				courseSelected = cur;
 			}
-		}
-		if(courseOfSession == null){
-			setError(true);
-			resp.sendRedirect("/createStudySession.jsp");
-			return;
 		}
 		
 		//getting profile of creator
@@ -64,21 +64,15 @@ public class CreateStudySessionServlet extends HttpServlet {
         Profile creator = null;
         List<Profile> profiles = ofy().load().type(Profile.class).list();
         for(Profile person : profiles){
-        	if(user.getUserId() == person.id){
+        	if(user.getUserId().equals(person.id)){
         		creator = person;
         	}
         }
         
+        
         //making study session
-		StudySession session = new StudySession(groupName,desc,courseOfSession,Integer.parseInt(groupSize),studyStyle,purpose,creator, new ArrayList<Profile>());
+		StudySession session = new StudySession(groupName,desc,startTime,duration,courseSelected,Integer.parseInt(groupSize),studyStyle,purpose,creator);
 		resp.sendRedirect("/userInterface.jsp");
 	}
 
-	public static boolean isError() {
-		return isError;
-	}
-
-	public static void setError(boolean isError) {
-		CreateStudySessionServlet.isError = isError;
-	}
 }
