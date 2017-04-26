@@ -118,7 +118,8 @@
 					    <table style="width:100%">
 					    	  <tr>
 						        <th>Name:</th>
-						        <th>Date:</th> 
+						        <th>Date:</th>
+						        <th>Time:</th> 
 						        <th>Course:</th>
 						        <th>Occupancy:</th>
 						        <th>Study Style:</th>
@@ -127,8 +128,10 @@
 					    	<%for (StudySession studySession : studySessions) {
 					    		if (!studySession.getMemberList().contains(userProfile)) {
 					    			pageContext.setAttribute("studySession_name", studySession.getName());
-						        	pageContext.setAttribute("studySession_date", studySession.getDate());
+					    			pageContext.setAttribute("studySession_date", studySession.getDate());
 						        	pageContext.setAttribute("studySession_course", studySession.getCourse());
+						        	pageContext.setAttribute("studySession_startTime", studySession.getStartTime());
+						        	pageContext.setAttribute("studySession_duration", studySession.getDuration());
 						        	pageContext.setAttribute("studySession_groupSize", studySession.getGroupSize());
 						        	pageContext.setAttribute("studySession_currentNumMembers", studySession.getMemberList().size());
 						        	pageContext.setAttribute("studySession_studyStyle", studySession.getStudyStyle());
@@ -137,7 +140,8 @@
 						        	%>
 						        	<tr>
 							    	    <td><span title="${fn:escapeXml(studySession_description)}"><a href="#" onclick="joinStudySession(studySession)">${fn:escapeXml(studySession_title)}</a></span></td>
-							    	    <td>${fn:escapeXml(studySession_date)}</td> 
+							    	    <td>${fn:escapeXml(studySession_date)}</td>
+							    	    <td>${fn:escapeXml(studySession_date)} (${fn:escapeXml(studySession_date)} hrs)</td> 
 							    	    <td>${fn:escapeXml(studySession_course)}</td>
 							    	    <td>${fn:escapeXml(studySession_currentNumMembers)} / ${fn:escapeXml(studySession_groupSize)}</td>
 							    	    <td>${fn:escapeXml(studySession_studyStyle)}</td>

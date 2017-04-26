@@ -22,11 +22,11 @@ public class StudySession implements Comparable<StudySession> {
     String description;
     String startTime;
     String duration;
-    Date date;
+    Date date = new Date();
     int groupSize;
     String studyStyle;
     String studyPurpose;
-    @Embed private Course course;
+    String course;
     @Embed Profile host;
     @Embed ArrayList<Profile> memberList = new ArrayList<Profile>();
     
@@ -37,7 +37,7 @@ public class StudySession implements Comparable<StudySession> {
     		String description, 
     		String startTime,
     		String duration,
-    		Course course,
+    		String course,
     		int groupSize,
     		String studyStyle,
     		String studyPurpose, 
@@ -47,7 +47,6 @@ public class StudySession implements Comparable<StudySession> {
         this.description = description;
         this.startTime = startTime;
         this.duration = duration;
-        this.date = new Date();
         this.course = course;
         this.groupSize = groupSize;
         this.studyStyle = studyStyle;
@@ -66,7 +65,15 @@ public class StudySession implements Comparable<StudySession> {
     	return description;
     }
     
-    public Course getCourse() {
+    public String getStartTime() {
+        return startTime;
+    }
+    
+    public String getDuration() {
+        return duration;
+    }
+    
+    public String getCourse() {
         return course;
     }
     

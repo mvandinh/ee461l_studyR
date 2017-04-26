@@ -36,11 +36,12 @@ public class Search extends HttpServlet {
 		}
     	String studyStyleFilter = req.getParameter("studyStyle");
     	String studyPurposeFilter = req.getParameter("studyPurpose");
+    	String courseFilter = req.getParameter("course");
     	filteredSearch = filterGroupSize(filteredSearch, groupSizeFilter);
     	filteredSearch = filterStudyStyle(filteredSearch, studyStyleFilter);
     	filteredSearch = filterStudyPurpose(filteredSearch, studyPurposeFilter);
+    	filteredSearch = filterCourse(filteredSearch, courseFilter);
 		ofy().save().entity(new SearchResults(user, filteredSearch)).now();
-		System.out.println("YOU REACH SEARCH.JAVA");
 		resp.sendRedirect("/search.jsp");
 	}
 	
@@ -80,9 +81,9 @@ public class Search extends HttpServlet {
 		return filteredSessions;
 	}
 	
-	public static ArrayList<StudySession> filterByCourse(ArrayList<StudySession> studySessions, Course courseFilter) {
+	public static ArrayList<StudySession> filterCourse(ArrayList<StudySession> studySessions, String courseFilter) {
 		ArrayList<StudySession> filteredSessions = new ArrayList<StudySession>();
-		if (!courseFilter.equals("default")) {
+		if (!courseFilter.equals("No Preference")) {
 			for (StudySession studySession : studySessions){
 				if (!studySession.getStudyStyle().equals(courseFilter)) {
 					filteredSessions.add(studySession);
