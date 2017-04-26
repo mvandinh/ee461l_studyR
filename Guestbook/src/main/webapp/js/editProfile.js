@@ -177,7 +177,6 @@ function errorMessage(){
 	errorMessage.id = "errorMessage";
 	cancelLoc.parentNode.insertBefore(newLine, cancelLoc.nextSibiling);
 	cancelLoc.parentNode.insertBefore(errorMessage, cancelLoc.nextSibiling);
-	
 }
 
 //This prevents the form from submitting if you press enter

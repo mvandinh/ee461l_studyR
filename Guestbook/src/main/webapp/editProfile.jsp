@@ -108,11 +108,11 @@
 		<div id="Basic" class="tabcontent">
 			<br>
 			 Display Name:
-			 <input type="text" name="userName" value="${fn:escapeXml(userName)}" id="userName">
+			 <input type="text" name="userName" value="${fn:escapeXml(userName)}" id="userName" maxlength="50">
 			 <br>
 			 <br>
 			 Email:
-			 <input type="text" name="email" value="${fn:escapeXml(email)}" id="email">
+			 <input type="text" name="email" value="${fn:escapeXml(email)}" id="email" maxlength="50">
 			 <br>
 			 <br>
 			 Phone Number:
@@ -125,7 +125,7 @@
 			<br>
 			Edit your profile description:
 			<br>
-			<textarea name="bioText" rows="3" cols="60" id="bioText">${fn:escapeXml(bio)}</textarea>
+			<textarea name="bioText" rows="3" cols="60" id="bioText" maxlength="500">${fn:escapeXml(bio)}</textarea>
 		</div>
 		
 		<div id="timePrefs" class="tabcontent">
@@ -170,7 +170,6 @@
 				 <p style="margin-left: 40px"><input type="checkbox" name="Exam Review" id="studyStylesER" > Exam Review</p>
 				 
 		</div>
-		
 		
 		<input type="hidden" name="userID" value="<%=user.getUserId()%>">
 		
