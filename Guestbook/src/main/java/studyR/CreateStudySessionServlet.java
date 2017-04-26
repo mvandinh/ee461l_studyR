@@ -57,6 +57,7 @@ public class CreateStudySessionServlet extends HttpServlet {
 			resp.sendRedirect("/createStudySession.jsp");
 		}
 		
+		//getting profile of creator
 		UserService userService = UserServiceFactory.getUserService();
         User user = userService.getCurrentUser();
         Profile creator = null;
@@ -66,6 +67,8 @@ public class CreateStudySessionServlet extends HttpServlet {
         		creator = person;
         	}
         }
+        
+        //making study session
 		StudySession session = new StudySession(groupName,desc,courseOfSession,Integer.parseInt(groupSize),studyStyle,purpose,creator, new ArrayList<Profile>());
 		resp.sendRedirect("/userInterface.jsp");
 	}
