@@ -21,6 +21,7 @@ public class StudySession implements Comparable<StudySession> {
     private String description;
     Date date;
     int groupSize;
+    int currentNumMembers;
     String studyStyle;
     String studyPurpose;
     @Embed private Course course;
@@ -41,6 +42,7 @@ public class StudySession implements Comparable<StudySession> {
         this.date = date;
         this.course = course;
         this.groupSize = groupSize;
+        this.currentNumMembers = 0;
         this.studyStyle = studyStyle;
         this.studyPurpose = studyPurpose;
         ofy().save().entity(this).now();
@@ -65,6 +67,10 @@ public class StudySession implements Comparable<StudySession> {
     
     public int getGroupSize() {
     	return groupSize;
+    }
+    
+    public int getCurrentNumMembers() {
+    	return currentNumMembers;
     }
     
     public String getStudyStyle() {

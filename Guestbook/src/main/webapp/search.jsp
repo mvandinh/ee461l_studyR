@@ -86,28 +86,48 @@
 				ObjectifyService.register(StudySession.class);
 				ObjectifyService.register(SearchResults.class);
 				List<StudySession> studySessions = ObjectifyService.ofy().load().type(StudySession.class).list();   
-				Collections.sort(studySessions); 
-				Collections.reverse(studySessions);
+				
 			    if (studySessions.isEmpty()) {
 			        %>
 			        <p>No study sessions with your preferences are available, but you can host you own <a href="/createStudySession.jsp">here</a>!!</p>
-			        <%
-			    } else if (searchResults == null){
-			    	for (StudySession studySession : studySessions) {
-			        	pageContext.setAttribute("greeting_title", studySession.getName());
-			        	%>
-			        	<h4><b><i>${fn:escapeXml(greeting_title)}</i></b></h4>
-			        	<%
+				<% } else {
+						if (searchResults != null){ 
+							studySessions = searchResults.getSearchResults();
+						}
+						Collections.sort(studySessions); 
+						Collections.reverse(studySessions);
+						%><h4>Study Session Search Results: </h4>
+					    <table style="width:100%">
+					    	  <tr>
+						        <th>Name:</th>
+						        <th>Date:</th> 
+						        <th>Course:</th>
+						        <th>Occupancy:</th>
+						        <th>Study Style:</th>
+						        <th>Study Purpose:</th>
+					    	  </tr>
+					    	<%for (StudySession studySession : studySessions) {
+					        	pageContext.setAttribute("studySession_name", studySession.getName());
+					        	pageContext.setAttribute("studySession_date", studySession.getDate());
+					        	pageContext.setAttribute("studySession_course", studySession.getCourse());
+					        	pageContext.setAttribute("studySession_groupSize", studySession.getGroupSize());
+					        	pageContext.setAttribute("studySession_currentNumMembers", studySession.getCurrentNumMembers());
+					        	pageContext.setAttribute("studySession_studyStyle", studySession.getStudyStyle());
+					        	pageContext.setAttribute("studySession_studyPurpose", studySession.getStudyPurpose());
+					        	%>
+					        	<tr>
+					    	    	<td>${fn:escapeXml(studySession_title)}</td>
+					    	    	<td>${fn:escapeXml(studySession_date)}</td> 
+					    	    	<td>${fn:escapeXml(studySession_course)}</td>
+					    	    	<td>${fn:escapeXml(studySession_currentNumMembers)} / ${fn:escapeXml(studySession_groupSize)}</td>
+					    	    	<td>${fn:escapeXml(studySession_studyStyle)}</td>
+					    	    	<td>${fn:escapeXml(studySession_studyPurpose)}</td>
+					    	  	</tr>
+					        	<%
 			        }
-				} else {
-					List<StudySession> filteredStudySessions = searchResults.getSearchResults();
-					for (StudySession studySession : filteredStudySessions) {
-						
-					}
-					ObjectifyService.ofy().delete().type(SearchResults.class).id(user.getUserId() +"_searchResults").now();
+			    	%></table><%
 				}
 				%>
-				
 			</div>
 		</div>		
 	</div>		

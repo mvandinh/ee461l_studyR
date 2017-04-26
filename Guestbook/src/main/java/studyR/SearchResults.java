@@ -22,7 +22,6 @@ public class SearchResults {
         this.user = user;
         this.searchResults = filteredSearch;
         id = user.getUserId() + "_searchResults";
-        Collections.sort(searchResults);
     }
 
     public ArrayList<StudySession> getSearchResults() {
