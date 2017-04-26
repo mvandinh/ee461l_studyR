@@ -96,6 +96,15 @@ public class StudySession implements Comparable<StudySession> {
     public ArrayList<Profile> getMemberList() {
     	return memberList;
     }
+    
+    public String getId() {
+    	return id;
+    }
+    
+    public void addMember(Profile addition) {
+    	memberList.add(addition);
+    	currentNumMembers++;
+    }
 
     @Override
     public int compareTo(StudySession other) {

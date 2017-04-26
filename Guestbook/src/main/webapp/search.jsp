@@ -122,7 +122,7 @@
 					        	pageContext.setAttribute("studySession_description", studySession.getDescription());
 					        	%>
 					        	<tr>
-						    	    <td><span title="${fn:escapeXml(studySession_description)}"><a href="/userInterface.jsp" onclick="joinStudySession(STUDYSESSIONID)">${fn:escapeXml(studySession_title)}</a></span></td>
+						    	    <td><span title="${fn:escapeXml(studySession_description)}"><a href="/userInterface.jsp" onclick="joinStudySession(studySession.getId)">${fn:escapeXml(studySession_title)}</a></span></td>
 						    	    <td>${fn:escapeXml(studySession_date)}</td> 
 						    	    <td>${fn:escapeXml(studySession_course)}</td>
 						    	    <td>${fn:escapeXml(studySession_currentNumMembers)} / ${fn:escapeXml(studySession_groupSize)}</td>
@@ -152,10 +152,10 @@
 <script>
 	document.getElementById("defaultButton").click();
 	
-	function joinStudySession(STUDYSESSIONID) {
-		Ref<studySession> studySession = ObjectifyService.ofy().load().type(StudySession.class).id(user.getUserId() +"_searchResults");
-	    SearchResults searchResults = searchResultsRef.get();
-	    document.getElementById("demo").innerHTML = "Hello World";
+	function joinStudySession(String hostId) {
+		Ref<studySession> studySessionRef = ObjectifyService.ofy().load().type(StudySession.class).id(hostId);
+	    StudySession studySession = studySessionRef.get();
+	    studySession.add(userProfile);
 	}
 </script>
 </html>
