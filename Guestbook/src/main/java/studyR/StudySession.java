@@ -4,8 +4,10 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
+import com.google.appengine.api.users.User;
 import com.googlecode.objectify.annotation.Embed;
 import com.googlecode.objectify.annotation.Entity;
 
@@ -16,7 +18,7 @@ import com.googlecode.objectify.annotation.Id;
 @Entity
 
 public class StudySession implements Comparable<StudySession> {
-    @Id Long id;
+    @Id String id;
     private String name;
     private String description;
     Date date;
@@ -25,26 +27,32 @@ public class StudySession implements Comparable<StudySession> {
     String studyStyle;
     String studyPurpose;
     @Embed private Course course;
+    @Embed Profile host;
+    @Embed ArrayList<Profile> memberList = new ArrayList<Profile>();
     
     public StudySession(){}
     
     public StudySession(
     		String name, 
     		String description, 
-    		Date date, 
     		Course course,
     		int groupSize,
     		String studyStyle,
-    		String studyPurpose
+    		String studyPurpose, 
+    		Profile host,
+    		ArrayList<Profile> members
     		) {
         this.name = name;
         this.description = description;
-        this.date = date;
+        this.date = new Date();
         this.course = course;
         this.groupSize = groupSize;
-        this.currentNumMembers = 0;
+        this.currentNumMembers = 1;
         this.studyStyle = studyStyle;
         this.studyPurpose = studyPurpose;
+        this.host = host;
+        memberList.add(host);
+        id = host.id + date;
         ofy().save().entity(this).now();
     }
 
@@ -79,6 +87,14 @@ public class StudySession implements Comparable<StudySession> {
     
     public String getStudyPurpose() {
     	return studyPurpose;
+    }
+    
+    public Profile getHost() {
+    	return host;
+    }
+    
+    public ArrayList<Profile> getMemberList() {
+    	return memberList;
     }
 
     @Override

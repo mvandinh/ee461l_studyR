@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Collections" %>
+<%@ page import="studyR.Profile" %>
 <%@ page import="studyR.StudySession" %>
 <%@ page import="studyR.SearchResults" %>
 <%@ page import="studyR.Email" %>
@@ -79,12 +80,15 @@
 		<div class="container" align="right">
 			<div class="row">
 				<%
-				UserService userService = UserServiceFactory.getUserService();
-			    User user = userService.getCurrentUser();
-				Ref<SearchResults> searchResultsRef = ObjectifyService.ofy().load().type(SearchResults.class).id(user.getUserId() +"_searchResults");
-			    SearchResults searchResults = searchResultsRef.get();
 				ObjectifyService.register(StudySession.class);
 				ObjectifyService.register(SearchResults.class);
+				ObjectifyService.register(Profile.class);
+				UserService userService = UserServiceFactory.getUserService();
+			    User user = userService.getCurrentUser();
+			    Ref<Profile> userProfileRef = ObjectifyService.ofy().load().type(Profile.class).id(user.getUserId());
+			    Profile userProfile = userProfileRef.get();
+				Ref<SearchResults> searchResultsRef = ObjectifyService.ofy().load().type(SearchResults.class).id(user.getUserId() +"_searchResults");
+			    SearchResults searchResults = searchResultsRef.get();
 				List<StudySession> studySessions = ObjectifyService.ofy().load().type(StudySession.class).list();   
 				
 			    if (studySessions.isEmpty()) {
@@ -107,6 +111,7 @@
 						        <th>Study Purpose:</th>
 					    	  </tr>
 					    	<%for (StudySession studySession : studySessions) {
+					    		if (studySession.getHost().equals(userProfile))
 					        	pageContext.setAttribute("studySession_name", studySession.getName());
 					        	pageContext.setAttribute("studySession_date", studySession.getDate());
 					        	pageContext.setAttribute("studySession_course", studySession.getCourse());
@@ -114,17 +119,21 @@
 					        	pageContext.setAttribute("studySession_currentNumMembers", studySession.getCurrentNumMembers());
 					        	pageContext.setAttribute("studySession_studyStyle", studySession.getStudyStyle());
 					        	pageContext.setAttribute("studySession_studyPurpose", studySession.getStudyPurpose());
+					        	pageContext.setAttribute("studySession_description", studySession.getDescription());
 					        	%>
 					        	<tr>
-					    	    	<td>${fn:escapeXml(studySession_title)}</td>
-					    	    	<td>${fn:escapeXml(studySession_date)}</td> 
-					    	    	<td>${fn:escapeXml(studySession_course)}</td>
-					    	    	<td>${fn:escapeXml(studySession_currentNumMembers)} / ${fn:escapeXml(studySession_groupSize)}</td>
-					    	    	<td>${fn:escapeXml(studySession_studyStyle)}</td>
-					    	    	<td>${fn:escapeXml(studySession_studyPurpose)}</td>
+						    	    <td><span title="${fn:escapeXml(studySession_description)}"><a href="/userInterface.jsp" onclick="joinStudySession(STUDYSESSIONID)">${fn:escapeXml(studySession_title)}</a></span></td>
+						    	    <td>${fn:escapeXml(studySession_date)}</td> 
+						    	    <td>${fn:escapeXml(studySession_course)}</td>
+						    	    <td>${fn:escapeXml(studySession_currentNumMembers)} / ${fn:escapeXml(studySession_groupSize)}</td>
+						    	    <td>${fn:escapeXml(studySession_studyStyle)}</td>
+						    	    <td>${fn:escapeXml(studySession_studyPurpose)}</td>
 					    	  	</tr>
 					        	<%
-			        }
+			        		}
+					    	if (searchResults != null){ 
+					    		ObjectifyService.ofy().delete().type(SearchResults.class).id(user.getUserId() +"_searchResults").now();
+							}
 			    	%></table><%
 				}
 				%>
@@ -142,6 +151,12 @@
 </body>
 <script>
 	document.getElementById("defaultButton").click();
+	
+	function joinStudySession(STUDYSESSIONID) {
+		Ref<studySession> studySession = ObjectifyService.ofy().load().type(StudySession.class).id(user.getUserId() +"_searchResults");
+	    SearchResults searchResults = searchResultsRef.get();
+	    document.getElementById("demo").innerHTML = "Hello World";
+	}
 </script>
 </html>
 		
