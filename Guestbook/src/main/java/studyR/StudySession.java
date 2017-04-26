@@ -18,8 +18,10 @@ import com.googlecode.objectify.annotation.Id;
 
 public class StudySession implements Comparable<StudySession> {
     @Id String id;
-    private String name;
-    private String description;
+    String name;
+    String description;
+    String startTime;
+    String duration;
     Date date;
     int groupSize;
     String studyStyle;
@@ -33,6 +35,8 @@ public class StudySession implements Comparable<StudySession> {
     public StudySession(
     		String name, 
     		String description, 
+    		String startTime,
+    		String duration,
     		Course course,
     		int groupSize,
     		String studyStyle,
@@ -41,6 +45,8 @@ public class StudySession implements Comparable<StudySession> {
     		) {
         this.name = name;
         this.description = description;
+        this.startTime = startTime;
+        this.duration = duration;
         this.date = new Date();
         this.course = course;
         this.groupSize = groupSize;
