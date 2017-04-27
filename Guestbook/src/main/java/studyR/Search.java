@@ -49,8 +49,6 @@ public class Search extends HttpServlet {
 				StudySession replacement = new StudySession(name, description, startTime, duration, date, groupSize, studyStyle, studyPurpose, course, host, memberList, id);
 				ofy().save().entity(replacement).now();
 				resp.sendRedirect("/userInterface.jsp");
-				
-				resp.sendRedirect("/userInterface.jsp");
 			} else {
 				resp.sendRedirect("/search.jsp");
 			}
@@ -59,8 +57,7 @@ public class Search extends HttpServlet {
 			ObjectifyService.register(StudySession.class);
 			List<StudySession> studySessions = ObjectifyService.ofy().load().type(StudySession.class).list();
 			Collections.sort(studySessions);
-			ArrayList<StudySession> filteredSearch = new ArrayList<StudySession>();
-			filteredSearch.addAll(studySessions);
+			ArrayList<StudySession> filteredSearch = new ArrayList<StudySession>(studySessions);
 			String groupSize = req.getParameter("groupSize");
 			int groupSizeFilter;
 			if (!groupSize.equals("")) {
@@ -75,56 +72,68 @@ public class Search extends HttpServlet {
 	    	filteredSearch = filterStudyStyle(filteredSearch, studyStyleFilter);
 	    	filteredSearch = filterStudyPurpose(filteredSearch, studyPurposeFilter);
 	    	filteredSearch = filterCourse(filteredSearch, courseFilter);
-			ofy().save().entity(new SearchResults(user, filteredSearch)).now();
+			new SearchResults(user, filteredSearch);
 			resp.sendRedirect("/search.jsp");
 		}
 	}
 	
 	public static ArrayList<StudySession> filterGroupSize(ArrayList<StudySession> studySessions, int groupSizeFilter) {
-		ArrayList<StudySession> filteredSessions = new ArrayList<StudySession>();
 		if (groupSizeFilter != -1) {
+			ArrayList<StudySession> filteredSessions = new ArrayList<StudySession>();
 			for (StudySession studySession : studySessions){
 				if ((groupSizeFilter - 1 <= studySession.getGroupSize()) && (studySession.getGroupSize() <= groupSizeFilter + 1)) {
 					filteredSessions.add(studySession);
 				}
 			}
+			return filteredSessions;
+		} else {
+			return studySessions;
 		}
-		return filteredSessions;
+		
 	}
 	
 	public static ArrayList<StudySession> filterStudyStyle(ArrayList<StudySession> studySessions, String studyStyleFilter) {
-		ArrayList<StudySession> filteredSessions = new ArrayList<StudySession>();
 		if (!studyStyleFilter.equals(" No Preference ")) {
+			ArrayList<StudySession> filteredSessions = new ArrayList<StudySession>();
 			for (StudySession studySession : studySessions){
 				if (studySession.getStudyStyle().equals(studyStyleFilter)) {
 					filteredSessions.add(studySession);
 				}
 			}
+			return filteredSessions;
+		} else {
+			return studySessions;
 		}
-		return filteredSessions;
+		
 	}
 	
 	public static ArrayList<StudySession> filterStudyPurpose(ArrayList<StudySession> studySessions, String studyPurposeFilter) {
-		ArrayList<StudySession> filteredSessions = new ArrayList<StudySession>();
 		if (!studyPurposeFilter.equals(" No Preference ")) {
+			ArrayList<StudySession> filteredSessions = new ArrayList<StudySession>();
 			for (StudySession studySession : studySessions){
-				if (!studySession.getStudyStyle().equals(studyPurposeFilter)) {
+				if (studySession.getStudyStyle().equals(studyPurposeFilter)) {
 					filteredSessions.add(studySession);
 				}
 			}
+			return filteredSessions;
+		} else {
+			return studySessions;
 		}
-		return filteredSessions;
+		
 	}
 	
 	public static ArrayList<StudySession> filterCourse(ArrayList<StudySession> studySessions, String courseFilter) {
-		ArrayList<StudySession> filteredSessions = new ArrayList<StudySession>();
 		if (!courseFilter.equals(" No Preference ")) {
+			ArrayList<StudySession> filteredSessions = new ArrayList<StudySession>();
 			for (StudySession studySession : studySessions){
-				if (!studySession.getStudyStyle().equals(courseFilter)) {
+				if (studySession.getCourse().equals(courseFilter)) {
 					filteredSessions.add(studySession);
 				}
 			}
+			return filteredSessions;
+		} else {
+			return studySessions;
 		}
-		return filteredSessions;
+		
 	}
 }

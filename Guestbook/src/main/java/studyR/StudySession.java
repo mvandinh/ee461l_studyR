@@ -2,6 +2,7 @@ package studyR;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import com.googlecode.objectify.annotation.Embed;
 import com.googlecode.objectify.annotation.Entity;
 
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Serialize;
 
 
 
@@ -28,7 +30,7 @@ public class StudySession implements Comparable<StudySession> {
     String studyPurpose;
     String course;
     @Embed Profile host;
-    @Embed ArrayList<Profile> memberList = new ArrayList<Profile>();
+    @Serialize ArrayList<Profile> memberList = new ArrayList<Profile>();
     
     public StudySession(){}
     

@@ -98,15 +98,15 @@
 						<div class = "col-lg-6">
 						<h3 align="left" class="tab"><b>Available times</b>:</h3>					
 						<%				
-						if(profile.getPreferences() != null && profile.getPreferences().getTimePrefs() != null){
-							ArrayList<String> timePrefs = profile.getPreferences().getTimePrefs();
-							for(int i = 0; i < timePrefs.size(); i++){
-								pageContext.setAttribute("thisTimePref", timePrefs.get(i));
+						//if(profile.getPreferences() != null && profile.getPreferences().getTimePrefs() != null){
+							//ArrayList<String> timePrefs = profile.getPreferences().getTimePrefs();
+							//for(int i = 0; i < timePrefs.size(); i++){
+								//pageContext.setAttribute("thisTimePref", timePrefs.get(i));
 								%>
-								<h3 align="left">${fn:escapeXml(thisTimePref)}</h3>
+								<%--<h3 align="left">${fn:escapeXml(thisTimePref)}</h3>--%>
 								<%
-							}
-						}
+							//}
+						//}
 						%>	
 
 					</div>

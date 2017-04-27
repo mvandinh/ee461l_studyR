@@ -2,6 +2,7 @@ package studyR;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import com.google.appengine.api.users.User;
@@ -10,7 +11,7 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
 @Entity
-public class Profile {
+public class Profile implements Serializable{
 	
     @Id String id;
     public static HashMap<User, Profile> allUsers = new HashMap<User, Profile>();
