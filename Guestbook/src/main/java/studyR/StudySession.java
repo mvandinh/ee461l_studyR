@@ -54,7 +54,35 @@ public class StudySession implements Comparable<StudySession> {
         this.host = host;
         memberList.add(host);
         id = host.id + date;
-        ofy().save().entity(this).now();
+    }
+    
+    // copy constructor
+    public StudySession(
+    	    String name,
+    	    String description,
+    	    String startTime,
+    	    String duration,
+    	    Date date,
+    	    int groupSize,
+    	    String studyStyle,
+    	    String studyPurpose,
+    	    String course,
+    	    Profile host,
+    	    ArrayList<Profile> memberList,
+    	    String id
+    	    ) {
+        this.name = name;
+        this.description = description;
+        this.startTime = startTime;
+        this.duration = duration;
+        this.date = date;
+        this.groupSize = groupSize;
+        this.studyStyle = studyStyle;
+        this.studyPurpose = studyPurpose;
+        this.course = course;
+        this.host = host;
+        this.memberList = memberList;
+        this.id = id;
     }
 
     public String getName() {
@@ -75,6 +103,10 @@ public class StudySession implements Comparable<StudySession> {
     
     public String getCourse() {
         return course;
+    }
+    
+    public Date getRealDate() {
+    	return date;
     }
     
     public String getDate() {
@@ -104,10 +136,6 @@ public class StudySession implements Comparable<StudySession> {
     
     public String getId() {
     	return id;
-    }
-    
-    public void addMember(Profile addition) {
-    	memberList.add(addition);
     }
 
     @Override

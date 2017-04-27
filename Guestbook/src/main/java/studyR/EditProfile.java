@@ -44,8 +44,8 @@ public class EditProfile extends HttpServlet {
 		studyStyles.put("Project Group", !(req.getParameter("Project Group") == null));
 		studyStyles.put("Exam Review", !(req.getParameter("Exam Review") == null));
 		String userID = req.getParameter("userID");
-		Preferences newPrefs = new Preferences(userID, timePrefs, groupSize, groupLongevity, studyStyles);
-		Profile replacement = new Profile(userName, email, phone, bio, null, newPrefs, userID);
+		//Preferences newPrefs = new Preferences(userID, timePrefs, groupSize, groupLongevity, studyStyles);
+		Profile replacement = new Profile(userName, email, phone, bio, null, /*newPrefs,*/ userID);
 		
 		ofy().delete().type(Profile.class).id(userID).now();
 		ofy().save().entity(replacement).now();

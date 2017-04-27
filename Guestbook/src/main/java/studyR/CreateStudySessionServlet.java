@@ -72,6 +72,7 @@ public class CreateStudySessionServlet extends HttpServlet {
         
         //making study session
 		StudySession session = new StudySession(groupName,desc,startTime,duration,courseSelected.courseName,Integer.parseInt(groupSize),studyStyle,purpose,creator);
+		ofy().save().entity(session).now();
 		resp.sendRedirect("/userInterface.jsp");
 	}
 

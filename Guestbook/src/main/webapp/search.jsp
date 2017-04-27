@@ -50,7 +50,7 @@
 	  </div>
 	</nav>
 	<p>You can look at all existing study sessions at this page. Use the advanced filters to match the results with your preferences. Hover over the study session's name to view its description</p> 
-	<p id="error"></p>
+	<p id="error">errors:</p>
 	<div class="jumbotron vertical-center">
 		<div class="container-fluid" align= "left">
 			<div class="row">
@@ -72,18 +72,18 @@
 							<option> EE422C </option>
 							<option> EE461L </option>
 						</select><br><br>
-					Study Style: 
-						<select name="studyStyle" id="studyStyle">
-							<option selected = "selected"> No Preference </option>
-							<option> Quiet </option>
-							<option> Collaborative </option>
-						</select><br><br>
 					Study Purpose:
 						<select name="studyPurpose" id="studyPurpose">
 							<option selected = "selected"> No Preference </option>
 							<option> Class Discussion </option>
 							<option> Homework </option>
 							<option> Exam Review </option>
+						</select><br><br>
+					Study Style: 
+						<select name="studyStyle" id="studyStyle">
+							<option selected = "selected"> No Preference </option>
+							<option> Quiet </option>
+							<option> Loud </option>
 						</select><br><br>
 					<input type="submit" class="btn btn-info" value="Filter" onclick="errorMessage()">
 					<a href="/userInterface.jsp" class="btn btn-primary" role="button" id="cancel">Cancel</a>
@@ -93,7 +93,6 @@
 		</div>
 		<div class="container" align="right">
 			<div class="row">
-			
 				<%
 				ObjectifyService.register(StudySession.class);
 				ObjectifyService.register(SearchResults.class);
@@ -109,25 +108,16 @@
 			        %>
 			        <p>No study sessions with your preferences are available, but you can host you own <a href="/createStudySession.jsp">here</a>!!</p>
 				<% } else {
-						if (searchResults != null){ 
-							studySessions = searchResults.getSearchResults();
-						}
+						//if (searchResults != null){ // 	PROBLEM CHILD
+							//studySessions = searchResults.getSearchResults();
+						//}
 						Collections.sort(studySessions); 
 						Collections.reverse(studySessions);
 						%><h4>Study Session Search Results: </h4>
-					    <table style="width:100%">
-					    	  <tr>
-						        <th>Name:</th>
-						        <th>Date:</th>
-						        <th>Time:</th> 
-						        <th>Course:</th>
-						        <th>Occupancy:</th>
-						        <th>Study Style:</th>
-						        <th>Study Purpose:</th>
-					    	  </tr>
 					    	<%for (StudySession studySession : studySessions) {
 					    		if (!studySession.getMemberList().contains(userProfile)) {
 					    			pageContext.setAttribute("studySession_name", studySession.getName());
+					    			pageContext.setAttribute("studySession_id", studySession.getId());
 					    			pageContext.setAttribute("studySession_date", studySession.getDate());
 						        	pageContext.setAttribute("studySession_course", studySession.getCourse());
 						        	pageContext.setAttribute("studySession_startTime", studySession.getStartTime());
@@ -138,22 +128,27 @@
 						        	pageContext.setAttribute("studySession_studyPurpose", studySession.getStudyPurpose());
 						        	pageContext.setAttribute("studySession_description", studySession.getDescription());
 						        	%>
-						        	<tr>
-							    	    <td><span title="${fn:escapeXml(studySession_description)}"><a href="#" onclick="joinStudySession(studySession)">${fn:escapeXml(studySession_title)}</a></span></td>
-							    	    <td>${fn:escapeXml(studySession_date)}</td>
-							    	    <td>${fn:escapeXml(studySession_date)} (${fn:escapeXml(studySession_date)} hrs)</td> 
-							    	    <td>${fn:escapeXml(studySession_course)}</td>
-							    	    <td>${fn:escapeXml(studySession_currentNumMembers)} / ${fn:escapeXml(studySession_groupSize)}</td>
-							    	    <td>${fn:escapeXml(studySession_studyStyle)}</td>
-							    	    <td>${fn:escapeXml(studySession_studyPurpose)}</td>
-						    	  	</tr>
+\
+							    	    
+							    	    <form action="/search" method="post">
+										<input type="submit" name="join" value="${fn:escapeXml(studySession_name)}" />
+										<input type="text" name="studySessionId" value="${fn:escapeXml(studySession_id)}" id="studySessionId"/>
+										</form>
+										<span title="${fn:escapeXml(studySession_description)}">
+							    	   	${fn:escapeXml(studySession_date)}
+							    	    ${fn:escapeXml(studySession_startTime)} for ${fn:escapeXml(studySession_duration)} hr(s) 
+							    	    ${fn:escapeXml(studySession_course)}
+							    	    ${fn:escapeXml(studySession_currentNumMembers)} / ${fn:escapeXml(studySession_groupSize)}
+							    	    ${fn:escapeXml(studySession_studyStyle)}
+							    	    ${fn:escapeXml(studySession_studyPurpose)}
+										</span>
+						    	  	
 						        	<%
 					    		}
 			        		}
-					    	if (searchResults != null){ 
-					    		ObjectifyService.ofy().delete().type(SearchResults.class).id(user.getUserId() + "_searchResults").now();
-							}
-			    	%></table><%
+					    	//if (searchResults != null){ // PROBLEM CHILD
+					    		//ObjectifyService.ofy().delete().type(SearchResults.class).id(user.getUserId() + "_searchResults").now();
+							//}
 				}
 				%>
 			</div>
@@ -170,14 +165,6 @@
 </body>
 <script>
 	document.getElementById("defaultButton").click();
-	function joinStudySession(studySession) {
-	    if (studySession.getMemberList().size() < studySession.getGroupSize()) {
-	    	studySession.addMember(userProfile);
-	    	response.sendRedirect("userInterface.jsp");
-	    } else {
-	    	document.getElementById("error").innerHTML = "This study session is now full.";
-	    }
-	}
 </script>
 </html>
 		

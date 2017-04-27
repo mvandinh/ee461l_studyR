@@ -20,7 +20,7 @@ public class Profile {
     private String phone;
     //This will need an @Embed tag when we actually get around to making the Course class
     private ArrayList<Course> courses;
-    @Embed Preferences preferences;
+    //@Embed Preferences preferences;
     
     public Profile(){}
     
@@ -44,7 +44,7 @@ public class Profile {
 			String phone, 
 			String bio, 
 			ArrayList<Course> courses,
-			Preferences preferences,
+			//Preferences preferences,
 			String id)
 	{
 		this.id = id;
@@ -53,7 +53,7 @@ public class Profile {
 		this.phone = phone;
 		this.courses = courses;
 		this.email = email;
-		this.preferences = preferences;
+		//this.preferences = preferences;
 	}
 	
 	public String getName() {
@@ -76,9 +76,9 @@ public class Profile {
 		return courses;
 	}
 	
-	public Preferences getPreferences(){
-		return preferences;
-	}
+	//public Preferences getPreferences(){
+		//return preferences;
+	//}
 	
 	public boolean compareID(String toCompare){
 		return id.equals(toCompare);

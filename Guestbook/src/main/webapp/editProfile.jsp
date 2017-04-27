@@ -64,29 +64,29 @@
 	       pageContext.setAttribute("bio", userProfile.getBio());	       
 	       int numberTimes = 0;
 	       ArrayList<String> timePrefs = new ArrayList<String>();
-	       if(userProfile.getPreferences() != null){
-		       if(userProfile.getPreferences().getTimePrefs()!= null){
-		    	   timePrefs =  userProfile.getPreferences().getTimePrefs();
-			       numberTimes = timePrefs.size();
-		       }
-		       if(userProfile.getPreferences().getGroupSize() != ""){
-		      	 pageContext.setAttribute("groupSize", userProfile.getPreferences().getGroupSize());
-		       }else{
-			       pageContext.setAttribute("groupSize", "0");
-		       }
-		       pageContext.setAttribute("groupLongevity", userProfile.getPreferences().getGroupLongevity());
-		       pageContext.setAttribute("groupDiscussion", userProfile.getPreferences().getStudyStyles().get("Group Discussion"));
-		       pageContext.setAttribute("practiceQuestions", userProfile.getPreferences().getStudyStyles().get("Practice Questions"));
-		       pageContext.setAttribute("projectGroup", userProfile.getPreferences().getStudyStyles().get("Project Group"));
-		       pageContext.setAttribute("examReview", userProfile.getPreferences().getStudyStyles().get("Exam Review"));
-	       }else{
+	       //if(userProfile.getPreferences() != null){
+		     //  if(userProfile.getPreferences().getTimePrefs()!= null){
+		    	//   timePrefs =  userProfile.getPreferences().getTimePrefs();
+			      // numberTimes = timePrefs.size();
+//		       }
+	//	       if(userProfile.getPreferences().getGroupSize() != ""){
+		//      	 pageContext.setAttribute("groupSize", userProfile.getPreferences().getGroupSize());
+		  //     }else{
+			//       pageContext.setAttribute("groupSize", "0");
+//		       }
+	//	       pageContext.setAttribute("groupLongevity", userProfile.getPreferences().getGroupLongevity());
+		//       pageContext.setAttribute("groupDiscussion", userProfile.getPreferences().getStudyStyles().get("Group Discussion"));
+		  //     pageContext.setAttribute("practiceQuestions", userProfile.getPreferences().getStudyStyles().get("Practice Questions"));
+		    //   pageContext.setAttribute("projectGroup", userProfile.getPreferences().getStudyStyles().get("Project Group"));
+		      // pageContext.setAttribute("examReview", userProfile.getPreferences().getStudyStyles().get("Exam Review"));
+	       //}else{
 	    	   pageContext.setAttribute("groupSize", "0");
 		       pageContext.setAttribute("groupLongevity", "1 Week");
 		       pageContext.setAttribute("groupDiscussion", false);
 		       pageContext.setAttribute("practiceQuestions", false);
 		       pageContext.setAttribute("projectGroup", false);
 		       pageContext.setAttribute("examReview", false);
-		   }
+		   //}
 
 
 	       pageContext.setAttribute("numTimes", numberTimes);
