@@ -38,12 +38,12 @@ public class EditProfile extends HttpServlet {
 			groupSize = "Any";
 		}	
 		String groupLongevity = req.getParameter("groupLongevity");
-		Map<String, Boolean> studyStyles = new HashMap<String, Boolean>();
-		studyStyles.put("Group Discussion",!(req.getParameter("Group Discussion") == null));
-		studyStyles.put("Practice Questions", !(req.getParameter("Practice Questions") == null));
-		studyStyles.put("Project Group", !(req.getParameter("Project Group") == null));
-		studyStyles.put("Exam Review", !(req.getParameter("Exam Review") == null));
-		String userID = req.getParameter("userID");
+		//Map<String, Boolean> studyStyles = new HashMap<String, Boolean>();
+		//studyStyles.put("Group Discussion",!(req.getParameter("Group Discussion") == null));
+		//studyStyles.put("Practice Questions", !(req.getParameter("Practice Questions") == null));
+		//studyStyles.put("Project Group", !(req.getParameter("Project Group") == null));
+		//studyStyles.put("Exam Review", !(req.getParameter("Exam Review") == null));
+		//String userID = req.getParameter("userID");
 		Profile replacement = new Profile(userName, email, phone, bio, null, timePrefs, studyStyles, groupLongevity, groupSize, userID);
 		
 		ofy().delete().type(Profile.class).id(userID).now();

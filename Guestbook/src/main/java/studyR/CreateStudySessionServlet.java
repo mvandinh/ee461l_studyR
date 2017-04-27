@@ -37,28 +37,9 @@ public class CreateStudySessionServlet extends HttpServlet {
 		String studyStyle = req.getParameter("studyStyle");
 		String purpose = req.getParameter("groupPurpose");
 		
-		ObjectifyService.register(Course.class);
 		ObjectifyService.register(StudySession.class);
 		ObjectifyService.register(Profile.class);
 		
-		//Adding couple of Courses
-		Course ee302 = new Course("EE302", 0);
-		Course ee306 = new Course("EE306", 0);
-		Course ee312 = new Course("EE312", 0);
-		Course ee313 = new Course("EE313", 0);
-		Course ee319k = new Course("EE319K", 0);
-		Course ee360c = new Course("EE360C", 0);
-		Course ee411 = new Course("EE411", 0);
-		Course ee422c = new Course("EE422C", 0);
-		Course ee461l = new Course("EE461L", 0);
-		
-		//choosing which course
-		Course courseSelected = new Course();
-		for(Course cur : Course.courseList){
-			if(courseName.equals(cur.courseName)){
-				courseSelected = cur;
-			}
-		}
 		
 		//getting profile of creator
 		UserService userService = UserServiceFactory.getUserService();
@@ -113,7 +94,7 @@ public class CreateStudySessionServlet extends HttpServlet {
         		
         
         //making study session
-		StudySession session = new StudySession(groupName,desc,startTime,duration,courseSelected.courseName, newDate, Integer.parseInt(groupSize),studyStyle,purpose,creator);
+		StudySession session = new StudySession(groupName,desc,startTime,duration, courseName, newDate, Integer.parseInt(groupSize),studyStyle,purpose,creator);
 		ofy().save().entity(session).now();
 		resp.sendRedirect("/userInterface.jsp");
 	}

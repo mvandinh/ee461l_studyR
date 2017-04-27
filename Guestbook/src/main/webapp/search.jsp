@@ -102,27 +102,43 @@
 			    User user = userService.getCurrentUser();
 			    Ref<Profile> userProfileRef = ObjectifyService.ofy().load().type(Profile.class).id(user.getUserId());
 			    Profile userProfile = userProfileRef.get();
-				Ref<SearchResults> searchResultsRef = ObjectifyService.ofy().load().type(SearchResults.class).id(user.getUserId() +"_searchResults");
-			    SearchResults searchResults = searchResultsRef.get();
-			    pageContext.setAttribute("test", searchResultsRef.get() == null);
-			    //pageContext.setAttribute("test1", searchResults.getSearchResults() == null);
+			    List<StudySession> studySessions = ObjectifyService.ofy().load().type(StudySession.class).list();   
+			    List<SearchResults> searchResults = ObjectifyService.ofy().load().type(SearchResults.class).list();
+			    SearchResults mySearchResults = null;
+			    for (SearchResults sr : searchResults) {
+			    	if (sr.getId().equals(user.getUserId()+"_searchResults")) {
+			    		mySearchResults = sr;
+			    		ArrayList<String> filterStudySessions =  mySearchResults.getSearchResultsId();
+			    		ArrayList<StudySession> filteredResults = new ArrayList<StudySession>();
+			    		if (filterStudySessions != null) {
+			    			for (String studySessionId : filterStudySessions) {
+								Ref<StudySession> filterStudySessionRef = ObjectifyService.ofy().load().type(StudySession.class).id(studySessionId);
+								if (filterStudySessionRef != null) {
+									filteredResults.add(filterStudySessionRef.get());
+							    }
+							}
+			    			studySessions = filteredResults;
+			    		}
+			    		break;
+			    	}
+			    }
+			    //Ref<SearchResults> searchResultsRef = ObjectifyService.ofy().load().type(SearchResults.class).id(user.getUserId() +"_searchResults");
+				//SearchResults searchResults = searchResultsRef.get();
+				pageContext.setAttribute("test", mySearchResults == null);
+				pageContext.setAttribute("test1", mySearchResults == null);
 			    %><form action="/search" method="post">
 					<input type="text" name="test" value="${fn:escapeXml(test)}" id="test"/>
-					<input type="text" name="test" value="${fn:escapeXml(test1)}" id="test"/>
+					<input type="text" name="test1" value="${fn:escapeXml(test1)}" id="test1"/>
 				</form><%
-				List<StudySession> studySessions = ObjectifyService.ofy().load().type(StudySession.class).list();   
 			    if (studySessions.isEmpty()) {
 			        %>
 			        <p>No study sessions with your preferences are available, but you can host you own <a href="/createStudySession.jsp">here</a>!!</p>
 				<% } else {
-						if (searchResults != null) {
-							//studySessions = searchResults.getSearchResults();
-						}
 						Collections.sort(studySessions); 
 						Collections.reverse(studySessions);
 						%><h4>Study Session Search Results: </h4>
 					    	<%for (StudySession studySession : studySessions) {
-					    		if (!studySession.getMemberList().contains(userProfile)) {
+					    		if (!studySession.getMemberList().contains(userProfile.getUserID())) {
 					    			pageContext.setAttribute("studySession_name", studySession.getName());
 					    			pageContext.setAttribute("studySession_id", studySession.getId());
 					    			pageContext.setAttribute("studySession_date", studySession.getDate());
@@ -134,11 +150,11 @@
 						        	pageContext.setAttribute("studySession_studyStyle", studySession.getStudyStyle());
 						        	pageContext.setAttribute("studySession_studyPurpose", studySession.getStudyPurpose());
 						        	pageContext.setAttribute("studySession_description", studySession.getDescription());
-						        	ObjectifyService.ofy().delete().type(StudySession.class).id(studySession.getId()).now();
 						        	%>
 							    	<form action="/search" method="post">
 										<input type="submit" name="join" value="${fn:escapeXml(studySession_name)}" />
 										<input type="text" name="studySessionId" value="${fn:escapeXml(studySession_id)}" id="studySessionId"/>
+										<input type="text" name="studySessionId" value="${fn:escapeXml(studySession_studyStyle)}" id="studySessionId"/>
 									</form>
 									<span title="${fn:escapeXml(studySession_description)}">
 							    	${fn:escapeXml(studySession_date)}
@@ -151,9 +167,13 @@
 						        	<%
 					    		}
 			        		}
-					    	if (searchResults != null) {
-					    		ObjectifyService.ofy().delete().type(SearchResults.class).id(user.getUserId() +"_searchResults").now();
-							}
+				}
+			    if (mySearchResults != null) {
+		    		ObjectifyService.ofy().delete().type(SearchResults.class).id(user.getUserId() +"_searchResults").now();
+		    		pageContext.setAttribute("test2", "Search Results exist");
+				    %><form action="/search" method="post">
+						<input type="text" name="test" value="${fn:escapeXml(test2)}" id="test"/>
+					</form><%
 				}
 				%>
 			</div>

@@ -30,7 +30,7 @@ public class StudySession implements Comparable<StudySession> {
     String studyPurpose;
     String course;
     @Embed Profile host;
-    @Serialize ArrayList<Profile> memberList = new ArrayList<Profile>();
+    @Embed ArrayList<String> memberList = new ArrayList<String>();
     
     public StudySession(){}
     
@@ -56,7 +56,7 @@ public class StudySession implements Comparable<StudySession> {
         this.studyPurpose = studyPurpose;
         this.host = host;
         this.date = date;
-        memberList.add(host);
+        memberList.add(host.getUserID());
         id = host.id + date;
     }
     
@@ -72,7 +72,7 @@ public class StudySession implements Comparable<StudySession> {
     	    String studyPurpose,
     	    String course,
     	    Profile host,
-    	    ArrayList<Profile> memberList,
+    	    ArrayList<String> memberList,
     	    String id
     	    ) {
         this.name = name;
@@ -134,7 +134,7 @@ public class StudySession implements Comparable<StudySession> {
     	return host;
     }
     
-    public ArrayList<Profile> getMemberList() {
+    public ArrayList<String> getMemberList() {
     	return memberList;
     }
     

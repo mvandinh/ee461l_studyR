@@ -63,35 +63,35 @@
 	       pageContext.setAttribute("phoneNumber", userProfile.getPhone());
 	       pageContext.setAttribute("bio", userProfile.getBio());	       
 	       int numberTimes = 0;
-	       ArrayList<String> timePrefs = new ArrayList<String>();
-		       if(userProfile.getTimePrefs()!= null){
-		    	   timePrefs =  userProfile.getTimePrefs();
-			       numberTimes = timePrefs.size();
-			   }
-		       if(userProfile.getGroupSize() != ""){
-		      	 pageContext.setAttribute("groupSize", userProfile.getGroupSize());
-		       }else{
-			       pageContext.setAttribute("groupSize", "0");
-		       }
-	       	   pageContext.setAttribute("groupLongevity", userProfile.getGroupLongevity());
-	       	   if(userProfile.getStudyStyles() != null){
-			       pageContext.setAttribute("groupDiscussion", userProfile.getStudyStyles().get("Group Discussion"));
-			       pageContext.setAttribute("practiceQuestions", userProfile.getStudyStyles().get("Practice Questions"));
-			       pageContext.setAttribute("projectGroup", userProfile.getStudyStyles().get("Project Group"));
-			       pageContext.setAttribute("examReview", userProfile.getStudyStyles().get("Exam Review"));
-	       	   }else{
-	       		   pageContext.setAttribute("groupDiscussion", false);
-			       pageContext.setAttribute("practiceQuestions", false);
-			       pageContext.setAttribute("projectGroup", false);
-			       pageContext.setAttribute("examReview", false);
-	       	   }
+//	       ArrayList<String> timePrefs = new ArrayList<String>();
+	//	       if(userProfile.getTimePrefs()!= null){
+		//    	   timePrefs =  userProfile.getTimePrefs();
+			//       numberTimes = timePrefs.size();
+			  // }
+//		       if(userProfile.getGroupSize() != ""){
+	//	      	 pageContext.setAttribute("groupSize", userProfile.getGroupSize());
+		//       }else{
+			//       pageContext.setAttribute("groupSize", "0");
+		      // }
+//	       	   pageContext.setAttribute("groupLongevity", userProfile.getGroupLongevity());
+	//       	   if(userProfile.getStudyStyles() != null){
+		//	       pageContext.setAttribute("groupDiscussion", userProfile.getStudyStyles().get("Group Discussion"));
+			//       pageContext.setAttribute("practiceQuestions", userProfile.getStudyStyles().get("Practice Questions"));
+			  //     pageContext.setAttribute("projectGroup", userProfile.getStudyStyles().get("Project Group"));
+			    //   pageContext.setAttribute("examReview", userProfile.getStudyStyles().get("Exam Review"));
+//	       	   }else{
+	//       		   pageContext.setAttribute("groupDiscussion", false);
+		//	       pageContext.setAttribute("practiceQuestions", false);
+			//       pageContext.setAttribute("projectGroup", false);
+			  //     pageContext.setAttribute("examReview", false);
+	       	   //}
 
-	       pageContext.setAttribute("numTimes", numberTimes);
-	       String timePrefsString = "";
-	       for(int i = 0; i < timePrefs.size(); i++){
-	    	  timePrefsString += timePrefs.get(i) + "|";
-	       }
-	       pageContext.setAttribute("timePrefs", timePrefsString);
+//	       pageContext.setAttribute("numTimes", numberTimes);
+	//       String timePrefsString = "";
+	  //     for(int i = 0; i < timePrefs.size(); i++){
+	    //	  timePrefsString += timePrefs.get(i) + "|";
+	      // }
+	       //pageContext.setAttribute("timePrefs", timePrefsString);
 		%>		
 	<form action="/editProfile" method="post" id="myform" onsubmit="return errorMessage();">
 		

@@ -17,19 +17,21 @@ import com.googlecode.objectify.annotation.Serialize;
 public class SearchResults {
     @Id String id;
     User user;
-    @Embed ArrayList<StudySession> searchResults;
+    ArrayList<String> searchResultsId;
     
     public SearchResults(){}
     
     public SearchResults(User user, ArrayList<StudySession> filteredSearch) {
         this.user = user;
-        this.searchResults = new ArrayList<StudySession>(filteredSearch);
+        this.searchResultsId = new ArrayList<String>();
+        for (StudySession studySession : filteredSearch) {
+        	this.searchResultsId.add(studySession.getId());
+        }
         id = user.getUserId() + "_searchResults";
-        ofy().save().entity(this).now();
     }
 
-    public ArrayList<StudySession> getSearchResults() {
-        return searchResults;
+    public ArrayList<String> getSearchResultsId() {
+        return searchResultsId;
     }
     
     public String getId() {

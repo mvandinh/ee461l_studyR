@@ -24,9 +24,10 @@ public class Search extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		UserService userService = UserServiceFactory.getUserService();
 	    User user = userService.getCurrentUser();
-	    Ref<Profile> userProfileRef = ObjectifyService.ofy().load().type(Profile.class).id(user.getUserId());
+	    Ref<Profile> userProfileRef = ObjectifyService.ofy().load().type(Profile.class).id(user.getUserId());	// Grab User profile
 	    Profile userProfile = userProfileRef.get();
-		if (req.getParameter("join") != null) {
+	    
+		if (req.getParameter("join") != null) {	// Attempt to Join a Session
 			ObjectifyService.register(StudySession.class);
 			String studySessionId = req.getParameter("studySessionId");
 			Ref<StudySession> studySessionRef = ObjectifyService.ofy().load().type(StudySession.class).id(studySessionId);
@@ -42,21 +43,19 @@ public class Search extends HttpServlet {
 	    	    String studyPurpose = studySession.getStudyPurpose();
 	    	    String course = studySession.getCourse();
 	    	    Profile host = studySession.getHost();
-	    	    ArrayList<Profile> memberList = new ArrayList<Profile>(studySession.getMemberList());
-	    	    memberList.add(userProfile);
+	    	    ArrayList<String> memberList = new ArrayList<String>(studySession.getMemberList());
+	    	    memberList.add(userProfile.getUserID());
 	    	    String id = studySession.getId();
 	    	    ofy().delete().type(StudySession.class).id(studySessionId).now();
 				StudySession replacement = new StudySession(name, description, startTime, duration, date, groupSize, studyStyle, studyPurpose, course, host, memberList, id);
 				ofy().save().entity(replacement).now();
 				resp.sendRedirect("/userInterface.jsp");
 			} else {
-				resp.sendRedirect("/search.jsp");
+				resp.sendRedirect("/search.jsp");	// make some error.jsp
 			}
-			
 		} else {
 			ObjectifyService.register(StudySession.class);
 			List<StudySession> studySessions = ObjectifyService.ofy().load().type(StudySession.class).list();
-			Collections.sort(studySessions);
 			ArrayList<StudySession> filteredSearch = new ArrayList<StudySession>(studySessions);
 			String groupSize = req.getParameter("groupSize");
 			int groupSizeFilter;
@@ -72,7 +71,7 @@ public class Search extends HttpServlet {
 	    	filteredSearch = filterStudyStyle(filteredSearch, studyStyleFilter);
 	    	filteredSearch = filterStudyPurpose(filteredSearch, studyPurposeFilter);
 	    	filteredSearch = filterCourse(filteredSearch, courseFilter);
-			new SearchResults(user, filteredSearch);
+	    	ofy().save().entity(new SearchResults(user, filteredSearch)).now();
 			resp.sendRedirect("/search.jsp");
 		}
 	}
@@ -93,7 +92,7 @@ public class Search extends HttpServlet {
 	}
 	
 	public static ArrayList<StudySession> filterStudyStyle(ArrayList<StudySession> studySessions, String studyStyleFilter) {
-		if (!studyStyleFilter.equals(" No Preference ")) {
+		if (!studyStyleFilter.equals("No Preference")) {
 			ArrayList<StudySession> filteredSessions = new ArrayList<StudySession>();
 			for (StudySession studySession : studySessions){
 				if (studySession.getStudyStyle().equals(studyStyleFilter)) {
@@ -108,10 +107,10 @@ public class Search extends HttpServlet {
 	}
 	
 	public static ArrayList<StudySession> filterStudyPurpose(ArrayList<StudySession> studySessions, String studyPurposeFilter) {
-		if (!studyPurposeFilter.equals(" No Preference ")) {
+		if (!studyPurposeFilter.equals("No Preference")) {
 			ArrayList<StudySession> filteredSessions = new ArrayList<StudySession>();
 			for (StudySession studySession : studySessions){
-				if (studySession.getStudyStyle().equals(studyPurposeFilter)) {
+				if (studySession.getStudyPurpose().equals(studyPurposeFilter)) {
 					filteredSessions.add(studySession);
 				}
 			}
@@ -123,7 +122,7 @@ public class Search extends HttpServlet {
 	}
 	
 	public static ArrayList<StudySession> filterCourse(ArrayList<StudySession> studySessions, String courseFilter) {
-		if (!courseFilter.equals(" No Preference ")) {
+		if (!courseFilter.equals("No Preference")) {
 			ArrayList<StudySession> filteredSessions = new ArrayList<StudySession>();
 			for (StudySession studySession : studySessions){
 				if (studySession.getCourse().equals(courseFilter)) {

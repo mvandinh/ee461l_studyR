@@ -124,14 +124,10 @@
 							User user = userService.getCurrentUser();
 			  				String userID = user.getUserId();
 			  				List<StudySession> sessions = ObjectifyService.ofy().load().type(StudySession.class).list();
-			  				boolean member;
+			  				boolean member = false;
 			  		        for(StudySession s : sessions){
-			  		        	member = false;
-			  		        	if(userID.equals(s.getHost().getUserID())){
-			  		        		member = true;
-			  		        	}
-			  		        	for(Profile p: s.getMemberList()){
-			  		        		if(userID.equals(p.getUserID())){
+			  		        	for(String p: s.getMemberList()){
+			  		        		if(userID.equals(p)){
 			  		        			member = true;
 			  		        		}
 			  		        	}

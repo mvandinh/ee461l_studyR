@@ -25,10 +25,11 @@ public class Profile implements Serializable{
     private ArrayList<Course> courses;
     //@Embed Preferences preferences;
     private ArrayList<String> timePrefs;
-	private Map<String, Boolean> studyStyles;
+	private String studyStyles;
 	private String groupLongevity;
 	private String groupSize;
-    public Profile(){}
+    
+	public Profile(){}
     
     //This should only be called if the user doesn't already have a saved profile.
     //The only scenario where a user should not have a saved profile is if they are a new user.
@@ -51,7 +52,7 @@ public class Profile implements Serializable{
 			String bio, 
 			ArrayList<Course> courses,
 			ArrayList<String> timePrefs,
-			Map<String, Boolean> studyStyles,
+			String studyStyles,
 			String groupLongevity,
 			String groupSize,
 			String id)
@@ -104,12 +105,8 @@ public class Profile implements Serializable{
 		this.timePrefs = timePrefs;
 	}
 	
-	public Map<String, Boolean> getStudyStyles() {
+	public String getStudyStyles() {
 		return studyStyles;
-	}
-
-	public void setStudyStyles(Map<String, Boolean> studyStyles) {
-		this.studyStyles = studyStyles;
 	}
 
 	public String getGroupLongevity() {
