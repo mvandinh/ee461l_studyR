@@ -97,9 +97,9 @@
 						</div>
 						<div class = "col-lg-6">
 						<h3 align="left" class="tab"><b>Available times</b>:</h3>					
-						<%				
-						if(profile.getPreferences() != null && profile.getPreferences().getTimePrefs() != null){
-							ArrayList<String> timePrefs = profile.getPreferences().getTimePrefs();
+						<%		
+						ArrayList<String> timePrefs = profile.getTimePrefs();
+						if(timePrefs != null){
 							for(int i = 0; i < timePrefs.size(); i++){
 								pageContext.setAttribute("thisTimePref", timePrefs.get(i));
 								%>
