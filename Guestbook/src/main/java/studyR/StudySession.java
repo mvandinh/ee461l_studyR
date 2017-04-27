@@ -24,7 +24,7 @@ public class StudySession implements Comparable<StudySession> {
     String description;
     String startTime;
     String duration;
-    Date date = new Date();
+    Date date;
     int groupSize;
     String studyStyle;
     String studyPurpose;
@@ -40,6 +40,7 @@ public class StudySession implements Comparable<StudySession> {
     		String startTime,
     		String duration,
     		String course,
+    		Date date,
     		int groupSize,
     		String studyStyle,
     		String studyPurpose, 
@@ -54,6 +55,7 @@ public class StudySession implements Comparable<StudySession> {
         this.studyStyle = studyStyle;
         this.studyPurpose = studyPurpose;
         this.host = host;
+        this.date = date;
         memberList.add(host);
         id = host.id + date;
     }

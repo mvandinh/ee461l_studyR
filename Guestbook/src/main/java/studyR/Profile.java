@@ -5,6 +5,8 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+
 import com.google.appengine.api.users.User;
 import com.googlecode.objectify.annotation.Embed;
 import com.googlecode.objectify.annotation.Entity;
@@ -22,7 +24,10 @@ public class Profile implements Serializable{
     //This will need an @Embed tag when we actually get around to making the Course class
     private ArrayList<Course> courses;
     //@Embed Preferences preferences;
-    
+    private ArrayList<String> timePrefs;
+	private Map<String, Boolean> studyStyles;
+	private String groupLongevity;
+	private String groupSize;
     public Profile(){}
     
     //This should only be called if the user doesn't already have a saved profile.
@@ -45,7 +50,10 @@ public class Profile implements Serializable{
 			String phone, 
 			String bio, 
 			ArrayList<Course> courses,
-			//Preferences preferences,
+			ArrayList<String> timePrefs,
+			Map<String, Boolean> studyStyles,
+			String groupLongevity,
+			String groupSize,
 			String id)
 	{
 		this.id = id;
@@ -54,7 +62,10 @@ public class Profile implements Serializable{
 		this.phone = phone;
 		this.courses = courses;
 		this.email = email;
-		//this.preferences = preferences;
+		this.studyStyles = studyStyles;
+		this.groupLongevity = groupLongevity;
+		this.timePrefs = timePrefs;
+		this.groupSize = groupSize;
 	}
 	
 	public String getUserID(){
@@ -81,11 +92,39 @@ public class Profile implements Serializable{
 		return courses;
 	}
 	
-	//public Preferences getPreferences(){
-		//return preferences;
-	//}
-	
 	public boolean compareID(String toCompare){
 		return id.equals(toCompare);
+	}
+	
+	public ArrayList<String> getTimePrefs(){
+		return timePrefs;
+	}
+
+	public void setTimePrefs(ArrayList<String> timePrefs) {
+		this.timePrefs = timePrefs;
+	}
+	
+	public Map<String, Boolean> getStudyStyles() {
+		return studyStyles;
+	}
+
+	public void setStudyStyles(Map<String, Boolean> studyStyles) {
+		this.studyStyles = studyStyles;
+	}
+
+	public String getGroupLongevity() {
+		return groupLongevity;
+	}
+
+	public void setGroupLongevity(String groupLongevity) {
+		this.groupLongevity = groupLongevity;
+	}
+
+	public String getGroupSize() {
+		return groupSize;
+	}
+
+	public void setGroupSize(String groupSize) {
+		this.groupSize = groupSize;
 	}
 }

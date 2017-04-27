@@ -4,6 +4,8 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,9 +71,49 @@ public class CreateStudySessionServlet extends HttpServlet {
         	}
         }
         
+
+        //getting the right friggin date
+        int chosenWeekDay = 0;
+        if(weekDay.equals("Sunday")){
+        	chosenWeekDay = 1;
+        }
+        else if(weekDay.equals("Monday")){
+        	chosenWeekDay = 2;
+        }
+        else if(weekDay.equals("Tuesday")){
+        	chosenWeekDay = 3;
+        }
+        else if(weekDay.equals("Wednesday")){
+        	chosenWeekDay = 4;
+        }
+        else if(weekDay.equals("Thursday")){
+        	chosenWeekDay = 5;
+        }
+        else if(weekDay.equals("Friday")){
+        	chosenWeekDay = 6;
+        }
+        else if(weekDay.equals("Saturday")){
+        	chosenWeekDay = 7;
+        }
+        Date currentDate = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(currentDate);
+        int currentWeekDay = c.get(Calendar.DAY_OF_WEEK);
+        int offset = chosenWeekDay - currentWeekDay;
+        c.add(Calendar.DATE, offset);
+        int hour = Integer.parseInt(req.getParameter("startHour"));
+        c.set(Calendar.HOUR_OF_DAY, hour);
+        int min = Integer.parseInt(req.getParameter("startMin"));
+        c.set(Calendar.MINUTE, min);
+        Date newDate = c.getTime();
+        if(newDate.before(currentDate)){
+        	c.add(Calendar.DATE, 7);
+        	newDate = c.getTime();
+        }
+        		
         
         //making study session
-		StudySession session = new StudySession(groupName,desc,startTime,duration,courseSelected.courseName,Integer.parseInt(groupSize),studyStyle,purpose,creator);
+		StudySession session = new StudySession(groupName,desc,startTime,duration,courseSelected.courseName, newDate, Integer.parseInt(groupSize),studyStyle,purpose,creator);
 		ofy().save().entity(session).now();
 		resp.sendRedirect("/userInterface.jsp");
 	}
