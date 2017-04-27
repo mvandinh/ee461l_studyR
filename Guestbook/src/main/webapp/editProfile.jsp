@@ -96,7 +96,7 @@
 	       }
 	       pageContext.setAttribute("timePrefs", timePrefsString);
 		%>		
-	<form action="/editProfile" method="post" id="myform">
+	<form action="/editProfile" method="post" id="myform" onsubmit="return errorMessage();">
 		
 		<div class="tab">
 		  <button type="button" class="tablinks" onclick="openCity(event, 'Basic')" id="defaultButton">Basic Information</button>
@@ -108,11 +108,11 @@
 		<div id="Basic" class="tabcontent">
 			<br>
 			 Display Name:
-			 <input type="text" name="userName" value="${fn:escapeXml(userName)}" id="userName">
+			 <input type="text" name="userName" value="${fn:escapeXml(userName)}" id="userName" maxlength="50">
 			 <br>
 			 <br>
 			 Email:
-			 <input type="text" name="email" value="${fn:escapeXml(email)}" id="email">
+			 <input type="text" name="email" value="${fn:escapeXml(email)}" id="email" maxlength="50">
 			 <br>
 			 <br>
 			 Phone Number:
@@ -125,7 +125,7 @@
 			<br>
 			Edit your profile description:
 			<br>
-			<textarea name="bioText" rows="3" cols="60" id="bioText">${fn:escapeXml(bio)}</textarea>
+			<textarea name="bioText" rows="3" cols="60" id="bioText" maxlength="500">${fn:escapeXml(bio)}</textarea>
 		</div>
 		
 		<div id="timePrefs" class="tabcontent">
@@ -170,12 +170,12 @@
 				 <p style="margin-left: 40px"><input type="checkbox" name="Exam Review" id="studyStylesER" > Exam Review</p>
 				 
 		</div>
-		
-		
+		<input type="hidden" id="timePrefs" value="${fn:escapeXml(timePrefs)}">
+		<input type="hidden" id="numTimes" value="${fn:escapeXml(numTimes)}">
 		<input type="hidden" name="userID" value="<%=user.getUserId()%>">
 		
 		<div>
-			<input type="submit" class="btn btn-info" value="Save" onclick="errorMessage()">
+			<input type="submit" class="btn btn-info" value="Save">
 			<a href="/userInterface.jsp" class="btn btn-primary" role="button" id="cancel">Cancel</a>
 		</div>
 		

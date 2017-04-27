@@ -56,6 +56,10 @@ public class Profile {
 		//this.preferences = preferences;
 	}
 	
+	public String getUserID(){
+		return id;
+	}
+	
 	public String getName() {
 		return name;
 	}

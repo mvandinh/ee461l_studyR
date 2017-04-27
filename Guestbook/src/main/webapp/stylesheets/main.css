@@ -17,7 +17,7 @@ body {
 	font: 100% georgia, sans-serif;
 	line-height: 1.88889;
 	color: #000000; 
-	background: #ffa url(https://img.clipartfest.com/291aa940d77920f8e84f639baf9a7b70_ocean-water-clip-art-ocean-water-clipart_6000-2154.png)  no-repeat bottom; 
+	background: linear-gradient(0deg, #ffffff, #8ac5ff);
 	background-size: cover;
 	margin: 0; 
 	padding: 0;
@@ -35,13 +35,14 @@ h1 {
 	color: #000080;
 	}
 h2 { 
-	font: italic normal 20pt georgia, sans-serif;
+	font: normal 20pt georgia, sans-serif;
 	letter-spacing: 1px; 
 	margin-bottom: 10; 
 	color: #000080;
 	}
 h3 { 
-	font: italic normal 12pt georgia, sans-serif;
+	margin-left: 40px;
+	font: normal 12pt verdana, sans-serif;
 	letter-spacing: 1px; 
 	margin-bottom: 0; 
 	color: #000080;
@@ -57,18 +58,18 @@ image {
 	margin-top: 10;
 }
 a:link { 
-	font-weight: bold; 
-	text-decoration: underline; 
+	font-weight: normal; 
+	text-decoration: 
 	color: #000080;
 	}
 a:visited { 
 	font-weight: bold; 
 	text-decoration: underline; 
-	color: #B7A5DF;
+	color: #000080;
 	}
 a:hover, a:focus, a:active { 
 	text-decoration: underline; 
-	color: #9685BA;
+	color: #0000a0;
 	}
 abbr {
 	border-bottom: none;
@@ -210,7 +211,7 @@ footer a:link, footer a:visited {
 
 
 .extra1 {
-	background: transparent url(http://csszengarden.com/001/cr2.gif) top left no-repeat; 
+	background: linear-gradient(0deg, #ffffff, #8ac5ff);
 	position: absolute; 
 	top: 40px; 
 	right: 0; 

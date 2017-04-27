@@ -1633,8 +1633,8 @@ pre code {
   overflow-y: scroll;
 }
 .container {
-  margin-right: auto;
-  margin-left: auto;
+  margin-right: 40px;
+  margin-left: 40px;
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -4544,8 +4544,9 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  background-color: #222222;
-  border-color: #121212;
+  background-color: #0000ff;
+  border-color: #0000a0;
+  background: linear-gradient(90deg, #000022, #ffffff);
 }
 .navbar-default .navbar-brand {
   color: #ffffff;
@@ -4564,7 +4565,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
   color: #ffffff;
-  background-color: #090909;
+  background-color: #090286;
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
@@ -4583,7 +4584,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
-  background-color: #090909;
+  background-color: #8080ff;
 }
 .navbar-default .navbar-toggle .icon-bar {
   background-color: #ffffff;
@@ -5011,7 +5012,7 @@ a.badge:focus {
   padding-bottom: 30px;
   margin-bottom: 30px;
   color: inherit;
-  background-color: lavenderblush;
+  background-color: #b9dcff;
 }
 .jumbotron h1,
 .jumbotron .h1 {
@@ -5873,12 +5874,13 @@ button.list-group-item-danger.active:focus {
   padding-bottom: 75%;
 }
 .well {
+  margin-left: 40px;
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
-  background-color: #f5f5f5;
-  border: 1px solid #e3e3e3;
-  border-radius: 0;
+  background-color: #ffffff;
+  border: 1px solid #000022;
+  border-radius: 5px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }

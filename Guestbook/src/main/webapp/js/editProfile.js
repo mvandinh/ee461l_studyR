@@ -169,15 +169,47 @@ function errorMessage(){
 		deleteThis = document.getElementById("errorMessage");
 		deleteThis.parentNode.removeChild(deleteThis);
 	}
+	var numberTimes = parseInt(document.getElementById("clicks").innerHTML);
+	var timeStringOne, AmPmOneString, AmPmTwoString, timeTwoString, j, timeInMinsOne, timeInMinsTwo;
+	var errorMessage = document.createElement("b");
+	errorMessage.innerHTML = "";
+	for (j = 0; j < numberTimes; j++){
+		timeInMinsOne = 0;
+		timeInMinsTwo = 0;
+		timeStringOne = document.getElementById("firstTime_" + j).value;
+		AmPmOneSelect = document.getElementById("AmPmOne_" + j);
+		AmPmOneString = AmPmOneSelect.options[AmPmOneSelect.selectedIndex].text;
+		timeTwoString = document.getElementById("secondTime_" + j).value;
+		AmPmTwoSelect = document.getElementById("AmPmTwo_" + j);
+		AmPmTwoString = AmPmTwoSelect.options[AmPmTwoSelect.selectedIndex].text;
+		if(parseInt(timeStringOne.substring(0,2)) < 12){
+			timeInMinsOne = 60*parseInt(timeStringOne.substring(0,2));
+		}
+		if(AmPmOneString == "PM"){
+			timeInMinsOne += 12*60;
+		}
+		timeInMinsOne += parseInt(timeStringOne.substring(3,5));
+		if(parseInt(timeTwoString.substring(0,2)) < 12){
+			timeInMinsTwo = 60*parseInt(timeTwoString.substring(0,2));
+		}
+		if(AmPmTwoString == "PM"){
+			timeInMinsTwo += 12*60;
+		}
+		timeInMinsTwo += parseInt(timeTwoString.substring(3,5));
+		if(timeInMinsOne > timeInMinsTwo){
+			errorMessage.innerHTML = "ERROR: One or more of your time preference ranges end before it begins.<br>";
+		}
+	}
 	var cancelLoc = document.getElementById("cancel");
 	var newLine = document.createElement("br");
 	newLine.id = "newLine";
-	var errorMessage = document.createElement("b");
-	errorMessage.innerHTML = "TODO: write the error checking code (this is the error message)";
 	errorMessage.id = "errorMessage";
 	cancelLoc.parentNode.insertBefore(newLine, cancelLoc.nextSibiling);
 	cancelLoc.parentNode.insertBefore(errorMessage, cancelLoc.nextSibiling);
-	
+	if(errorMessage.innerHTML.length > 1){
+		return false;
+	}
+	return true;
 }
 
 //This prevents the form from submitting if you press enter
