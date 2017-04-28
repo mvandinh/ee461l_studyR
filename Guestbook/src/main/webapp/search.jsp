@@ -24,11 +24,7 @@
 <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
 <!-- <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />-->
 <!-- Bootstrap -->
-<link href="css/bootstrap-search.css" rel="stylesheet">
-
-						<style>
-							h3 {color:blue;}				
-						</style>	
+<link href="css/bootstrap.css" rel="stylesheet">
 </head>
 
 <title>Search Study Sessions</title>
@@ -117,6 +113,8 @@
 							    }
 							}
 			    			studySessions = filteredResults;
+			    		} else {
+			    			studySessions.clear();
 			    		}
 			    		break;
 			    	}
@@ -130,8 +128,9 @@
 						boolean empty = true;
 						for (StudySession studySession : studySessions) {
 					    		String[] memberList = studySession.getMemberList();
+					    		int currentNumMembers = studySession.getCurrentNumMembers();
 					    		boolean notAlreadyJoined = true;
-					    		for (int i = 0; i < 10; i++) {
+					    		for (int i = 0; i < currentNumMembers; i++) {
 					    			if (memberList[i] != null && memberList[i].equals(userProfile.getUserID())) {
 					    				notAlreadyJoined = false;
 					    				break;

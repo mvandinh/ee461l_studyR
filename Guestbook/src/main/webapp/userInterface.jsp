@@ -130,11 +130,14 @@
 			  				List<StudySession> sessions = ObjectifyService.ofy().load().type(StudySession.class).list();
 			  				boolean member = false;
 			  		        for(StudySession s : sessions){
-			  		        	for(String p: s.getMemberList()){
-			  		        		if(userID.equals(p)){
-			  		        			member = true;
-			  		        		}
-			  		        	}
+			  		        	String[] memberList = s.getMemberList();
+			  		        	int currentNumMembers = s.getCurrentNumMembers();
+					    		for (int i = 0; i < currentNumMembers; i++) {
+					    			if (memberList[i] != null && memberList[i].equals(userID)) {
+					    				member = true;
+					    				break;
+					    			}
+					    		}
 			  		        	if(member){
 			  		        		pageContext.setAttribute("session_name", s.getName());
 			  	    				pageContext.setAttribute("session_course", s.getCourse());
