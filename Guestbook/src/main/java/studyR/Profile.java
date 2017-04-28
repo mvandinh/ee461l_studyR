@@ -24,8 +24,7 @@ public class Profile implements Serializable{
     //This will need an @Embed tag when we actually get around to making the Course class
     private ArrayList<Course> courses;
     //@Embed Preferences preferences;
-    private ArrayList<String> timePrefs;
-	private String studyStyles;
+    private String timePrefs;
 	private String groupLongevity;
 	private String groupSize;
     
@@ -45,14 +44,16 @@ public class Profile implements Serializable{
 	}
 	
 	//TODO should we have a copy constructor?
+
+	//TODO should we have a copy constructor?
 	public Profile( 
 			String name, 
 			String email, 
 			String phone, 
 			String bio, 
 			ArrayList<Course> courses,
-			ArrayList<String> timePrefs,
-			String studyStyles,
+			String timePrefs,
+			String  studyStyles,
 			String groupLongevity,
 			String groupSize,
 			String id)
@@ -97,16 +98,12 @@ public class Profile implements Serializable{
 		return id.equals(toCompare);
 	}
 	
-	public ArrayList<String> getTimePrefs(){
+	public String getTimePrefs(){
 		return timePrefs;
 	}
 
-	public void setTimePrefs(ArrayList<String> timePrefs) {
+	public void setTimePrefs(String timePrefs) {
 		this.timePrefs = timePrefs;
-	}
-	
-	public String getStudyStyles() {
-		return studyStyles;
 	}
 
 	public String getGroupLongevity() {

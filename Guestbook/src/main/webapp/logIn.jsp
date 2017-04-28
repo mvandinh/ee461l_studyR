@@ -35,7 +35,9 @@
    		<img src = "http://vignette2.wikia.nocookie.net/scribblenauts/images/7/7a/Tuna_Fish.png/revision/latest?cb=20130418113339" alt = "Cartuna" style = "width:250px;height:125px">
    		<hr>
 <%
+	ObjectifyService.reset();	
 	ObjectifyService.register(Profile.class);
+
 	ObjectifyService.register(StudySession.class);
     String studyR = request.getParameter("studyR");
     if (studyR == null) {
@@ -54,6 +56,10 @@
 		<%
 		}
 	%>
+	<form action="/deleter" method="post">
+		<input type="submit" value="DELETER DEBUG">
+	</form>
+
 		<hr>
 		<p><b>Developed by :</b><i> Minh Van-Dinh, Ethan Cranmer, Matthew Edwards, Garrett Custer</i></p>
 	</body>

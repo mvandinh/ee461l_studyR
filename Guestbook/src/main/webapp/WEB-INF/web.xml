@@ -5,6 +5,14 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
          version="2.5">
 	<servlet>
+		<servlet-name>deleter</servlet-name>
+		<servlet-class>studyR.Deleter</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>deleter</servlet-name>
+		<url-pattern>/deleter</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>studyR</servlet-name>
 		<servlet-class>studyR.StudyRServlet</servlet-class>
 	</servlet>

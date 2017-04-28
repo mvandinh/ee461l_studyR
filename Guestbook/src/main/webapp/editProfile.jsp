@@ -63,35 +63,20 @@
 	       pageContext.setAttribute("phoneNumber", userProfile.getPhone());
 	       pageContext.setAttribute("bio", userProfile.getBio());	       
 	       int numberTimes = 0;
-//	       ArrayList<String> timePrefs = new ArrayList<String>();
-	//	       if(userProfile.getTimePrefs()!= null){
-		//    	   timePrefs =  userProfile.getTimePrefs();
-			//       numberTimes = timePrefs.size();
-			  // }
-//		       if(userProfile.getGroupSize() != ""){
-	//	      	 pageContext.setAttribute("groupSize", userProfile.getGroupSize());
-		//       }else{
-			//       pageContext.setAttribute("groupSize", "0");
-		      // }
-//	       	   pageContext.setAttribute("groupLongevity", userProfile.getGroupLongevity());
-	//       	   if(userProfile.getStudyStyles() != null){
-		//	       pageContext.setAttribute("groupDiscussion", userProfile.getStudyStyles().get("Group Discussion"));
-			//       pageContext.setAttribute("practiceQuestions", userProfile.getStudyStyles().get("Practice Questions"));
-			  //     pageContext.setAttribute("projectGroup", userProfile.getStudyStyles().get("Project Group"));
-			    //   pageContext.setAttribute("examReview", userProfile.getStudyStyles().get("Exam Review"));
-//	       	   }else{
-	//       		   pageContext.setAttribute("groupDiscussion", false);
-		//	       pageContext.setAttribute("practiceQuestions", false);
-			//       pageContext.setAttribute("projectGroup", false);
-			  //     pageContext.setAttribute("examReview", false);
-	       	   //}
+	       String timePrefs = new String();
+		       if(userProfile.getTimePrefs()!= null){
+		    	   timePrefs =  userProfile.getTimePrefs();
+			       numberTimes = timePrefs.length() - timePrefs.replace("|", "").length();
+			   }
+		       if(userProfile.getGroupSize() != ""){
+		      	 pageContext.setAttribute("groupSize", userProfile.getGroupSize());
+		       }else{
+			       pageContext.setAttribute("groupSize", "0");
+		       }
+	       	   pageContext.setAttribute("groupLongevity", userProfile.getGroupLongevity());
 
-//	       pageContext.setAttribute("numTimes", numberTimes);
-	//       String timePrefsString = "";
-	  //     for(int i = 0; i < timePrefs.size(); i++){
-	    //	  timePrefsString += timePrefs.get(i) + "|";
-	      // }
-	       //pageContext.setAttribute("timePrefs", timePrefsString);
+	       pageContext.setAttribute("numTimes", numberTimes);
+	       pageContext.setAttribute("timePrefs", timePrefs);
 		%>		
 	<form action="/editProfile" method="post" id="myform" onsubmit="return errorMessage();">
 		
@@ -159,12 +144,6 @@
 				 </select>
 				 <br>
 				 <br>
-				 Group Purposes:
-				 <br>
-				 <p style="margin-left: 40px"><input type="checkbox" name="Group Discussion" id="studyStylesGD" > Class Discussion</p>
-				 <p style="margin-left: 40px"><input type="checkbox" name="Practice Questions" id="studyStylesPQ" > Homework</p>
-				 <p style="margin-left: 40px"><input type="checkbox" name="Project Group" id="studyStylesPG" > Project Group</p>
-				 <p style="margin-left: 40px"><input type="checkbox" name="Exam Review" id="studyStylesER" > Exam Review</p>
 				 
 		</div>
 		<input type="hidden" id="timePrefs" value="${fn:escapeXml(timePrefs)}">
@@ -219,27 +198,6 @@
 			groupLongevity.selectedIndex = i;
 		}
 	}
-	var groupDiscussion = document.getElementById("studyStylesGD");
-	var GD = ${groupDiscussion};
-	if(GD){
-		groupDiscussion.checked = "true";
-	}
-	var practiceQuestions = document.getElementById("studyStylesPQ");
-	var PQ = ${practiceQuestions};
-	if(PQ){
-		practiceQuestions.checked = "true";
-	}
-	var projectGroup = document.getElementById("studyStylesPG");
-	var PG = ${projectGroup};
-	if(PG){
-		projectGroup.checked = "true";
-	}
-	var examReview = document.getElementById("studyStylesER");
-	var ER = ${examReview};
-	if(ER){
-		examReview.checked = "true";
-	}
-			    
 
 </script>
 </html>

@@ -81,7 +81,8 @@
 				<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a> here.)</p>
 				<%
   			  	} else {
-  			  		response.sendRedirect("logIn.jsp");			
+  			  		response.sendRedirect("logIn.jsp");	
+  			  		return;
     			}
 				%>
 			</div>
@@ -98,15 +99,17 @@
 						<div class = "col-lg-6">
 						<h3 align="left" class="tab"><b>Available times</b>:</h3>					
 						<%				
-						//if(profile.getPreferences() != null && profile.getPreferences().getTimePrefs() != null){
-							//ArrayList<String> timePrefs = profile.getPreferences().getTimePrefs();
-							//for(int i = 0; i < timePrefs.size(); i++){
-								//pageContext.setAttribute("thisTimePref", timePrefs.get(i));
-								%>
-								<%--<h3 align="left">${fn:escapeXml(thisTimePref)}</h3>--%>
-								<%
-							//}
-						//}
+						String timePrefs = profile.getTimePrefs();
+						int numtimes = timePrefs.length() - timePrefs.replace("|", "").length();
+						for(int i = 0; i < numtimes; i++){
+							String thisTimePref = timePrefs.substring(0, timePrefs.indexOf('|'));
+							pageContext.setAttribute("thisTimePref", thisTimePref);
+							timePrefs = timePrefs.substring(timePrefs.indexOf('|') + 1);
+							%>
+							<h3 align="left">${fn:escapeXml(thisTimePref)}</h3>
+							<%
+						}
+					
 						%>	
 
 					</div>

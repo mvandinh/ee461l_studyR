@@ -20,7 +20,7 @@ public class EditProfile extends HttpServlet {
 		String email = req.getParameter("email");
 		String phone = req.getParameter("phone");
 		String bio = req.getParameter("bioText");
-		ArrayList<String> timePrefs = new ArrayList<String>();
+		String timePrefs = new String();
 		//IMPORTANT: the 4 in the for-loop corresponds to the maximum number of time ranges users can input.
 		//			 Change this value if we change the number of allowed time ranges as specified in editProfile.jsp.
 		for(char i = '0'; i<'4'; i++){
@@ -30,7 +30,7 @@ public class EditProfile extends HttpServlet {
 				String AmPmOne = req.getParameter("AmPmOne_" + i);
 				String timeEnd = req.getParameter("secondTime_" + i);
 				String AmPmTwo = req.getParameter("AmPmTwo_" + i);
-				timePrefs.add(day + ", " + timeStart + AmPmOne + " to " + timeEnd + AmPmTwo);
+				timePrefs += day + ", " + timeStart + AmPmOne + " to " + timeEnd + AmPmTwo + "|";
 			}
 		}
 		String groupSize = req.getParameter("groupSize");
@@ -38,13 +38,9 @@ public class EditProfile extends HttpServlet {
 			groupSize = "Any";
 		}	
 		String groupLongevity = req.getParameter("groupLongevity");
-		//Map<String, Boolean> studyStyles = new HashMap<String, Boolean>();
-		//studyStyles.put("Group Discussion",!(req.getParameter("Group Discussion") == null));
-		//studyStyles.put("Practice Questions", !(req.getParameter("Practice Questions") == null));
-		//studyStyles.put("Project Group", !(req.getParameter("Project Group") == null));
-		//studyStyles.put("Exam Review", !(req.getParameter("Exam Review") == null));
-		//String userID = req.getParameter("userID");
-		Profile replacement = new Profile(userName, email, phone, bio, null, timePrefs, studyStyles, groupLongevity, groupSize, userID);
+		Map<String, Boolean> studyStyles = new HashMap<String, Boolean>();
+		String userID = req.getParameter("userID");
+		Profile replacement = new Profile(userName, email, phone, bio, null/*Courses*/, timePrefs, null/*StudyStlyes*/, groupLongevity, groupSize, userID);
 		
 		ofy().delete().type(Profile.class).id(userID).now();
 		ofy().save().entity(replacement).now();
@@ -52,4 +48,3 @@ public class EditProfile extends HttpServlet {
 	}
 	
 }
-
