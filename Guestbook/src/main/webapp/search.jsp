@@ -24,7 +24,7 @@
 <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
 <!-- <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />-->
 <!-- Bootstrap -->
-<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-search.css" rel="stylesheet">
 
 						<style>
 							h3 {color:blue;}				
