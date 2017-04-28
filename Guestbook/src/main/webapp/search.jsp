@@ -21,14 +21,11 @@
 <%@ page session="false" %>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-<%--<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />--%>
+<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
 <!-- <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />-->
 <!-- Bootstrap -->
 <link href="css/bootstrap.css" rel="stylesheet">
+
 						<style>
 							h3 {color:blue;}				
 						</style>	
@@ -51,7 +48,6 @@
 	  </div>
 	</nav>
 	<p>You can look at all existing study sessions at this page. Use the advanced filters to match the results with your preferences. Hover over the study session's name to view its description</p> 
-	<p id="error">errors:</p>
 	<div class="jumbotron vertical-center">
 		<div class="container-fluid" align= "left">
 			<div class="row">
@@ -92,8 +88,10 @@
 			</form>
 			</div>
 		</div>
-		<div class="container" align="right">
+		<div class="container" align="left">
 			<div class="row">
+				<h4><b>Study Session Search Results: </b></h4>
+				<hr>
 				<%
 				ObjectifyService.register(StudySession.class);
 				ObjectifyService.register(SearchResults.class);
@@ -122,22 +120,13 @@
 			    		break;
 			    	}
 			    }
-			    //Ref<SearchResults> searchResultsRef = ObjectifyService.ofy().load().type(SearchResults.class).id(user.getUserId() +"_searchResults");
-				//SearchResults searchResults = searchResultsRef.get();
-				pageContext.setAttribute("test", mySearchResults == null);
-				pageContext.setAttribute("test1", mySearchResults == null);
-			    %><form action="/search" method="post">
-					<input type="text" name="test" value="${fn:escapeXml(test)}" id="test"/>
-					<input type="text" name="test1" value="${fn:escapeXml(test1)}" id="test1"/>
-				</form><%
 			    if (studySessions.isEmpty()) {
 			        %>
-			        <p>No study sessions with your preferences are available, but you can host you own <a href="/createStudySession.jsp">here</a>!!</p>
+			        <p>No study sessions are available to you, but you can host you own <a href="/createStudySession.jsp">here</a>!!</p>
 				<% } else {
 						Collections.sort(studySessions); 
 						Collections.reverse(studySessions);
-						%><h4>Study Session Search Results: </h4>
-					    	<%for (StudySession studySession : studySessions) {
+						for (StudySession studySession : studySessions) {
 					    		if (!studySession.getMemberList().contains(userProfile.getUserID())) {
 					    			pageContext.setAttribute("studySession_name", studySession.getName());
 					    			pageContext.setAttribute("studySession_id", studySession.getId());
@@ -150,30 +139,40 @@
 						        	pageContext.setAttribute("studySession_studyStyle", studySession.getStudyStyle());
 						        	pageContext.setAttribute("studySession_studyPurpose", studySession.getStudyPurpose());
 						        	pageContext.setAttribute("studySession_description", studySession.getDescription());
+						        	pageContext.setAttribute("test", studySession.getMemberList());
+						        	pageContext.setAttribute("test1", userProfile.getUserID());
+						        	%><form action="/search" method="post">
+										<input type="text" name="test" value="${fn:escapeXml(test)}" id="test"/>
+										<input type="text" name="test1" value="${fn:escapeXml(test1)}" id="test1"/>
+									</form><%
 						        	%>
-							    	<form action="/search" method="post">
-										<input type="submit" name="join" value="${fn:escapeXml(studySession_name)}" />
-										<input type="text" name="studySessionId" value="${fn:escapeXml(studySession_id)}" id="studySessionId"/>
-										<input type="text" name="studySessionId" value="${fn:escapeXml(studySession_studyStyle)}" id="studySessionId"/>
+						        		<table>
+									    <tr>
+									    	<td><b>Session Name:</b> ${fn:escapeXml(studySession_name)}</td>
+									    </tr>
+								    	<tr>
+								    		<td><b>Course:</b> ${fn:escapeXml(studySession_course)}</td>
+								    		<td>&emsp;&emsp;<b>Date:</b> ${fn:escapeXml(studySession_date)}</td>
+								    		<td>&emsp;&emsp;<b>Time:</b> ${fn:escapeXml(studySession_startTime)} for ${fn:escapeXml(studySession_duration)} hr(s)</td>
+								    	</tr>
+									    <tr>
+									    	<td><b>Occupancy:</b> ${fn:escapeXml(studySession_currentNumMembers)} / ${fn:escapeXml(studySession_groupSize)}</td>
+									    	<td>&emsp;&emsp;<b>Study Purpose:</b> ${fn:escapeXml(studySession_studyPurpose)}</td>
+									    	<td>&emsp;&emsp;<b>Study Style:</b> ${fn:escapeXml(studySession_studyStyle)}</td>
+									    </tr>
+									    <tr><td><b>Description:</b> ${fn:escapeXml(studySession_description)}</td></tr>
+									    </table>
+									<form action="/search" method="post">
+										<input type="submit" name="join" value="Join ${fn:escapeXml(studySession_name)}" />
+										<input type="hidden" name="studySessionId" value="${fn:escapeXml(studySession_id)}" id="studySessionId"/>
 									</form>
-									<span title="${fn:escapeXml(studySession_description)}">
-							    	${fn:escapeXml(studySession_date)}
-							    	${fn:escapeXml(studySession_startTime)} for ${fn:escapeXml(studySession_duration)} hr(s) 
-							    	${fn:escapeXml(studySession_course)}
-							    	${fn:escapeXml(studySession_currentNumMembers)} / ${fn:escapeXml(studySession_groupSize)}
-							    	${fn:escapeXml(studySession_studyStyle)}
-							    	${fn:escapeXml(studySession_studyPurpose)}
-									</span>
+									<hr>
 						        	<%
 					    		}
 			        		}
 				}
 			    if (mySearchResults != null) {
 		    		ObjectifyService.ofy().delete().type(SearchResults.class).id(user.getUserId() +"_searchResults").now();
-		    		pageContext.setAttribute("test2", "Search Results exist");
-				    %><form action="/search" method="post">
-						<input type="text" name="test" value="${fn:escapeXml(test2)}" id="test"/>
-					</form><%
 				}
 				%>
 			</div>

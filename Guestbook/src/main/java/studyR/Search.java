@@ -44,7 +44,7 @@ public class Search extends HttpServlet {
 	    	    String course = studySession.getCourse();
 	    	    Profile host = studySession.getHost();
 	    	    ArrayList<String> memberList = new ArrayList<String>(studySession.getMemberList());
-	    	    memberList.add(userProfile.getUserID());
+	    	    memberList.add("185804764220139124118");
 	    	    String id = studySession.getId();
 	    	    ofy().delete().type(StudySession.class).id(studySessionId).now();
 				StudySession replacement = new StudySession(name, description, startTime, duration, date, groupSize, studyStyle, studyPurpose, course, host, memberList, id);

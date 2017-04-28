@@ -48,7 +48,7 @@
 		
 		<div id="Basic" class="tabcontent">
 				 Session Name:
-				 <input type="text" name="sessionName" id="sessionName"><br>
+				 <input type="text" name="sessionName" id="sessionName" value="Session Name"><br>
 				 <br>
 				 Class that session is for:
 				 <select name="courseName" id="courseName">
@@ -135,7 +135,7 @@
 		<div id="Desc" class="tabcontent">
 			Edit the session description:
 			<br>
-			<textarea name="bioText" rows="3" cols="60" id="bioText">Default</textarea>
+			<textarea name="bioText" rows="3" cols="60" id="bioText">Description</textarea>
 		</div>
 		
 		<div id="otherDetails" class="tabcontent">
