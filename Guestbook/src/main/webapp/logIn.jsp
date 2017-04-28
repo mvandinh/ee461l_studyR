@@ -40,7 +40,7 @@
 
 	ObjectifyService.register(StudySession.class);
     String studyR = request.getParameter("studyR");
-    if (studyR == null) {
+    if (studyR != null) {
         studyR = "default";
     }
     pageContext.setAttribute("studyR", studyR);

@@ -100,16 +100,17 @@
 						<h3 align="left" class="tab"><b>Available times</b>:</h3>					
 						<%				
 						String timePrefs = profile.getTimePrefs();
-						int numtimes = timePrefs.length() - timePrefs.replace("|", "").length();
-						for(int i = 0; i < numtimes; i++){
-							String thisTimePref = timePrefs.substring(0, timePrefs.indexOf('|'));
-							pageContext.setAttribute("thisTimePref", thisTimePref);
-							timePrefs = timePrefs.substring(timePrefs.indexOf('|') + 1);
-							%>
-							<h3 align="left">${fn:escapeXml(thisTimePref)}</h3>
-							<%
+						if(timePrefs != null){
+							int numtimes = timePrefs.length() - timePrefs.replace("|", "").length();
+							for(int i = 0; i < numtimes; i++){
+								String thisTimePref = timePrefs.substring(0, timePrefs.indexOf('|'));
+								pageContext.setAttribute("thisTimePref", thisTimePref);
+								timePrefs = timePrefs.substring(timePrefs.indexOf('|') + 1);
+								%>
+								<h3 align="left">${fn:escapeXml(thisTimePref)}</h3>
+								<%
+							}
 						}
-					
 						%>	
 
 					</div>

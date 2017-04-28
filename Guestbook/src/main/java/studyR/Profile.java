@@ -53,7 +53,6 @@ public class Profile implements Serializable{
 			String bio, 
 			ArrayList<Course> courses,
 			String timePrefs,
-			String  studyStyles,
 			String groupLongevity,
 			String groupSize,
 			String id)
@@ -64,7 +63,6 @@ public class Profile implements Serializable{
 		this.phone = phone;
 		this.courses = courses;
 		this.email = email;
-		this.studyStyles = studyStyles;
 		this.groupLongevity = groupLongevity;
 		this.timePrefs = timePrefs;
 		this.groupSize = groupSize;

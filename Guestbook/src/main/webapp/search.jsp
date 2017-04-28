@@ -40,9 +40,9 @@
 	    </div>
 	    <ul class="nav navbar-nav">
 	   	  <li ><a href="/userInterface.jsp">Dashboard</a></li>
-	      <li class="active"><a href="/editProfile.jsp">Edit Profile</a></li>
+	      <li ><a href="/editProfile.jsp">Edit Profile</a></li>
 	      <li><a href="/createStudySession.jsp">Create Study Session</a></li>
-	      <li><a href="search.jsp">Search Study Sessions</a></li>
+	      <li class="active"><a href="search.jsp">Search Study Sessions</a></li>
 	      <li><a href="#">Search For User</a></li>
 	    </ul>
 	  </div>
@@ -132,7 +132,7 @@
 					    		String[] memberList = studySession.getMemberList();
 					    		boolean notAlreadyJoined = true;
 					    		for (int i = 0; i < 10; i++) {
-					    			if (memberList[i].equals(userProfile.getUserID())) {
+					    			if (memberList[i] != null && memberList[i].equals(userProfile.getUserID())) {
 					    				notAlreadyJoined = false;
 					    				break;
 					    			}

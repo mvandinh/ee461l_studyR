@@ -183,7 +183,6 @@
 		AmPmTwo = timePrefsSplit[3].substring(5, 7);
 		addTimeReference("loc", maxClicks, day, timeOne, AmPmOne, timeTwo, AmPmTwo);
 	}
-	
 	var groupSize = document.getElementById("groupSize");
 	var GS = ${groupSize};
 	if(GS > 0){
