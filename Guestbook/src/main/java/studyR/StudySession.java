@@ -30,7 +30,8 @@ public class StudySession implements Comparable<StudySession> {
     String studyPurpose;
     String course;
     @Embed Profile host;
-    @Embed ArrayList<String> memberList = new ArrayList<String>();
+    String[] memberList;
+    int currentNumMembers = 1;
     
     public StudySession(){}
     
@@ -56,8 +57,9 @@ public class StudySession implements Comparable<StudySession> {
         this.studyPurpose = studyPurpose;
         this.host = host;
         this.date = date;
-        memberList.add(host.getUserID());
-        id = host.id + date;
+        this.memberList = new String[10];
+        memberList[0] = host.getUserID();
+        id = host.getUserID() + date;
     }
     
     // copy constructor
@@ -72,8 +74,9 @@ public class StudySession implements Comparable<StudySession> {
     	    String studyPurpose,
     	    String course,
     	    Profile host,
-    	    ArrayList<String> memberList,
-    	    String id
+    	    String[] memberList,
+    	    String id,
+    	    int currentNumMembers
     	    ) {
         this.name = name;
         this.description = description;
@@ -87,6 +90,7 @@ public class StudySession implements Comparable<StudySession> {
         this.host = host;
         this.memberList = memberList;
         this.id = id;
+        this.currentNumMembers = currentNumMembers + 1;
     }
 
     public String getName() {
@@ -134,12 +138,16 @@ public class StudySession implements Comparable<StudySession> {
     	return host;
     }
     
-    public ArrayList<String> getMemberList() {
+    public String[] getMemberList() {
     	return memberList;
     }
     
     public String getId() {
     	return id;
+    }
+    
+    public int getCurrentNumMembers() {
+    	return currentNumMembers;
     }
 
     @Override

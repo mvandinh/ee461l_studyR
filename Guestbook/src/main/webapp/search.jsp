@@ -96,6 +96,7 @@
 				ObjectifyService.register(StudySession.class);
 				ObjectifyService.register(SearchResults.class);
 				ObjectifyService.register(Profile.class);
+				
 				UserService userService = UserServiceFactory.getUserService();
 			    User user = userService.getCurrentUser();
 			    Ref<Profile> userProfileRef = ObjectifyService.ofy().load().type(Profile.class).id(user.getUserId());
@@ -122,12 +123,22 @@
 			    }
 			    if (studySessions.isEmpty()) {
 			        %>
-			        <p>No study sessions are available to you, but you can host you own <a href="/createStudySession.jsp">here</a>!!</p>
+			        No study sessions are available to you, but you can host you own <a href="/createStudySession.jsp">here</a>!!
 				<% } else {
 						Collections.sort(studySessions); 
 						Collections.reverse(studySessions);
+						boolean empty = true;
 						for (StudySession studySession : studySessions) {
-					    		if (!studySession.getMemberList().contains(userProfile.getUserID())) {
+					    		String[] memberList = studySession.getMemberList();
+					    		boolean notAlreadyJoined = true;
+					    		for (int i = 0; i < 10; i++) {
+					    			if (memberList[i].equals(userProfile.getUserID())) {
+					    				notAlreadyJoined = false;
+					    				break;
+					    			}
+					    		}
+					    		if (notAlreadyJoined) {
+					    			empty = false;
 					    			pageContext.setAttribute("studySession_name", studySession.getName());
 					    			pageContext.setAttribute("studySession_id", studySession.getId());
 					    			pageContext.setAttribute("studySession_date", studySession.getDate());
@@ -135,7 +146,7 @@
 						        	pageContext.setAttribute("studySession_startTime", studySession.getStartTime());
 						        	pageContext.setAttribute("studySession_duration", studySession.getDuration());
 						        	pageContext.setAttribute("studySession_groupSize", studySession.getGroupSize());
-						        	pageContext.setAttribute("studySession_currentNumMembers", studySession.getMemberList().size());
+						        	pageContext.setAttribute("studySession_currentNumMembers", studySession.getCurrentNumMembers());
 						        	pageContext.setAttribute("studySession_studyStyle", studySession.getStudyStyle());
 						        	pageContext.setAttribute("studySession_studyPurpose", studySession.getStudyPurpose());
 						        	pageContext.setAttribute("studySession_description", studySession.getDescription());
@@ -168,8 +179,14 @@
 									</form>
 									<hr>
 						        	<%
+						        	
 					    		}
 			        		}
+						if(empty) {
+							%>
+					        No study sessions are available to you, but you can host you own <a href="/createStudySession.jsp">here</a>!!
+						<%
+						}
 				}
 			    if (mySearchResults != null) {
 		    		ObjectifyService.ofy().delete().type(SearchResults.class).id(user.getUserId() +"_searchResults").now();

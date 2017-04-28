@@ -32,7 +32,7 @@ public class Search extends HttpServlet {
 			String studySessionId = req.getParameter("studySessionId");
 			Ref<StudySession> studySessionRef = ObjectifyService.ofy().load().type(StudySession.class).id(studySessionId);
 			StudySession studySession = studySessionRef.get();
-			if (studySession.getMemberList().size() < studySession.getGroupSize()) {
+			if (studySession.getCurrentNumMembers() < studySession.getGroupSize()) {
 				String name = studySession.getName();
 	    	    String description = studySession.getDescription();
 	    	    String startTime = studySession.getStartTime();
@@ -43,11 +43,12 @@ public class Search extends HttpServlet {
 	    	    String studyPurpose = studySession.getStudyPurpose();
 	    	    String course = studySession.getCourse();
 	    	    Profile host = studySession.getHost();
-	    	    ArrayList<String> memberList = new ArrayList<String>(studySession.getMemberList());
-	    	    memberList.add("185804764220139124118");
+	    	    String[] memberList = studySession.getMemberList().clone();
+	    	    memberList[studySession.getCurrentNumMembers()] = userProfile.getUserID();
 	    	    String id = studySession.getId();
+	    	    int currentNumMembers = studySession.getCurrentNumMembers();
 	    	    ofy().delete().type(StudySession.class).id(studySessionId).now();
-				StudySession replacement = new StudySession(name, description, startTime, duration, date, groupSize, studyStyle, studyPurpose, course, host, memberList, id);
+				StudySession replacement = new StudySession(name, description, startTime, duration, date, groupSize, studyStyle, studyPurpose, course, host, memberList, id, currentNumMembers);
 				ofy().save().entity(replacement).now();
 				resp.sendRedirect("/userInterface.jsp");
 			} else {
