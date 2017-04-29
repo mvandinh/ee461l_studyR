@@ -30,7 +30,9 @@ public class EditProfile extends HttpServlet {
 				String AmPmOne = req.getParameter("AmPmOne_" + i);
 				String timeEnd = req.getParameter("secondTime_" + i);
 				String AmPmTwo = req.getParameter("AmPmTwo_" + i);
-				timePrefs += day + ", " + timeStart + AmPmOne + " to " + timeEnd + AmPmTwo + "|";
+				if(!timePrefs.contains(day + ", " + timeStart + AmPmOne + " to " + timeEnd + AmPmTwo)){
+					timePrefs += day + ", " + timeStart + AmPmOne + " to " + timeEnd + AmPmTwo + "|";
+				}
 			}
 		}
 		String groupSize = req.getParameter("groupSize");

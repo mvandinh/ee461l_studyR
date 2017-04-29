@@ -43,55 +43,41 @@
 	    </ul>
 	  </div>
 	</nav>
-	<p>You can look at all existing study sessions at this page. Use the advanced filters to match the results with your preferences. Hover over the study session's name to view its description</p> 
 	<div class="jumbotron vertical-center">
 		<div class="container-fluid" align= "left">
 			<div class="row">
 			<h3>Search for a user:</h3>
 				<div id="margin-left">
 					<div id="margin-left"> Search by Username: </div>
-					<form action="/userSearch" method = "post">
-						<input type="text" id="username">
+					<form action="/userSearch" method="post" name="form0" id="form0">
+						<input type="text" id="username" name="username">
+						<input type="hidden" id="searchType" value="username">
 						<input type="submit">
 					</form>
 					<br>
 					<div id="margin-left"> Search by Email: </div>
-					<form action="/userSearch" method = "post">
-						<input type="text" id="email">
+					<form action="/userSearch" method="post" name="form1" id="form1">
+						<input type="text" id="email" name="email">
 						<input type="submit">
 					</form>		
 					<br>
 					<div id="margin-left"> Search by enrolled course: </div>										
-					<form action="/userSearch" method = "post">
-						<input type="text" id="email">
+					<form action="/userSearch" method = "post" name="form2" id="form2">
+						<input type="text" id="course">
 						<input type="submit">
 					</form>
 					</div>
 			</div>
 		</div>
 		<%
-		
-		if(/*resultsFlag*/ false){
-		%>
-		
-		<div class="container" align="left">
-			<div class="row">
-				<h4><b>Results: </b></h4>
-				<hr>
-				<%
-				ObjectifyService.register(StudySession.class);
-				ObjectifyService.register(SearchResults.class);
-				ObjectifyService.register(Profile.class);
-				
-				UserService userService = UserServiceFactory.getUserService();
-			    User user = userService.getCurrentUser();
-			    Ref<Profile> userProfileRef = ObjectifyService.ofy().load().type(Profile.class).id(user.getUserId());
-			    Profile userProfile = userProfileRef.get();
-					        %>No study sessions are available to you, but you can host you own <a href="/createStudySession.jsp">here</a>!!<%
-		}
+		boolean resultsFlag = "true".equals(request.getAttribute("resultsFlag"));
+		if(resultsFlag){
+			ArrayList<Profile> displayProfiles = (ArrayList<Profile>) request.getAttribute("results");
+			for(Profile p : displayProfiles){
 				%>
-			</div>
-		</div>		
+				<p><%=p.getName()%></p>
+		  <%}
+		  }%>
 	</div>		
 	
 			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
