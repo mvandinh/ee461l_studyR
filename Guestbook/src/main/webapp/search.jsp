@@ -24,7 +24,7 @@
 <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
 <!-- <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />-->
 <!-- Bootstrap -->
-<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-search.css" rel="stylesheet">
 </head>
 
 <title>Search Study Sessions</title>
@@ -38,8 +38,8 @@
 	   	  <li ><a href="/userInterface.jsp">Dashboard</a></li>
 	      <li ><a href="/editProfile.jsp">Edit Profile</a></li>
 	      <li><a href="/createStudySession.jsp">Create Study Session</a></li>
-	      <li class="active"><a href="search.jsp">Search Study Sessions</a></li>
-	      <li><a href="#">Search For User</a></li>
+	      <li ><a href="search.jsp">Search Study Sessions</a></li>
+	      <li class="active"><a href="/userSearch.jsp">Search For User</a></li>
 	    </ul>
 	  </div>
 	</nav>
