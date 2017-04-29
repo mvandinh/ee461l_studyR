@@ -16,7 +16,11 @@
 <%@ page import="com.google.appengine.api.datastore.FetchOptions" %>
 <%@ page import="com.google.appengine.api.datastore.Key" %>
 <%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
+<%@ page import="java.io.*" %>
+<%@ page import="java.util.Scanner" %>
+<%@ page import="studyR.courseList" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%@ page session="false" %>
 <html>
 <head>
@@ -43,7 +47,7 @@
 	      <li ><a href="/editProfile.jsp">Edit Profile</a></li>
 	      <li class="active"><a href="/createStudySession.jsp">Create Study Session</a></li>
 	      <li><a href="search.jsp">Search Study Sessions</a></li>
-	      <li><a href="#">Search For User</a></li>
+	      <li><a href="/userSearch.jsp">Search For User</a></li>
 	    </ul>
 	  </div>
 	</nav>
@@ -66,16 +70,13 @@
 				 <br>
 				 Class that session is for:
 				 <select name="courseName" id="courseName">
-							<option> EE302 </option>
-							<option> EE306 </option>
-							<option> EE312 </option>
-							<option> EE313 </option>
-							<option> EE319K </option>
-							<option> EE360C </option>
-							<option> EE411 </option>
-							<option> EE422C </option>
-							<option> EE461L </option>
-						</select>
+				 <%
+				 for(int i = 0; i < courseList.courseList.length; i++){
+					 pageContext.setAttribute("nextCourse", courseList.courseList[i]); 
+				 %>
+					<option> ${fn:escapeXml(nextCourse)} </option>
+				<%} %>
+				</select>
 				 <br id="loc">
 				 <br>
 				 Day of the Week:
