@@ -21,6 +21,7 @@
 <%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="studyR.courseList" %>
 <%@ page session="false" %>
 
 <html>
@@ -48,7 +49,7 @@
 	      <li class="active"><a href="/editProfile.jsp">Edit Profile</a></li>
 	      <li><a href="/createStudySession.jsp">Create Study Session</a></li>
 	      <li><a href="search.jsp">Search Study Sessions</a></li>
-	      <li><a href="#">Search For User</a></li>
+	      <li><a href="/userSearch.jsp">Search For User</a></li>
 	    </ul>
 	  </div>
 	</nav>
@@ -77,6 +78,11 @@
 
 	       pageContext.setAttribute("numTimes", numberTimes);
 	       pageContext.setAttribute("timePrefs", timePrefs);
+	       pageContext.setAttribute("userCourses", userProfile.getCourses());
+	       int numCourses = 0;
+	       if(userProfile.getCourses() != null)
+	    	   numCourses = (userProfile.getCourses().length() - userProfile.getCourses().replace(", ", "").length())/2;
+	       pageContext.setAttribute("numCourses", numCourses);
 		%>		
 	<form action="/editProfile" method="post" id="myform" onsubmit="return errorMessage();">
 		
@@ -144,10 +150,20 @@
 				 </select>
 				 <br>
 				 <br>
-				 
+				 Courses:
+				 <br>
+				 Number of courses:
+				 <b id="courses">0</b>
+				 <%
+				 String courses = new String();
+				 for(int i = 0; i < courseList.courseList.length; i++){
+					 courses += courseList.courseList[i] + "|";
+					 pageContext.setAttribute("courses", courses);
+				 }
+				 %>
+				 <button type="button"  onclick="addCourse('${fn:escapeXml(courses)}')" id="courseButton">add another course</button>
+
 		</div>
-		<input type="hidden" id="timePrefs" value="${fn:escapeXml(timePrefs)}">
-		<input type="hidden" id="numTimes" value="${fn:escapeXml(numTimes)}">
 		<input type="hidden" name="userID" value="<%=user.getUserId()%>">
 		
 		<div>
@@ -183,6 +199,17 @@
 		AmPmTwo = timePrefsSplit[3].substring(5, 7);
 		addTimeReference("loc", maxClicks, day, timeOne, AmPmOne, timeTwo, AmPmTwo);
 	}
+	//Preload courses
+	var numCourse = ${numCourses};
+	var theseCourses = '${userCourses}';
+	var allCourses = '${courses}';
+	var theseCoursesSplit = theseCourses.split(", ");
+	for(var i = 0; i < numCourse+1; i++){
+		addCourseQualified(allCourses, theseCoursesSplit[i]);
+	}
+	
+	
+	
 	var groupSize = document.getElementById("groupSize");
 	var GS = ${groupSize};
 	if(GS > 0){

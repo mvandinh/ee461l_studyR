@@ -4,7 +4,6 @@ public class courseList{
 	
 	public static String[] courseList = 
 		{"EE302",
-		 "EE302",
 		 "EE306",
 		 "EE312",
 		 "EE313",

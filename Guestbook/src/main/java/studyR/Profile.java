@@ -22,7 +22,7 @@ public class Profile implements Serializable{
     private String email;
     private String phone;
     //This will need an @Embed tag when we actually get around to making the Course class
-    private ArrayList<Course> courses;
+    private String courses;
     //@Embed Preferences preferences;
     private String timePrefs;
 	private String groupLongevity;
@@ -51,7 +51,7 @@ public class Profile implements Serializable{
 			String email, 
 			String phone, 
 			String bio, 
-			ArrayList<Course> courses,
+			String courses,
 			String timePrefs,
 			String groupLongevity,
 			String groupSize,
@@ -88,7 +88,7 @@ public class Profile implements Serializable{
 		return phone;
 	}
 	
-	public ArrayList<Course> getCourses() {
+	public String getCourses() {
 		return courses;
 	}
 	

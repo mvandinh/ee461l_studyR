@@ -212,6 +212,99 @@ function errorMessage(){
 	return true;
 }
 
+function addCourse(coursesString){
+	var idNum = 0;
+	for(var i = 0; i < 5; i++){
+		if(document.getElementById("course_" + i) == null){
+			idNum = i;
+			break;
+		}
+	}
+	var insertLoc = document.getElementById("courseButton");
+	var courses = document.getElementById("courses").innerHTML;
+	var select = document.createElement("select");
+	select.id = "course_" + idNum;
+	select.name = "course_" + idNum;
+	var courseList = coursesString.split("|");
+	if(courses < 5){		
+		for(var i = 0; i < courseList.length-1; i++){
+		    var thisCourse = document.createElement("option");
+		    thisCourse.text = courseList[i];
+		    select.add(thisCourse);
+		}
+		var deleteButton = document.createElement("button");
+		deleteButton.value = idNum;
+   		deleteButton.id = "courseButton_" + idNum;
+   		deleteButton.type = "button";
+   		deleteButton.innerHTML = "delete course";
+   		deleteButton.onclick = function(){		   		
+   			var deleteThis = document.getElementById("course_" + deleteButton.value);
+   			deleteThis.parentNode.removeChild(deleteThis);
+   			var deleteThis = document.getElementById("newLineCourse_" + deleteButton.value);
+   			deleteThis.parentNode.removeChild(deleteThis);
+   			courses = document.getElementById("courses").innerHTML;
+			courses--;
+			document.getElementById("courses").innerHTML = courses;
+			this.parentNode.removeChild(this);					
+   		}
+		courses++;
+		document.getElementById("courses").innerHTML = courses;
+		var newLineCourse = document.createElement("br");
+		newLineCourse.id = "newLineCourse_" + idNum;
+		insertLoc.parentNode.insertBefore(newLineCourse, insertLoc.nextSibiling);
+		insertLoc.parentNode.insertBefore(select, insertLoc.nextSibiling);
+		insertLoc.parentNode.insertBefore(deleteButton, insertLoc.nextSibiling);
+	}
+}
+
+function addCourseQualified(coursesString, courseSelect){
+	var idNum = 0;
+	for(var i = 0; i < 5; i++){
+		if(document.getElementById("course_" + i) == null){
+			idNum = i;
+			break;
+		}
+	}
+	var insertLoc = document.getElementById("courseButton");
+	var courses = document.getElementById("courses").innerHTML;
+	var select = document.createElement("select");
+	select.id = "course_" + idNum;
+	select.name = "course_" + idNum;
+	var courseList = coursesString.split("|");
+	if(courses < 5){		
+		for(var i = 0; i < courseList.length-1; i++){
+		    var thisCourse = document.createElement("option");
+		    thisCourse.text = courseList[i];	   
+		    select.add(thisCourse);
+		    if(courseSelect == courseList[i]){
+		    	select.selectedIndex = i;
+		    }
+		}
+		var deleteButton = document.createElement("button");
+		deleteButton.value = idNum;
+   		deleteButton.id = "courseButton_" + idNum;
+   		deleteButton.type = "button";
+   		deleteButton.innerHTML = "delete course";
+   		deleteButton.onclick = function(){		   		
+   			var deleteThis = document.getElementById("course_" + deleteButton.value);
+   			deleteThis.parentNode.removeChild(deleteThis);
+   			var deleteThis = document.getElementById("newLineCourse_" + deleteButton.value);
+   			deleteThis.parentNode.removeChild(deleteThis);
+   			courses = document.getElementById("courses").innerHTML;
+			courses--;
+			document.getElementById("courses").innerHTML = courses;
+			this.parentNode.removeChild(this);					
+   		}
+		courses++;
+		document.getElementById("courses").innerHTML = courses;
+		var newLineCourse = document.createElement("br");
+		newLineCourse.id = "newLineCourse_" + idNum;
+		insertLoc.parentNode.insertBefore(newLineCourse, insertLoc.nextSibiling);
+		insertLoc.parentNode.insertBefore(select, insertLoc.nextSibiling);
+		insertLoc.parentNode.insertBefore(deleteButton, insertLoc.nextSibiling);
+	}
+}
+
 //This prevents the form from submitting if you press enter
 $(document).on("keypress", ":input:not(textarea)", function(event) {
     return event.keyCode != 13;

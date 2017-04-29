@@ -40,7 +40,18 @@ public class EditProfile extends HttpServlet {
 		String groupLongevity = req.getParameter("groupLongevity");
 		Map<String, Boolean> studyStyles = new HashMap<String, Boolean>();
 		String userID = req.getParameter("userID");
-		Profile replacement = new Profile(userName, email, phone, bio, null/*Courses*/, timePrefs, groupLongevity, groupSize, userID);
+		String courses = new String();
+		for(int i = 0; i < 5; i++){
+			String course = req.getParameter("course_" + i);
+			if(course != null){
+				if(!courses.contains(course))
+					courses += course + ", ";
+			}
+		}
+		if(courses != null){
+			courses = courses.substring(0, courses.length()-2);
+		}
+		Profile replacement = new Profile(userName, email, phone, bio, courses, timePrefs, groupLongevity, groupSize, userID);
 		
 		ofy().delete().type(Profile.class).id(userID).now();
 		ofy().save().entity(replacement).now();

@@ -46,7 +46,7 @@
 	      <li><a href="/editProfile.jsp">Edit Profile</a></li>
 	      <li><a href="/createStudySession.jsp">Create Study Session</a></li>
 	      <li><a href="/search.jsp">Search Study Sessions</a></li>
-	      <li><a href="#">Search For User</a></li>
+	      <li><a href="/userSearch.jsp">Search For User</a></li>
 	    </ul>
 	  </div>
 	</nav>
@@ -118,6 +118,11 @@
 				<div class="row">
 					<h3 align="left" class="tab"><b>Bio</b>:</h3>
 					<div class="well">${fn:escapeXml(bio)}</div>
+				</div>
+				<div class="row">
+					<%pageContext.setAttribute("courses", profile.getCourses()); %>
+					<h3 align="left" class="tab"><b>Classes</b>: ${fn:escapeXml(courses)}</h3>
+
 				</div>
 	
 				<div class="row">
