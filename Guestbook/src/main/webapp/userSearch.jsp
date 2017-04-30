@@ -73,6 +73,10 @@
 		boolean resultsFlag = "true".equals(request.getAttribute("resultsFlag"));
 		if(resultsFlag){
 			ArrayList<Profile> displayProfiles = (ArrayList<Profile>) request.getAttribute("results");
+			if(displayProfiles.size() == 0){
+				%><p> No results found </p><%
+			}
+			
 			for(Profile p : displayProfiles){
 				%>
 				<p><%=p.getName()%></p>
