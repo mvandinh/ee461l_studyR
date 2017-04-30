@@ -1,8 +1,9 @@
-account.email=minh.vandinh@utexas.edu
+account.email=custer.garrett@utexas.edu
 eclipse.preferences.version=1
+include.optional.configuration.files=true
 project.bucket=
 project.bucket.overrideDefault=false
-project.id=studyr-162818
+project.id=guestbookobjectify-157504
 project.previousVersion.stop=true
 project.promote=true
 project.version=

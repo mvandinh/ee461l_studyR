@@ -5,12 +5,12 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
          version="2.5">
 	<servlet>
-		<servlet-name>userSearch</servlet-name>
-		<servlet-class>studyR.UserSearch</servlet-class>
+		<servlet-name>MessageBoard</servlet-name>
+		<servlet-class>studyR.MessageBoardServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>userSearch</servlet-name>
-		<url-pattern>/userSearch</url-pattern>
+		<servlet-name>MessageBoard</servlet-name>
+		<url-pattern>/messageBoard</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>deleter</servlet-name>

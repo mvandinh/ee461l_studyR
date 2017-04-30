@@ -40,6 +40,7 @@
 	      <li><a href="/createStudySession.jsp">Create Study Session</a></li>
 	      <li ><a href="search.jsp">Search Study Sessions</a></li>
 	      <li class="active"><a href="/userSearch.jsp">Search For User</a></li>
+	      <li><a href="/messageBoard.jsp">Messages</a></li>
 	    </ul>
 	  </div>
 	</nav>

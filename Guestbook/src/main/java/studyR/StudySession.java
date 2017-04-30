@@ -31,6 +31,8 @@ public class StudySession implements Comparable<StudySession> {
     String course;
     @Embed Profile host;
     String[] memberList;
+    String[] messageList;
+    String[] messageNameList;
     int currentNumMembers = 1;
     
     public StudySession(){}
@@ -58,6 +60,8 @@ public class StudySession implements Comparable<StudySession> {
         this.host = host;
         this.date = date;
         this.memberList = new String[10];
+        this.messageList = new String[0];
+        this.messageNameList = new String[0];
         memberList[0] = host.getUserID();
         id = host.getUserID() + date;
     }
@@ -75,6 +79,8 @@ public class StudySession implements Comparable<StudySession> {
     	    String course,
     	    Profile host,
     	    String[] memberList,
+    	    String[] messageList,
+    	    String[] messageNameList,
     	    String id,
     	    int currentNumMembers
     	    ) {
@@ -89,6 +95,8 @@ public class StudySession implements Comparable<StudySession> {
         this.course = course;
         this.host = host;
         this.memberList = memberList;
+        this.messageList = messageList;
+        this.messageNameList = messageNameList;
         this.id = id;
         this.currentNumMembers = currentNumMembers + 1;
     }
@@ -140,6 +148,14 @@ public class StudySession implements Comparable<StudySession> {
     
     public String[] getMemberList() {
     	return memberList;
+    }
+    
+    public String[] getMessageList(){
+    	return messageList;
+    }
+    
+    public String[] getMessageNameList(){
+    	return messageNameList;
     }
     
     public String getId() {
