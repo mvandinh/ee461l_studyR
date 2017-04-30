@@ -47,6 +47,7 @@
 	      <li><a href="/createStudySession.jsp">Create Study Session</a></li>
 	      <li><a href="/search.jsp">Search Study Sessions</a></li>
 	      <li><a href="/userSearch.jsp">Search For User</a></li>
+	      <li><a href="/messageBoard.jsp">Messages</a></li>
 	    </ul>
 	  </div>
 	</nav>
@@ -156,8 +157,20 @@
 							%>
 					</div>
 					<div class="col-lg-6">					
-						<h2 align="left" class="tab">Messages:</h2>	
-						Todo
+						<h2 align="left" class="tab">Recent Messages:</h2>	
+						<%
+						if(profile.getRecentMessages()!= null){
+						for(int i = 0; i<5; i++){
+							if(profile.getRecentMessages()[i] != null){
+								pageContext.setAttribute("message", profile.getRecentMessages()[i]);
+								%>
+								${fn:escapeXml(message)}
+								<br>
+								<%
+							}
+						}
+						}
+						%>
 					</div>
 				</div>
 			</div>	

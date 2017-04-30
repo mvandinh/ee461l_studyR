@@ -44,11 +44,13 @@ public class Search extends HttpServlet {
 	    	    String course = studySession.getCourse();
 	    	    Profile host = studySession.getHost();
 	    	    String[] memberList = studySession.getMemberList().clone();
+	    	    String[] messageList = studySession.getMessageList().clone();
+	    	    String[] messageNameList = studySession.getMessageNameList().clone();
 	    	    memberList[studySession.getCurrentNumMembers()] = userProfile.getUserID();
 	    	    String id = studySession.getId();
 	    	    int currentNumMembers = studySession.getCurrentNumMembers();
 	    	    ofy().delete().type(StudySession.class).id(studySessionId).now();
-				StudySession replacement = new StudySession(name, description, startTime, duration, date, groupSize, studyStyle, studyPurpose, course, host, memberList, id, currentNumMembers);
+				StudySession replacement = new StudySession(name, description, startTime, duration, date, groupSize, studyStyle, studyPurpose, course, host, memberList, messageList, messageNameList, id, currentNumMembers);
 				ofy().save().entity(replacement).now();
 				resp.sendRedirect("/userInterface.jsp");
 			} else {

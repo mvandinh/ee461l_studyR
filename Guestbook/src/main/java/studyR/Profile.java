@@ -27,6 +27,7 @@ public class Profile implements Serializable{
     private String timePrefs;
 	private String groupLongevity;
 	private String groupSize;
+	private String[] recentMessages;
     
 	public Profile(){}
     
@@ -40,6 +41,7 @@ public class Profile implements Serializable{
 		this.courses = null;
 		allUsers.put(user, this);
 		id = user.getUserId();
+		this.recentMessages = new String[5];
 		ofy().save().entity(this).now();
 	}
 	
@@ -55,7 +57,8 @@ public class Profile implements Serializable{
 			String timePrefs,
 			String groupLongevity,
 			String groupSize,
-			String id)
+			String id,
+			String[] recentMessages)
 	{
 		this.id = id;
 		this.name = name;
@@ -66,6 +69,7 @@ public class Profile implements Serializable{
 		this.groupLongevity = groupLongevity;
 		this.timePrefs = timePrefs;
 		this.groupSize = groupSize;
+		this.recentMessages = recentMessages;
 	}
 	
 	public String getUserID(){
@@ -118,5 +122,9 @@ public class Profile implements Serializable{
 
 	public void setGroupSize(String groupSize) {
 		this.groupSize = groupSize;
+	}
+	
+	public String[] getRecentMessages(){
+		return recentMessages;
 	}
 }

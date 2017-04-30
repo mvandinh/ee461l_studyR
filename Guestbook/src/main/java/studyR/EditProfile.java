@@ -5,17 +5,33 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import studyR.Profile;
 import javax.servlet.http.HttpServlet;  
 import javax.servlet.http.HttpServletRequest;  
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+
 //This Servlet gets the data from editProfile.jsp, creates a new Profile object,
 //deletes the old corresponding Profile object, and saves the new one.
 public class EditProfile extends HttpServlet {  
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		
+		UserService userService = UserServiceFactory.getUserService();
+        User user = userService.getCurrentUser();
+        Profile profile = null;
+        List<Profile> profiles = ofy().load().type(Profile.class).list();
+        for(Profile person : profiles){
+        	if(user.getUserId().equals(person.id)){
+        		profile = person;
+        	}
+        }
+        String[] recentMessages = profile.getRecentMessages();
 		String userName = req.getParameter("userName");
 		String email = req.getParameter("email");
 		String phone = req.getParameter("phone");
@@ -53,7 +69,7 @@ public class EditProfile extends HttpServlet {
 		if(courses != null){
 			courses = courses.substring(0, courses.length()-2);
 		}
-		Profile replacement = new Profile(userName, email, phone, bio, courses, timePrefs, groupLongevity, groupSize, userID);
+		Profile replacement = new Profile(userName, email, phone, bio, courses, timePrefs, groupLongevity, groupSize, userID, recentMessages);
 		
 		ofy().delete().type(Profile.class).id(userID).now();
 		ofy().save().entity(replacement).now();

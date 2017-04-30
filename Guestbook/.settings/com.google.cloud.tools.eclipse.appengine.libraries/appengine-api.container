@@ -1,6 +1,6 @@
 {
   "description": "App Engine API",
-  "path": "com.google.cloud.tools.eclipse.appengine.libraries\\appengine-api",
+  "path": "com.google.cloud.tools.eclipse.appengine.libraries/appengine-api",
   "entries": [
     {
       "accessRules": [
@@ -22,7 +22,7 @@
         }
       ],
       "sourceAttachmentPath": "",
-      "path": "com/google/appengine/appengine-api-1.0-sdk/1.9.48/appengine-api-1.0-sdk-1.9.48.jar",
+      "path": "com/google/appengine/appengine-api-1.0-sdk/1.9.50/appengine-api-1.0-sdk-1.9.50.jar",
       "attributes": [
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.repository",
@@ -42,7 +42,7 @@
         },
         {
           "name": "com.google.cloud.tools.eclipse.appengine.libraries.version",
-          "value": "1.9.48"
+          "value": "1.9.50"
         },
         {
           "name": "org.eclipse.jst.component.dependency",
