@@ -29,36 +29,40 @@
 		<link href="css/bootstrap.css" rel="stylesheet">
 	</head>
 	<body>
-		<h1>studyR</h1>
-   		<h3></h3>
-   		<i>"I went fishing this one time, and it was a tuna fun!</i>
-   		<img src = "http://vignette2.wikia.nocookie.net/scribblenauts/images/7/7a/Tuna_Fish.png/revision/latest?cb=20130418113339" alt = "Cartuna" style = "width:250px;height:125px">
-   		<hr>
-<%
-	ObjectifyService.reset();	
-	ObjectifyService.register(Profile.class);
-
-	ObjectifyService.register(StudySession.class);
-    String studyR = request.getParameter("studyR");
-    if (studyR != null) {
-        studyR = "default";
-    }
-    pageContext.setAttribute("studyR", studyR);
-    UserService userService = UserServiceFactory.getUserService();
-    User user = userService.getCurrentUser();
-    if (user != null) {
-    	response.sendRedirect("userInterface.jsp");
-    } else {
-		%>
-		<p>Hello! Please 
-		<a href="<%= userService.createLoginURL(request.getRequestURI()) %>">sign in</a>
-		to be able to use studyR!</p>
-		<%
-		}
-	%>
-	<form action="/deleter" method="post">
-		<input type="submit" value="DELETER DEBUG">
-	</form>
+	<div class="jumbotron vertical-center">
+		<div class="wrapper container">
+			<h1>studyR</h1>
+	  		<h3></h3>
+	  		<i>"I went fishing this one time, and it was a tuna fun!</i>
+	  		<img src = "http://vignette2.wikia.nocookie.net/scribblenauts/images/7/7a/Tuna_Fish.png/revision/latest?cb=20130418113339" alt = "Cartuna" style = "width:250px;height:125px">
+	  		<hr>
+			<%
+			ObjectifyService.reset();	
+			ObjectifyService.register(Profile.class);
+		
+			ObjectifyService.register(StudySession.class);
+		    String studyR = request.getParameter("studyR");
+		    if (studyR != null) {
+		        studyR = "default";
+		    }
+		    pageContext.setAttribute("studyR", studyR);
+		    UserService userService = UserServiceFactory.getUserService();
+		    User user = userService.getCurrentUser();
+		    if (user != null) {
+		    	response.sendRedirect("userInterface.jsp");
+		    } else {
+				%>
+				<p>Hello! Please 
+				<a href="<%= userService.createLoginURL(request.getRequestURI()) %>">sign in</a>
+				to be able to use studyR!</p>
+				<%
+				}
+			%>
+			<form action="/deleter" method="post">
+				<input type="submit" value="DELETER DEBUG">
+			</form>
+		</div>
+	</div>
 
 		<hr>
 		<p><b>Developed by :</b><i> Minh Van-Dinh, Ethan Cranmer, Matthew Edwards, Garrett Custer</i></p>

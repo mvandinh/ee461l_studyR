@@ -32,7 +32,7 @@
 <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
 <!-- <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />-->
 <!-- Bootstrap -->
-<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-userInterface.css" rel="stylesheet">
 
 <title>studyR Dashboard</title>
 <body>
