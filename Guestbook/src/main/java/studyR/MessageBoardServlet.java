@@ -94,8 +94,10 @@ public class MessageBoardServlet extends HttpServlet {
 				String userID = p.getUserID();
 				String courses = p.getCourses();
 				String[] recentMessages = new String[5];
-				for(int i = 0; i < 4; i++){
-					recentMessages[i + 1] = p.getRecentMessages()[i];
+				if(p.getRecentMessages() != null){
+					for(int i = 0; i < 4; i++){
+						recentMessages[i + 1] = p.getRecentMessages()[i];
+					}
 				}
 				recentMessages[0] = messageText;
 				Profile preplacement = new Profile(userName, email, phone, bio, courses, timePrefs, groupLongevity, pgroupSize, userID, recentMessages);
