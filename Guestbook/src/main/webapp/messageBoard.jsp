@@ -55,7 +55,7 @@
 	  </div>
 	</nav>
 	<h1>
-		<font face="agency FB">Messages
+		<font face="agency FB">Group Messages
 		</font>
 	</h1>
 	<br>

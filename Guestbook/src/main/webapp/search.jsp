@@ -46,6 +46,10 @@
 	    </ul>
 	  </div>
 	</nav>
+		<h1>
+		<font face="agency FB">Search Study Sessions
+		</font>
+	</h1>
 	<div class="jumbotron vertical-center">
 		<div class="container-fluid" align= "left">
 			<div class="row">

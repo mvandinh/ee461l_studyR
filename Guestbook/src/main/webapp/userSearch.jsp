@@ -28,7 +28,7 @@
 <link href="css/bootstrap-search.css" rel="stylesheet">
 </head>
 
-<title>Search Study Sessions</title>
+<title>Search For User</title>
 <body>
 	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
@@ -46,6 +46,10 @@
 	    </ul>
 	  </div>
 	</nav>
+		<h1>
+		<font face="agency FB">Search For User
+		</font>
+	</h1>
 	<%
 	UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();

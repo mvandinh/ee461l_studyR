@@ -55,6 +55,10 @@
 		    </ul>
 		</div>
 	</nav>
+		<h1>
+		<font face="agency FB">Edit Profile
+		</font>
+	</h1>
 	
 	<% 		
 	UserService userService = UserServiceFactory.getUserService();
