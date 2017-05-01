@@ -48,9 +48,10 @@
 				<li ><a href="/userInterface.jsp">Dashboard</a></li>
 				<li class="active"><a href="/editProfile.jsp">Edit Profile</a></li>
 				<li><a href="/createStudySession.jsp">Create Study Session</a></li>
-				<li><a href="search.jsp">Search Study Sessions</a></li>
+				<li><a href="/search.jsp">Search Study Sessions</a></li>
 				<li><a href="/userSearch.jsp">Search For User</a></li>
-				<li><a href="/messageBoard.jsp">Messages</a></li>
+				<li><a href="/messageBoard.jsp">Group Messages</a></li>
+				<li><a href="/privateMessages.jsp">Private Messages</a></li>
 		    </ul>
 		</div>
 	</nav>
@@ -186,6 +187,8 @@
 			<a href="/userInterface.jsp" class="btn btn-primary" role="button" id="cancel">Cancel</a>
 		</div>		
 	</form>
+	<!-- End big ass form -->
+	
 			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 			
 	<script
@@ -195,6 +198,7 @@
 
 </body>
 <script>
+	//This script preloads the form with profile information.
 	document.getElementById("defaultButton").click();
 
 	var times = ${numTimes};

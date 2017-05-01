@@ -28,6 +28,7 @@ public class Profile implements Serializable{
 	private String groupLongevity;
 	private String groupSize;
 	private String[] recentMessages;
+	private String[] privateMessages;
     
 	public Profile(){}
     
@@ -58,7 +59,8 @@ public class Profile implements Serializable{
 			String groupLongevity,
 			String groupSize,
 			String id,
-			String[] recentMessages)
+			String[] recentMessages,
+			String[] privateMessages)
 	{
 		this.id = id;
 		this.name = name;
@@ -70,6 +72,7 @@ public class Profile implements Serializable{
 		this.timePrefs = timePrefs;
 		this.groupSize = groupSize;
 		this.recentMessages = recentMessages;
+		this.privateMessages = privateMessages;
 	}
 	
 	public String getUserID(){
@@ -126,5 +129,9 @@ public class Profile implements Serializable{
 	
 	public String[] getRecentMessages(){
 		return recentMessages;
+	}
+	
+	public String[] getPrivateMessages(){
+		return privateMessages;
 	}
 }

@@ -49,7 +49,8 @@
 	      <li><a href="/createStudySession.jsp">Create Study Session</a></li>  
 	      <li><a href="search.jsp">Search Study Sessions</a></li>
 	      <li><a href="/userSearch.jsp">Search For User</a></li>
-	      <li class="active"><a href="/messageBoard.jsp">Messages</a></li>
+	      <li class="active"><a href="/messageBoard.jsp">Group Messages</a></li>
+	      <li><a href="/privateMessages.jsp">Private Messages</a></li>
 	    </ul>
 	  </div>
 	</nav>

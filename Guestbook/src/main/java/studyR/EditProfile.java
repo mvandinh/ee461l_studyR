@@ -32,7 +32,8 @@ public class EditProfile extends HttpServlet {
         	}
         }
         String[] recentMessages = profile.getRecentMessages();
-		String userName = req.getParameter("userName");
+        String[] privateMessages = profile.getPrivateMessages();
+        String userName = req.getParameter("userName");
 		String email = req.getParameter("email");
 		String phone = req.getParameter("phone");
 		String bio = req.getParameter("bioText");
@@ -69,7 +70,7 @@ public class EditProfile extends HttpServlet {
 		if(courses.length() > 0){
 			courses = courses.substring(0, courses.length()-2);
 		}
-		Profile replacement = new Profile(userName, email, phone, bio, courses, timePrefs, groupLongevity, groupSize, userID, recentMessages);
+		Profile replacement = new Profile(userName, email, phone, bio, courses, timePrefs, groupLongevity, groupSize, userID, recentMessages, privateMessages);
 		
 		ofy().delete().type(Profile.class).id(userID).now();
 		ofy().save().entity(replacement).now();

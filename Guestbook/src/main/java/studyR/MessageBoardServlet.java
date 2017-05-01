@@ -93,6 +93,7 @@ public class MessageBoardServlet extends HttpServlet {
 				String groupLongevity = p.getGroupLongevity();
 				String userID = p.getUserID();
 				String courses = p.getCourses();
+				String[] privateMessages = p.getPrivateMessages();
 				String[] recentMessages = new String[5];
 				if(p.getRecentMessages() != null){
 					for(int i = 0; i < 4; i++){
@@ -100,7 +101,7 @@ public class MessageBoardServlet extends HttpServlet {
 					}
 				}
 				recentMessages[0] = messageText;
-				Profile preplacement = new Profile(userName, email, phone, bio, courses, timePrefs, groupLongevity, pgroupSize, userID, recentMessages);
+				Profile preplacement = new Profile(userName, email, phone, bio, courses, timePrefs, groupLongevity, pgroupSize, userID, recentMessages, privateMessages);
 				
 				ofy().delete().type(Profile.class).id(userID).now();
 				ofy().save().entity(preplacement).now();

@@ -47,7 +47,8 @@
 	      <li><a href="/createStudySession.jsp">Create Study Session</a></li>
 	      <li><a href="/search.jsp">Search Study Sessions</a></li>
 	      <li><a href="/userSearch.jsp">Search For User</a></li>
-	      <li><a href="/messageBoard.jsp">Messages</a></li>
+	      <li><a href="/messageBoard.jsp">Group Messages</a></li>
+	      <li><a href="/privateMessages.jsp">Private Messages</a></li>
 	    </ul>
 	  </div>
 	</nav>
@@ -150,21 +151,21 @@
 			  	    				pageContext.setAttribute("session_date", s.getDate());
 			  	    				pageContext.setAttribute("session_time", s.getStartTime());
 			  		        		%>
-			  		        		<h3 align="left" class="tab"><b>${fn:escapeXml(session_name)}, ${fn:escapeXml(session_course)}</b>: ${fn:escapeXml(session_date)}, ${fn:escapeXml(session_time)}</h3>
+			  		        		<p align="left"><b>${fn:escapeXml(session_name)}, ${fn:escapeXml(session_course)}</b>: ${fn:escapeXml(session_date)}, ${fn:escapeXml(session_time)}</p>
 			  		        		<%
 			  		        	}
 			  		        }
 							%>
 					</div>
 					<div class="col-lg-6">					
-						<h2 align="left" class="tab">Recent Messages:</h2>	
+						<h2 align="left" class="tab">Recent Group Messages:</h2>	
 						<%
 						if(profile.getRecentMessages()!= null){
 						for(int i = 0; i<5; i++){
 							if(profile.getRecentMessages()[i] != null){
 								pageContext.setAttribute("message", profile.getRecentMessages()[i]);
 								%>
-								${fn:escapeXml(message)}
+								<p align="left"> ${fn:escapeXml(message)} </p>
 								<br>
 								<%
 							}

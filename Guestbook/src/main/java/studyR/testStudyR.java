@@ -25,7 +25,7 @@ public class testStudyR {
 	   // Informs JUnit that this method should be run before each test
 	   public void setUp() {
 		   user = new User("test@gmail.com", "gmail.com");
-		   testProfile = new Profile("ProfileTest", "test@email.com", "123-456-7890", "testing testing 123", null, null, null, null, "0123", new String[5]);
+		   testProfile = new Profile("ProfileTest", "test@email.com", "123-456-7890", "testing testing 123", null, null, null, null, "0123", new String[5], null);
 		   studySession1 = new StudySession("StudyTest1", "describe me", "11:00", "1", "EE302", new Date(), 5, "Quiet", "Homework", testProfile);
 		   studySession2 = new StudySession("StudyTest2", "describe me", "11:00", "1", "EE302", new Date(), 5, "Loud", "Exam Review", testProfile);
 		   studySession3 = new StudySession("StudyTest3", "describe me", "11:00", "1", "EE302", new Date(), 5, "Quiet", "Class Discussion", testProfile);

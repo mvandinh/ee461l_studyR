@@ -41,10 +41,18 @@
 	      <li><a href="/createStudySession.jsp">Create Study Session</a></li>
 	      <li ><a href="search.jsp">Search Study Sessions</a></li>
 	      <li class="active"><a href="/userSearch.jsp">Search For User</a></li>
-	      <li><a href="/messageBoard.jsp">Messages</a></li>
+	      <li><a href="/messageBoard.jsp">Group Messages</a></li>
+	      <li><a href="/privateMessages.jsp">Private Messages</a></li>
 	    </ul>
 	  </div>
 	</nav>
+	<%
+	UserService userService = UserServiceFactory.getUserService();
+    User user = userService.getCurrentUser();
+    Ref<Profile> userProfileRef = ObjectifyService.ofy().load().type(Profile.class).id(user.getUserId());	// Grab User profile
+    Profile userProfile = userProfileRef.get();
+    pageContext.setAttribute("sender", userProfile.getName());
+	%>
 	<div class="jumbotron vertical-center">
 		<div class="container" align= "left">
 		<h2><u>Search for a user:</u></h2>
@@ -82,20 +90,29 @@
 	</div>
 	<div class="jumbotron vertical-center">
 		<div class="container" align= "left">
-		<h2><u>Results:</u></h2>
-		<%
-		boolean resultsFlag = "true".equals(request.getAttribute("resultsFlag"));
-		if(resultsFlag){
-			ArrayList<Profile> displayProfiles = (ArrayList<Profile>) request.getAttribute("results");
-			if(displayProfiles.size() == 0){
-				%><p> No results found </p><%
-			}
-			
-			for(Profile p : displayProfiles){
-				%>
-				<p><%=p.getName()%></p>
-		  <%}
-		  }%>
+			<h2><u>Results:</u></h2>
+			<%
+			boolean resultsFlag = "true".equals(request.getAttribute("resultsFlag"));
+			if(resultsFlag){
+				ArrayList<Profile> displayProfiles = (ArrayList<Profile>) request.getAttribute("results");
+				if(displayProfiles.size() == 0){
+					%><p> No results found </p><%
+				}				
+				for(Profile p : displayProfiles){
+					pageContext.setAttribute("profileID", p.getUserID());
+					String profileID = p.getUserID();
+					%>
+					<hr>
+					<p><%=p.getName()%></p>
+					Send a private message:
+					<form action="/privateMessage" method="post" name="loveforms">
+						<input type="hidden" name="userID" id="userID" value="${fn:escapeXml(profileID)}">
+						<input type="hidden" name="sender" id="sender" value="${fn:escapeXml(sender)}">
+						<textarea id="message" name="message"></textarea>
+						<input type="submit" name="submit" id="submit">
+					</form>
+			  <%}
+			  }%>
 		  </div>
 	</div>	
 	
