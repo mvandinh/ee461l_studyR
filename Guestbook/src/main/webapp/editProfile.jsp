@@ -205,8 +205,10 @@
 	var theseCourses = '${userCourses}';
 	var allCourses = '${courses}';
 	var theseCoursesSplit = theseCourses.split(", ");
-	for(var i = 0; i < numCourse+1; i++){
-		addCourseQualified(allCourses, theseCoursesSplit[i]);
+	if(numCourse > 0){
+		for(var i = 0; i < numCourse+1; i++){
+			addCourseQualified(allCourses, theseCoursesSplit[i]);
+		}
 	}
 	
 	

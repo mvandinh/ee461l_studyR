@@ -66,7 +66,7 @@ public class EditProfile extends HttpServlet {
 					courses += course + ", ";
 			}
 		}
-		if(courses != null){
+		if(courses.length() > 0){
 			courses = courses.substring(0, courses.length()-2);
 		}
 		Profile replacement = new Profile(userName, email, phone, bio, courses, timePrefs, groupLongevity, groupSize, userID, recentMessages);

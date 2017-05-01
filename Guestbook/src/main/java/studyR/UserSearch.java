@@ -31,7 +31,7 @@ public class UserSearch extends HttpServlet {
 	    List<Profile> userList = ofy().load().type(Profile.class).list();
 	    String username = req.getParameter("username");
 	    String email = req.getParameter("email");
-		String course = req.getParameter("coures");
+		String course = req.getParameter("course");
 		String searchType = new String();
 		if(username != null){
 			searchType = "username";
@@ -60,7 +60,7 @@ public class UserSearch extends HttpServlet {
 	    		break;
 	    	case "course":
 	    		for(Profile p: userList){
-	    			if(p.getCourses().equals(course) && p != userProfile){
+	    			if(p.getCourses() != null && p.getCourses().contains(course) && p != userProfile){
 	    				matchingProfiles.add(p);
 	    			}
 	    		}

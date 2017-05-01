@@ -18,6 +18,7 @@
 <%@ page import="com.google.appengine.api.datastore.Key" %>
 <%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="studyR.courseList" %>
 <%@ page session="false" %>
 <html>
 <head>
@@ -45,9 +46,10 @@
 	  </div>
 	</nav>
 	<div class="jumbotron vertical-center">
-		<div class="container-fluid" align= "left">
+		<div class="container" align= "left">
+		<h2><u>Search for a user:</u></h2>
 			<div class="row">
-			<h3>Search for a user:</h3>
+			
 				<div id="margin-left">
 					<div id="margin-left"> Search by Username: </div>
 					<form action="/userSearch" method="post" name="form0" id="form0">
@@ -64,12 +66,23 @@
 					<br>
 					<div id="margin-left"> Search by enrolled course: </div>										
 					<form action="/userSearch" method = "post" name="form2" id="form2">
-						<input type="text" id="course">
+						 <select name="course" id="course">
+						 <%
+						 for(int i = 0; i < courseList.courseList.length; i++){
+							 pageContext.setAttribute("nextCourse", courseList.courseList[i]); 
+						 %>
+							<option> ${fn:escapeXml(nextCourse)} </option>
+						<%} %>
+						</select>
 						<input type="submit">
 					</form>
 					</div>
 			</div>
 		</div>
+	</div>
+	<div class="jumbotron vertical-center">
+		<div class="container" align= "left">
+		<h2><u>Results:</u></h2>
 		<%
 		boolean resultsFlag = "true".equals(request.getAttribute("resultsFlag"));
 		if(resultsFlag){
@@ -83,7 +96,8 @@
 				<p><%=p.getName()%></p>
 		  <%}
 		  }%>
-	</div>		
+		  </div>
+	</div>	
 	
 			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 			
