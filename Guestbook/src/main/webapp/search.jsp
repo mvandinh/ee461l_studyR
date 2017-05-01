@@ -46,7 +46,6 @@
 	    </ul>
 	  </div>
 	</nav>
-	<p>You can look at all existing study sessions at this page. Use the advanced filters to match the results with your preferences. Hover over the study session's name to view its description</p> 
 	<div class="jumbotron vertical-center">
 		<div class="container-fluid" align= "left">
 			<div class="row">
@@ -86,7 +85,7 @@
 		</div>
 		<div class="container" align="left">
 			<div class="row">
-				<h4><b>Study Session Search Results: </b></h4>
+				<br><h4><b>Study Session Search Results: </b></h4>
 				<hr>
 				<%
 				ObjectifyService.register(StudySession.class);
@@ -151,10 +150,6 @@
 						        	pageContext.setAttribute("studySession_description", studySession.getDescription());
 						        	pageContext.setAttribute("test", studySession.getMemberList());
 						        	pageContext.setAttribute("test1", userProfile.getUserID());
-						        	%><form action="/search" method="post">
-										<input type="text" name="test" value="${fn:escapeXml(test)}" id="test"/>
-										<input type="text" name="test1" value="${fn:escapeXml(test1)}" id="test1"/>
-									</form><%
 						        	%>
 						        		<table>
 									    <tr>

@@ -11,5 +11,6 @@ public class courseList{
 		 "EE360C",
 		 "EE411",
 		 "EE422C",
+		 "EE461L"
 		};
 }
