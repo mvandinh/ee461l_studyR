@@ -87,19 +87,21 @@
 				<%
 				String[] list = s.getMessageList();
 				String[] namelist = s.getMessageNameList();
-				if(list == null){
+				if((list == null) || (list.length <= 1)){
 					%>
 					[No messages]
 					<%
 				}
 				else{
-					for(int i = 0; i < list.length; i++){
+					for(int i = 0; i < list.length - 1; i++){
+						if(list[i] != null){
 						pageContext.setAttribute("message", list[i]);
 						pageContext.setAttribute("name", namelist[i]);
 						%>
 						<b>${fn:escapeXml(name)}:</b> ${fn:escapeXml(message)}
 						<br>
 						<%
+						}
 					}
 				}
 				%>

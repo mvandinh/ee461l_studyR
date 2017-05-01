@@ -134,8 +134,8 @@
 							User user = userService.getCurrentUser();
 			  				String userID = user.getUserId();
 			  				List<StudySession> sessions = ObjectifyService.ofy().load().type(StudySession.class).list();
-			  				boolean member = false;
 			  		        for(StudySession s : sessions){
+				  				boolean member = false;
 			  		        	String[] memberList = s.getMemberList();
 			  		        	int currentNumMembers = s.getCurrentNumMembers();
 					    		for (int i = 0; i < currentNumMembers; i++) {

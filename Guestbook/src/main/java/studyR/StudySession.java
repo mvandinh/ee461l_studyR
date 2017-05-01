@@ -60,8 +60,8 @@ public class StudySession implements Comparable<StudySession> {
         this.host = host;
         this.date = date;
         this.memberList = new String[10];
-        this.messageList = new String[0];
-        this.messageNameList = new String[0];
+        this.messageList = new String[1];
+        this.messageNameList = new String[1];
         memberList[0] = host.getUserID();
         id = host.getUserID() + date;
     }
