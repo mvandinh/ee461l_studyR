@@ -40,60 +40,79 @@
 <title>Edit Profile</title>
 <body>
 	<nav class="navbar navbar-default">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#">studyR</a>
-	    </div>
-	    <ul class="nav navbar-nav">
-	   	  <li ><a href="/userInterface.jsp">Dashboard</a></li>
-	      <li class="active"><a href="/editProfile.jsp">Edit Profile</a></li>
-	      <li><a href="/createStudySession.jsp">Create Study Session</a></li>
-	      <li><a href="search.jsp">Search Study Sessions</a></li>
-	      <li><a href="/userSearch.jsp">Search For User</a></li>
-	      <li><a href="/messageBoard.jsp">Messages</a></li>
-	    </ul>
-	  </div>
-	</nav>
-		<% 
-		
-		   UserService userService = UserServiceFactory.getUserService();
-	       User user = userService.getCurrentUser();
-	       Ref<Profile> userProfileRef = ObjectifyService.ofy().load().type(Profile.class).id(user.getUserId());
-	       Profile userProfile = userProfileRef.get();
-	       pageContext.setAttribute("userName", userProfile.getName());
-	       pageContext.setAttribute("email", userProfile.getEmail());
-	       pageContext.setAttribute("phoneNumber", userProfile.getPhone());
-	       pageContext.setAttribute("bio", userProfile.getBio());	       
-	       int numberTimes = 0;
-	       String timePrefs = new String();
-		       if(userProfile.getTimePrefs()!= null){
-		    	   timePrefs =  userProfile.getTimePrefs();
-			       numberTimes = timePrefs.length() - timePrefs.replace("|", "").length();
-			   }
-		       if(userProfile.getGroupSize() != ""){
-		      	 pageContext.setAttribute("groupSize", userProfile.getGroupSize());
-		       }else{
-			       pageContext.setAttribute("groupSize", "0");
-		       }
-	       	   pageContext.setAttribute("groupLongevity", userProfile.getGroupLongevity());
-
-	       pageContext.setAttribute("numTimes", numberTimes);
-	       pageContext.setAttribute("timePrefs", timePrefs);
-	       pageContext.setAttribute("userCourses", userProfile.getCourses());
-	       int numCourses = 0;
-	       if(userProfile.getCourses() != null)
-	    	   numCourses = (userProfile.getCourses().length() - userProfile.getCourses().replace(", ", "").length())/2;
-	       pageContext.setAttribute("numCourses", numCourses);
-		%>		
-	<form action="/editProfile" method="post" id="myform" onsubmit="return errorMessage();">
-		
-		<div class="tab">
-		  <button type="button" class="tablinks" onclick="openCity(event, 'Basic')" id="defaultButton">Basic Information</button>
-		  <button type="button" class="tablinks" onclick="openCity(event, 'Bio')">Bio</button>
-		  <button type="button" class="tablinks" onclick="openCity(event, 'timePrefs')">Time Preferences</button>
-		  <button type="button" class="tablinks" onclick="openCity(event, 'otherPrefs')">Other Preferences</button>
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">studyR</a>
+	    	</div>
+		    <ul class="nav navbar-nav">
+				<li ><a href="/userInterface.jsp">Dashboard</a></li>
+				<li class="active"><a href="/editProfile.jsp">Edit Profile</a></li>
+				<li><a href="/createStudySession.jsp">Create Study Session</a></li>
+				<li><a href="search.jsp">Search Study Sessions</a></li>
+				<li><a href="/userSearch.jsp">Search For User</a></li>
+				<li><a href="/messageBoard.jsp">Messages</a></li>
+		    </ul>
 		</div>
+	</nav>
+	
+	<% 		
+	UserService userService = UserServiceFactory.getUserService();
+	User user = userService.getCurrentUser();
+	Ref<Profile> userProfileRef = ObjectifyService.ofy().load().type(Profile.class).id(user.getUserId());
+	Profile userProfile = userProfileRef.get();
+	
+	pageContext.setAttribute("userName", userProfile.getName());
+	pageContext.setAttribute("email", userProfile.getEmail());
+	String phoneNumber = "";
+	if(userProfile.getPhone() != null){
+		phoneNumber = userProfile.getPhone();
+	}
+	pageContext.setAttribute("phoneNumber", phoneNumber);
+	String bio = "";
+	if(userProfile.getBio() != null){
+		phoneNumber = userProfile.getBio();
+	}
+	pageContext.setAttribute("bio", bio);	       
+	
+	int numberTimes = 0;
+	String timePrefs = "";
+	if(userProfile.getTimePrefs()!= null){
+    	   timePrefs =  userProfile.getTimePrefs();
+	       numberTimes = timePrefs.length() - timePrefs.replace("|", "").length();
+	}
+	String groupSize = "1";
+	if(userProfile.getGroupSize() != null){
+		pageContext.setAttribute("groupSize", userProfile.getGroupSize());
+	}else{
+		pageContext.setAttribute("groupSize", "0");
+	}
+	pageContext.setAttribute("groupSize", groupSize);
+	String groupLongevity = "EE302";
+	if(userProfile.getGroupLongevity() != null){
+		groupLongevity = userProfile.getGroupLongevity();
+	}
+	pageContext.setAttribute("groupLongevity", groupLongevity);
+	pageContext.setAttribute("numTimes", numberTimes);
+	pageContext.setAttribute("timePrefs", timePrefs);
+	
+	int numCourses = 0;
+	String userCourses = "";
+	if(userProfile.getCourses() != null){
+		numCourses = (userProfile.getCourses().length() - userProfile.getCourses().replace(", ", "").length())/2;
+		userCourses = userProfile.getCourses();
+	}
+	pageContext.setAttribute("numCourses", numCourses);
+	pageContext.setAttribute("userCourses", userCourses);
+	%>		
 		
+	<!--- Big ass form --->
+	<form action="/editProfile" method="post" id="myform" onsubmit="return errorMessage();">
+		<div class="tab">
+			 <button type="button" class="tablinks" onclick="openCity(event, 'Basic')" id="defaultButton">Basic Information</button>
+			 <button type="button" class="tablinks" onclick="openCity(event, 'Bio')">Bio</button>
+			 <button type="button" class="tablinks" onclick="openCity(event, 'timePrefs')">Time Preferences</button>
+			 <button type="button" class="tablinks" onclick="openCity(event, 'otherPrefs')">Other Preferences</button>
+		</div>
 		<div id="Basic" class="tabcontent">
 			<br>
 			 Display Name:
@@ -107,8 +126,7 @@
 			 Phone Number:
 			 <input type="text" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="${fn:escapeXml(phoneNumber)}">
 			 <br>
-			 Format: 555-555-5555
-				 
+			 Format: 555-555-5555	 
 		</div>		
 		<div id="Bio" class="tabcontent">
 			<br>
@@ -116,7 +134,6 @@
 			<br>
 			<textarea name="bioText" rows="3" cols="60" id="bioText" maxlength="500">${fn:escapeXml(bio)}</textarea>
 		</div>
-		
 		<div id="timePrefs" class="tabcontent">
 			<br>
 			 Your available times:
@@ -130,51 +147,45 @@
 				 var maxClicks = 4; //Read the note in EditProfile.java if you change this	
 				 function addTime(loc){
 				 	addTimeReference(loc, maxClicks, "Monday", "12:00", "AM", "11:59", "AM");
-				 }
-				 
+				 } 
 		  	</script>
 		</div>
-		
 		<div id="otherPrefs" class="tabcontent">
-				 Group Size (leave blank if your have no preference):
-				 <input type="number" name="groupSize" value="todo" id="groupSize" min = "2" max="10"><br>
-				 <br>
-				 Group Longevity:
-				 <select name="groupLongevity" id="groupLongevity">
-				 	<option> 1 Week </option>
-				 	<option> Several Weeks </option>
-				 	<option> 1 Month </option>
-				 	<option> Several Months </option>
-				 	<option> 1 Semester </option>
-				 	<option> Several Semesters </option>
-				 	<option> No Preference </option>
-				 </select>
-				 <br>
-				 <br>
-				 Courses:
-				 <br>
-				 Number of courses:
-				 <b id="courses">0</b>
-				 <%
-				 String courses = new String();
-				 for(int i = 0; i < courseList.courseList.length; i++){
-					 courses += courseList.courseList[i] + "|";
-					 pageContext.setAttribute("courses", courses);
-				 }
-				 %>
-				 <button type="button"  onclick="addCourse('${fn:escapeXml(courses)}')" id="courseButton">add another course</button>
-
+			<br>
+			Group Size (leave blank if your have no preference):
+			<input type="number" name="groupSize" value="todo" id="groupSize" min = "2" max="10"><br>
+			<br>
+			Group Longevity:
+			<select name="groupLongevity" id="groupLongevity">
+				<option> 1 Week </option>
+				<option> Several Weeks </option>
+				<option> 1 Month </option>
+				<option> Several Months </option>
+				<option> 1 Semester </option>
+				<option> Several Semesters </option>
+				<option> No Preference </option>
+			</select>
+			<br>
+			<br>
+			Courses:
+			<br>
+			Number of courses:
+			<b id="courses">0</b>
+			<%
+			String courses = new String();
+			for(int i = 0; i < courseList.courseList.length; i++){
+				courses += courseList.courseList[i] + "|";
+				pageContext.setAttribute("courses", courses);
+			}
+			 %>
+			 <button type="button"  onclick="addCourse('${fn:escapeXml(courses)}')" id="courseButton">add another course</button>
 		</div>
-		<input type="hidden" name="userID" value="<%=user.getUserId()%>">
-		
+		<input type="hidden" name="userID" value="<%=user.getUserId()%>">		
 		<div>
 			<input type="submit" class="btn btn-info" value="Save">
 			<a href="/userInterface.jsp" class="btn btn-primary" role="button" id="cancel">Cancel</a>
-		</div>
-		
+		</div>		
 	</form>
-
-	
 			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 			
 	<script
@@ -211,19 +222,19 @@
 		}
 	}
 	
-	
-	
 	var groupSize = document.getElementById("groupSize");
 	var GS = ${groupSize};
-	if(GS > 0){
+	if(GS > 1){
 		groupSize.value = GS;
 	}
 	
 	//preload longevity pref
 	var groupLongevity = document.getElementById("groupLongevity");
 	var groupLongevityOpts = groupLongevity.options;
+	var groupLongevityChoice = '${groupLongevity}';
+	groupLongevity.selectedIndex = 0;
 	for(var i = 0; i < groupLongevityOpts.length; i++){
-		if(groupLongevityOpts[i].text == '${groupLongevity}'){
+		if(groupLongevityOpts[i].text == groupLongevityChoice){
 			groupLongevity.selectedIndex = i;
 		}
 	}
