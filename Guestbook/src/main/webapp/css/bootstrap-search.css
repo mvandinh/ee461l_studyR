@@ -48,10 +48,10 @@ div.tab button.active {
 .tabcontent {
     float: left;
     padding: 10px 12px;
-    border: 4px solid #ccc;
+    border: 4px solid #0000a0;
     width: 70%;
     height: 300px;
-    background: #6399f3;
+    background: #cdcaff;
     box-shadow: 5px 5px 5px #003972;
     margin-left: 20px;
 }

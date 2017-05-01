@@ -117,16 +117,13 @@
 		<div id="Basic" class="tabcontent">
 			<br>
 			 Display Name:
-			 <input type="text" name="userName" value="${fn:escapeXml(userName)}" id="userName" maxlength="50">
-			 <br>
+			 <input type="text" name="userName" value="${fn:escapeXml(userName)}" id="userName" maxlength="50" class="form-control">
 			 <br>
 			 Email:
-			 <input type="text" name="email" value="${fn:escapeXml(email)}" id="email" maxlength="50">
-			 <br>
+			 <input type="text" name="email" value="${fn:escapeXml(email)}" id="email" maxlength="50" class="form-control"> 
 			 <br>
 			 Phone Number:
-			 <input type="text" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="${fn:escapeXml(phoneNumber)}">
-			 <br>
+			 <input type="text" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="${fn:escapeXml(phoneNumber)}" class="form-control">
 			 Format: 555-555-5555	 
 		</div>		
 		<div id="Bio" class="tabcontent">
