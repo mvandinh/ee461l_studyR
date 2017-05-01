@@ -34,7 +34,7 @@
 <!-- Bootstrap -->
 <link href="css/bootstrap.css" rel="stylesheet">
 
-<title>studyR Dashboard</title>
+<title>Private Messages</title>
 <body>
 	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
@@ -53,6 +53,10 @@
 	    </ul>
 	  </div>
 	</nav>
+	<h1>
+		<font face="agency FB">Private Messages
+		</font>
+	</h1>
 	<div class="jumbotron vertical-center">
 			<div class="wrapper container">
 				<div class="row">

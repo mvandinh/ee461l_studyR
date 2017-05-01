@@ -36,7 +36,7 @@
 </head>
 
 
-<title>Messages</title>
+<title>Group Messages</title>
 <body>
 	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
