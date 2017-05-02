@@ -10,6 +10,7 @@
 <%@ page import="java.util.Collections" %>
 <%@ page import="studyR.StudySession" %>
 <%@ page import="studyR.Profile" %>
+<%@ page import="studyR.Email" %>
 <%@ page import="com.googlecode.objectify.*" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
