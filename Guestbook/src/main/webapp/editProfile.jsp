@@ -3,7 +3,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Collections" %>
 <%@ page import="studyR.StudySession" %>
-<%@ page import="studyR.Email" %>
 <%@ page import="studyR.Profile" %>
 <%@page import="com.googlecode.objectify.Objectify"%>
 <%@page import="com.googlecode.objectify.ObjectifyService"%>

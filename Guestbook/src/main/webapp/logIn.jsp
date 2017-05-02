@@ -2,7 +2,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Collections" %>
 <%@ page import="studyR.StudySession" %>
-<%@ page import="studyR.Email" %>
 <%@ page import="studyR.Profile" %>
 <%@ page import="com.googlecode.objectify.*" %>
 <%@ page import="com.google.appengine.api.users.User" %>
@@ -58,14 +57,17 @@
 				<%
 				}
 			%>
+			<!--Debugger Button
 			<form action="/deleter" method="post">
 				<input type="submit" value="DELETER DEBUG">
 			</form>
+			-->
+
+				<hr>
+				<p><b>Developed by :</b><i> Minh Van-Dinh, Ethan Cranmer, Matthew Edwards, Garrett Custer</i></p>
 		</div>
 	</div>
-
-		<hr>
-		<p><b>Developed by :</b><i> Minh Van-Dinh, Ethan Cranmer, Matthew Edwards, Garrett Custer</i></p>
+	
 	</body>
 				<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script

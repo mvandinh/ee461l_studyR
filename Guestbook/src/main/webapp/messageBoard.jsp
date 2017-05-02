@@ -4,7 +4,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Collections" %>
 <%@ page import="studyR.StudySession" %>
-<%@ page import="studyR.Email" %>
 <%@ page import="studyR.MessageBoardServlet" %>
 <%@ page import="com.googlecode.objectify.*" %>
 <%@ page import="com.google.appengine.api.users.User" %>
