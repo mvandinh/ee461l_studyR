@@ -55,10 +55,12 @@
 		    </ul>
 		</div>
 	</nav>
+	<div class="jumbotron vertical-center">
+		<div class="container">	
 		<h1>
-		<font face="agency FB">Edit Profile
-		</font>
-	</h1>
+			<font face="agency FB">Edit Profile
+			</font>
+		</h1>
 	
 	<% 		
 	UserService userService = UserServiceFactory.getUserService();
@@ -109,86 +111,87 @@
 	pageContext.setAttribute("numCourses", numCourses);
 	pageContext.setAttribute("userCourses", userCourses);
 	%>		
-		
-	<!--- Big ass form --->
-	<form action="/editProfile" method="post" id="myform" onsubmit="return errorMessage();">
-		<div class="tab">
-			 <button type="button" class="tablinks" onclick="openCity(event, 'Basic')" id="defaultButton">Basic Information</button>
-			 <button type="button" class="tablinks" onclick="openCity(event, 'Bio')">Bio</button>
-			 <button type="button" class="tablinks" onclick="openCity(event, 'timePrefs')">Time Preferences</button>
-			 <button type="button" class="tablinks" onclick="openCity(event, 'otherPrefs')">Other Preferences</button>
+	
+			<!--- Big ass form --->
+			<form action="/editProfile" method="post" id="myform" onsubmit="return errorMessage();">
+				<div class="tab">
+					 <button type="button" class="tablinks" onclick="openCity(event, 'Basic')" id="defaultButton">Basic Information</button>
+					 <button type="button" class="tablinks" onclick="openCity(event, 'Bio')">Bio</button>
+					 <button type="button" class="tablinks" onclick="openCity(event, 'timePrefs')">Time Preferences</button>
+					 <button type="button" class="tablinks" onclick="openCity(event, 'otherPrefs')">Other Preferences</button>
+				</div>
+				<div id="Basic" class="tabcontent">
+					<br>
+					 Display Name:
+					 <input type="text" name="userName" value="${fn:escapeXml(userName)}" id="userName" maxlength="50" class="form-control">
+					 <br>
+					 Email:
+					 <input type="text" name="email" value="${fn:escapeXml(email)}" id="email" maxlength="50" class="form-control"> 
+					 <br>
+					 Phone Number:
+					 <input type="text" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="${fn:escapeXml(phoneNumber)}" class="form-control">
+					 Format: 555-555-5555	 
+				</div>		
+				<div id="Bio" class="tabcontent">
+					<br>
+					Edit your profile description:
+					<br>
+					<textarea name="bioText" rows="3" cols="60" id="bioText" maxlength="500">${fn:escapeXml(bio)}</textarea>
+				</div>
+				<div id="timePrefs" class="tabcontent">
+					<br>
+					 Your available times:
+					 <b id="clicks">0</b>
+					 <br>
+					 Time ranges which end before they begin will be ignored.
+					 Enter times in the following format: HH:MM
+					 <br id="loc">
+					 <button type="button"  onclick="addTime('loc')" >add another time</button>
+					 <script>
+						 var maxClicks = 4; //Read the note in EditProfile.java if you change this	
+						 function addTime(loc){
+						 	addTimeReference(loc, maxClicks, "Monday", "12:00", "AM", "11:59", "AM");
+						 } 
+				  	</script>
+				</div>
+				<div id="otherPrefs" class="tabcontent">
+					<br>
+					Group Size (leave blank if your have no preference):
+					<input type="number" name="groupSize" value="todo" id="groupSize" min = "2" max="10"><br>
+					<br>
+					Group Longevity:
+					<select name="groupLongevity" id="groupLongevity">
+						<option> 1 Week </option>
+						<option> Several Weeks </option>
+						<option> 1 Month </option>
+						<option> Several Months </option>
+						<option> 1 Semester </option>
+						<option> Several Semesters </option>
+						<option> No Preference </option>
+					</select>
+					<br>
+					<br>
+					Courses:
+					<br>
+					Number of courses:
+					<b id="courses">0</b>
+					<%
+					String courses = new String();
+					for(int i = 0; i < courseList.courseList.length; i++){
+						courses += courseList.courseList[i] + "|";
+						pageContext.setAttribute("courses", courses);
+					}
+					 %>
+					 <button type="button"  onclick="addCourse('${fn:escapeXml(courses)}')" id="courseButton">add another course</button>
+				</div>
+				<input type="hidden" name="userID" value="<%=user.getUserId()%>">		
+				<div>
+					<input type="submit" class="btn btn-info" value="Save">
+				</div>		
+			</form>
+			<!-- End big ass form -->
 		</div>
-		<div id="Basic" class="tabcontent">
-			<br>
-			 Display Name:
-			 <input type="text" name="userName" value="${fn:escapeXml(userName)}" id="userName" maxlength="50" class="form-control">
-			 <br>
-			 Email:
-			 <input type="text" name="email" value="${fn:escapeXml(email)}" id="email" maxlength="50" class="form-control"> 
-			 <br>
-			 Phone Number:
-			 <input type="text" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="${fn:escapeXml(phoneNumber)}" class="form-control">
-			 Format: 555-555-5555	 
-		</div>		
-		<div id="Bio" class="tabcontent">
-			<br>
-			Edit your profile description:
-			<br>
-			<textarea name="bioText" rows="3" cols="60" id="bioText" maxlength="500">${fn:escapeXml(bio)}</textarea>
-		</div>
-		<div id="timePrefs" class="tabcontent">
-			<br>
-			 Your available times:
-			 <b id="clicks">0</b>
-			 <br>
-			 Time ranges which end before they begin will be ignored.
-			 Enter times in the following format: HH:MM
-			 <br id="loc">
-			 <button type="button"  onclick="addTime('loc')" >add another time</button>
-			 <script>
-				 var maxClicks = 4; //Read the note in EditProfile.java if you change this	
-				 function addTime(loc){
-				 	addTimeReference(loc, maxClicks, "Monday", "12:00", "AM", "11:59", "AM");
-				 } 
-		  	</script>
-		</div>
-		<div id="otherPrefs" class="tabcontent">
-			<br>
-			Group Size (leave blank if your have no preference):
-			<input type="number" name="groupSize" value="todo" id="groupSize" min = "2" max="10"><br>
-			<br>
-			Group Longevity:
-			<select name="groupLongevity" id="groupLongevity">
-				<option> 1 Week </option>
-				<option> Several Weeks </option>
-				<option> 1 Month </option>
-				<option> Several Months </option>
-				<option> 1 Semester </option>
-				<option> Several Semesters </option>
-				<option> No Preference </option>
-			</select>
-			<br>
-			<br>
-			Courses:
-			<br>
-			Number of courses:
-			<b id="courses">0</b>
-			<%
-			String courses = new String();
-			for(int i = 0; i < courseList.courseList.length; i++){
-				courses += courseList.courseList[i] + "|";
-				pageContext.setAttribute("courses", courses);
-			}
-			 %>
-			 <button type="button"  onclick="addCourse('${fn:escapeXml(courses)}')" id="courseButton">add another course</button>
-		</div>
-		<input type="hidden" name="userID" value="<%=user.getUserId()%>">		
-		<div>
-			<input type="submit" class="btn btn-info" value="Save">
-			<a href="/userInterface.jsp" class="btn btn-primary" role="button" id="cancel">Cancel</a>
-		</div>		
-	</form>
-	<!-- End big ass form -->
+	</div>
 	
 			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 			

@@ -53,14 +53,14 @@
 	    </ul>
 	  </div>
 	</nav>
-	<h1>
-		<font face="agency FB">Private Messages
-		</font>
-	</h1>
+	
 	<div class="jumbotron vertical-center">
 			<div class="wrapper container">
+				<h1>
+					<font face="agency FB">Private Messages
+					</font>
+				</h1>	
 				<div class="row">
-					<h2 align="left" ><u> Private Messages </u></h3>
 					<%
 					UserService userService = UserServiceFactory.getUserService();
 				    User user = userService.getCurrentUser();

@@ -46,11 +46,12 @@
 	    </ul>
 	  </div>
 	</nav>
-		<h1>
-		<font face="agency FB">Search Study Sessions
-		</font>
-	</h1>
+		
 	<div class="jumbotron vertical-center">
+		<h1>
+			<font face="agency FB">Search Study Sessions
+			</font>
+		</h1>
 		<div class="container-fluid" align= "left">
 			<div class="row">
 			<h3>Advanced Filters:</h3>
@@ -82,7 +83,6 @@
 							<option> Loud </option>
 						</select><br><br>
 					<input type="submit" class="btn btn-info" value="Filter" onclick="errorMessage()">
-					<a href="/userInterface.jsp" class="btn btn-primary" role="button" id="cancel">Cancel</a>
 				</div>
 			</form>
 			</div>

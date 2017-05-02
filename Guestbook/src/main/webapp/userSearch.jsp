@@ -46,10 +46,7 @@
 	    </ul>
 	  </div>
 	</nav>
-		<h1>
-		<font face="agency FB">Search For User
-		</font>
-	</h1>
+	
 	<%
 	UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();
@@ -59,7 +56,10 @@
 	%>
 	<div class="jumbotron vertical-center">
 		<div class="container" align= "left">
-		<h2><u>Search for a user:</u></h2>
+			<h1 align="center">
+				<font face="agency FB">Search For User
+				</font>
+			</h1>	
 			<div class="row">
 			
 				<div id="margin-left">
