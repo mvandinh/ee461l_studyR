@@ -54,75 +54,81 @@
 	    </ul>
 	  </div>
 	</nav>
-	<h1>
-		<font face="agency FB">Group Messages
-		</font>
-	</h1>
-	<br>
-		  <%
-			UserService userService = UserServiceFactory.getUserService();
-		  	List<StudySession> joined = new ArrayList<StudySession>();
-		  	User user = userService.getCurrentUser();
-			String userID = user.getUserId();
-			List<StudySession> sessions = ObjectifyService.ofy().load().type(StudySession.class).list();
-	        for(StudySession s : sessions){
-	        	String[] memberList = s.getMemberList();
-	        	int currentNumMembers = s.getCurrentNumMembers();
-	    		for (int i = 0; i < currentNumMembers; i++) {
-	    			if (memberList[i] != null && memberList[i].equals(userID)) {
-	    				joined.add(s);
-	    				break;
-	    			}
-	    		}
-	        }
-	    
-		for(StudySession s: joined){
-		%>
-		<form action="/messageBoard" method="post" id="<%s.getId();%>">
-		<%
-		pageContext.setAttribute("id", s.getId());
-		pageContext.setAttribute("name", s.getName());
-		%>
-		<div>
-				 <h2><b>${fn:escapeXml(name)}</b></h2>
+	<div class="jumbotron vertical-center">
+		<div class="container" align= "left">
+			<h1 align="center">
+				<font face="agency FB" >Group Messages
+				</font>
+			</h1>
+			<br>
+				  <%
+					UserService userService = UserServiceFactory.getUserService();
+				  	List<StudySession> joined = new ArrayList<StudySession>();
+				  	User user = userService.getCurrentUser();
+					String userID = user.getUserId();
+					List<StudySession> sessions = ObjectifyService.ofy().load().type(StudySession.class).list();
+			        for(StudySession s : sessions){
+			        	String[] memberList = s.getMemberList();
+			        	int currentNumMembers = s.getCurrentNumMembers();
+			    		for (int i = 0; i < currentNumMembers; i++) {
+			    			if (memberList[i] != null && memberList[i].equals(userID)) {
+			    				joined.add(s);
+			    				break;
+			    			}
+			    		}
+			        }
+			    
+				for(StudySession s: joined){
+				%>
+				<form action="/messageBoard" method="post" id="<%s.getId();%>">
 				<%
-				String[] list = s.getMessageList();
-				String[] namelist = s.getMessageNameList();
-				if((list == null) || (list.length <= 1)){
-					%>
-					[No messages]
-					<%
-				}
-				else{
-					for(int i = 0; i < list.length - 1; i++){
-						if(list[i] != null){
-						pageContext.setAttribute("message", list[i]);
-						pageContext.setAttribute("name", namelist[i]);
-						%>
-						<b>${fn:escapeXml(name)}:</b> ${fn:escapeXml(message)}
-						<br>
-						<%
-						}
-					}
-				}
+				pageContext.setAttribute("id", s.getId());
+				pageContext.setAttribute("name", s.getName());
 				%>
 				<div>
-				<input type="hidden" name="studySessionId" value="${fn:escapeXml(id)}" id="studySessionId"/>
-				<input type="hidden" name="userID" value="<%=user.getUserId()%>">
-				<textarea name="messageText" rows="2" cols="50"></textarea>
-				<input type="submit" class="btn btn-info" value="Send Message" onclick="errorMessage()">
+						 <h2><b>${fn:escapeXml(name)}</b></h2>
+						<%
+						String[] list = s.getMessageList();
+						String[] namelist = s.getMessageNameList();
+						if((list == null) || (list.length <= 1)){
+							%>
+							[No messages]
+							<%
+						}
+						else{
+							for(int i = 7; i >= 0; i--){
+								if(list.length <= i){
+									continue;
+								}
+								if(list[i] != null){
+								pageContext.setAttribute("message", list[i]);
+								pageContext.setAttribute("name", namelist[i]);
+								%>
+								<b>${fn:escapeXml(name)}:</b> ${fn:escapeXml(message)}
+								<br>
+								<%
+								}
+							}
+						}
+						%>
+						<div>
+						<input type="hidden" name="studySessionId" value="${fn:escapeXml(id)}" id="studySessionId"/>
+						<input type="hidden" name="userID" value="<%=user.getUserId()%>">
+						<textarea name="messageText" rows="2" cols="50" maxlength="80"></textarea>
+						<input type="submit" class="btn btn-info" value="Send Message" onclick="errorMessage()">
+						</div>
+						<br>
+						<br>
 				</div>
-				<br>
-				<br>
+				</form>
+					<%	
+					}
+					%>
+		
+			
+			<div class="row" align="left">
+			</div>
 		</div>
-		</form>
-			<%	
-			}
-			%>
-
-	
-	<div class="row" align="left">
-		<a href="/userInterface.jsp" class="btn btn-primary" role="button" id="cancel">Cancel</a>
 	</div>
 	
 			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
